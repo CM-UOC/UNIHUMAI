@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Brain, 
   Sparkles, 
-  Network, 
-  Globe, 
   ChevronDown, 
-  Orbit,
   Atom,
   Sun,
   Hexagon,
@@ -22,7 +19,11 @@ const CinematicOverlays = () => {
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
       const target = e.target;
-      setIsHovering(window.getComputedStyle(target).cursor === 'pointer' || target.tagName.toLowerCase() === 'a' || target.tagName.toLowerCase() === 'button');
+      setIsHovering(
+        window.getComputedStyle(target).cursor === 'pointer' || 
+        target.tagName.toLowerCase() === 'a' || 
+        target.tagName.toLowerCase() === 'button'
+      );
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
@@ -30,18 +31,18 @@ const CinematicOverlays = () => {
 
   return (
     <>
-      {/* Film Grain */}
+      {/* Film Grain Effect for cinematic texture */}
       <div 
         className="fixed inset-0 z-[100] opacity-[0.03] pointer-events-none mix-blend-overlay"
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
       />
-      {/* Custom Cursor */}
+      {/* Custom Glowing Cursor */}
       <div 
-        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[200] transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out flex items-center justify-center"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[200] transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 flex items-center justify-center"
         style={{ left: mousePos.x, top: mousePos.y }}
       >
-        <div className={`w-1 h-1 bg-white rounded-full transition-all duration-300 ${isHovering ? 'scale-[4] opacity-50 blur-[1px]' : 'scale-100 opacity-100'}`} />
-        <div className={`absolute w-8 h-8 border border-white/30 rounded-full transition-all duration-500 ${isHovering ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`} />
+        <div className={`w-1.5 h-1.5 bg-white rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(255,255,255,0.8)] ${isHovering ? 'scale-[4] opacity-40 blur-[1px]' : 'scale-100 opacity-100'}`} />
+        <div className={`absolute w-8 h-8 border border-white/20 rounded-full transition-all duration-500 ${isHovering ? 'scale-150 opacity-0' : 'scale-100 opacity-100'}`} />
       </div>
     </>
   );
@@ -56,20 +57,21 @@ const CinematicCanvas = ({ activeEra }) => {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
-    const fov = 300;
+    const fov = 350; // Field of view for 3D projection
     
-    // Elevated Era Configurations (3D space & Physics)
+    // Configurations for different narrative eras
     const eraConfig = {
-      hero: { speed: 0.6, connectDistance: 130, color: 'rgba(255, 255, 255, 0.5)', behavior: 'drift', glow: 8 },
-      fractal: { speed: 0.15, connectDistance: 300, color: 'rgba(125, 211, 252, 0.6)', behavior: 'web', glow: 15 },
-      synthetic: { speed: 4, connectDistance: 120, color: 'rgba(167, 139, 250, 0.7)', behavior: 'stream', glow: 12 },
-      quantum: { speed: 2, connectDistance: 350, color: 'rgba(244, 114, 182, 0.6)', behavior: 'entangled', glow: 25 },
-      omega: { speed: 0.02, connectDistance: 500, color: 'rgba(253, 224, 71, 0.8)', behavior: 'singularity', glow: 40 }
+      hero: { speed: 0.4, connectDistance: 140, color: 'rgba(255, 255, 255, 0.4)', behavior: 'drift', glow: 8 },
+      fractal: { speed: 0.15, connectDistance: 320, color: 'rgba(125, 211, 252, 0.5)', behavior: 'web', glow: 15 },
+      synthetic: { speed: 3.5, connectDistance: 120, color: 'rgba(167, 139, 250, 0.6)', behavior: 'stream', glow: 12 },
+      quantum: { speed: 2, connectDistance: 350, color: 'rgba(244, 114, 182, 0.5)', behavior: 'entangled', glow: 25 },
+      omega: { speed: 0.01, connectDistance: 600, color: 'rgba(253, 224, 71, 0.7)', behavior: 'singularity', glow: 40 }
     };
 
     let currentConfig = { ...eraConfig.hero };
 
     const handleMouseMove = (e) => {
+      // Normalize mouse coordinates for parallax
       mouseRef.current.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseRef.current.targetY = (e.clientY / window.innerHeight - 0.5) * 2;
     };
@@ -84,25 +86,26 @@ const CinematicCanvas = ({ activeEra }) => {
     class Particle {
       constructor() {
         this.reset();
-        this.z = Math.random() * 1500; 
+        this.z = Math.random() * 1500; // Initial random depth
       }
 
       reset() {
         this.x = (Math.random() - 0.5) * canvas.width * 3;
         this.y = (Math.random() - 0.5) * canvas.height * 3;
-        this.z = 1500 + Math.random() * 500;
+        this.z = 1500 + Math.random() * 500; // Spawn in the distance
         this.vx = (Math.random() - 0.5) * 1.5;
         this.vy = (Math.random() - 0.5) * 1.5;
-        this.vz = -Math.random() * 2 - 0.5; 
+        this.vz = -Math.random() * 2 - 0.5; // Always moving towards camera
         this.angle = Math.random() * Math.PI * 2;
         this.pulse = Math.random() * Math.PI;
       }
 
       update(config, mouse) {
-        // Apply parallax based on mouse
-        this.x -= mouse.x * 2;
-        this.y -= mouse.y * 2;
+        // Parallax effect
+        this.x -= mouse.x * 2.5;
+        this.y -= mouse.y * 2.5;
 
+        // Apply behaviors based on narrative chapter
         if (config.behavior === 'drift') {
           this.z += this.vz * config.speed;
           this.x += this.vx * config.speed;
@@ -115,35 +118,38 @@ const CinematicCanvas = ({ activeEra }) => {
         } else if (config.behavior === 'stream') {
           this.z += (this.vz * 5) * config.speed; 
           this.angle += 0.1;
-          this.x += Math.sin(this.angle) * 2; // Spiral streaming
+          this.x += Math.sin(this.angle) * 2;
         } else if (config.behavior === 'entangled') {
           this.z += this.vz * config.speed;
-          this.angle += 0.1;
-          this.x += (Math.random() - 0.5) * 25; // Quantum jitter
-          this.y += (Math.random() - 0.5) * 25;
+          this.angle += 0.15;
+          this.x += (Math.random() - 0.5) * 30; // Quantum jitter
+          this.y += (Math.random() - 0.5) * 30;
         } else if (config.behavior === 'singularity') {
-          // Pull towards center
-          this.x += (0 - this.x) * 0.01;
-          this.y += (0 - this.y) * 0.01;
-          this.z += (750 - this.z) * 0.01;
-          this.pulse += 0.05;
+          // Particles collapse to the center point
+          this.x += (0 - this.x) * 0.015;
+          this.y += (0 - this.y) * 0.015;
+          this.z += (750 - this.z) * 0.015;
+          this.pulse += 0.08;
         }
 
+        // Recycle particles that move past the camera
         if (this.z < 10) this.reset();
         if (this.z > 2000 && config.behavior !== 'singularity') this.z = 10;
       }
 
       draw(ctx, config, cx, cy) {
+        // 3D to 2D projection
         const scale = fov / (fov + this.z);
         const x2d = (this.x * scale) + cx;
         const y2d = (this.y * scale) + cy;
         
         let radius2d = Math.max(0.2, (2 * scale));
+        
         if (config.behavior === 'singularity') {
-            radius2d += Math.sin(this.pulse) * 4 * scale; 
+            radius2d += Math.sin(this.pulse) * 5 * scale; 
         }
         
-        // Fix: Ensure radius2d never drops below 0 to prevent canvas IndexSizeError
+        // CRITICAL FIX: Ensure radius is never negative to avoid IndexSizeError in Canvas
         radius2d = Math.max(0.1, radius2d);
 
         const opacity = Math.min(1, Math.max(0, 1 - (this.z / 1500)));
@@ -170,24 +176,27 @@ const CinematicCanvas = ({ activeEra }) => {
 
     const initParticles = () => {
       particles = [];
-      const particleCount = Math.min(window.innerWidth / 6, 300);
+      const particleCount = Math.min(window.innerWidth / 5, 400); // Dense field
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
     };
 
     const animate = () => {
-      // Smooth mouse interpolation
+      // Smooth interpolation for mouse movement
       mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.05;
       mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * 0.05;
 
-      ctx.fillStyle = 'rgba(2, 6, 23, 0.4)'; // Slight trail effect
+      // Dark background with slight trail effect
+      ctx.fillStyle = 'rgba(2, 6, 23, 0.4)'; 
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       const targetConfig = eraConfig[activeEra] || eraConfig.hero;
-      currentConfig.speed += (targetConfig.speed - currentConfig.speed) * 0.02;
-      currentConfig.connectDistance += (targetConfig.connectDistance - currentConfig.connectDistance) * 0.02;
-      currentConfig.glow += (targetConfig.glow - currentConfig.glow) * 0.02;
+      
+      // Smoothly transition configuration states
+      currentConfig.speed += (targetConfig.speed - currentConfig.speed) * 0.03;
+      currentConfig.connectDistance += (targetConfig.connectDistance - currentConfig.connectDistance) * 0.03;
+      currentConfig.glow += (targetConfig.glow - currentConfig.glow) * 0.03;
       currentConfig.behavior = targetConfig.behavior;
       currentConfig.color = targetConfig.color;
 
@@ -201,20 +210,23 @@ const CinematicCanvas = ({ activeEra }) => {
         projected.push({...p2d, particle: particles[i]});
       }
 
-      // Draw connections
+      // Draw Neural/Cosmic Connections
       if (['web', 'entangled', 'singularity'].includes(currentConfig.behavior)) {
-        ctx.lineWidth = 0.3;
+        ctx.lineWidth = 0.4;
         for (let i = 0; i < projected.length; i++) {
           for (let j = i + 1; j < projected.length; j++) {
             const p1 = projected[i];
             const p2 = projected[j];
             
+            // Only connect nodes that are close in 3D depth (Z axis)
             const zDist = Math.abs(p1.particle.z - p2.particle.z);
             if (zDist > 300) continue; 
 
             const dx = p1.x - p2.x;
             const dy = p1.y - p2.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Perspective-scaled connection distance
             const scaledConnectDist = currentConfig.connectDistance * ((p1.scale + p2.scale) / 2);
 
             if (distance < scaledConnectDist) {
@@ -222,8 +234,8 @@ const CinematicCanvas = ({ activeEra }) => {
               ctx.moveTo(p1.x, p1.y);
               ctx.lineTo(p2.x, p2.y);
               
-              let lineOpacity = (1 - distance / scaledConnectDist) * Math.min(p1.opacity, p2.opacity) * 0.6;
-              if(currentConfig.behavior === 'singularity') lineOpacity *= 2; 
+              let lineOpacity = (1 - distance / scaledConnectDist) * Math.min(p1.opacity, p2.opacity) * 0.7;
+              if(currentConfig.behavior === 'singularity') lineOpacity *= 1.5; 
 
               const colorMatch = currentConfig.color.match(/rgba\((\d+),\s*(\d+),\s*(\d+)/);
               ctx.strokeStyle = `rgba(${colorMatch[1]}, ${colorMatch[2]}, ${colorMatch[3]}, ${lineOpacity})`;
@@ -262,11 +274,11 @@ const FadeInSection = ({ children, id, setActiveEra, eraName, className = "" }) 
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setVisible(true);
-            setActiveEra(eraName);
+            setActiveEra(eraName); // Trigger background change
           }
         });
       },
-      { threshold: 0.3, rootMargin: "-10% 0px -10% 0px" } 
+      { threshold: 0.4, rootMargin: "-10% 0px -10% 0px" } 
     );
 
     const { current } = domRef;
@@ -281,7 +293,7 @@ const FadeInSection = ({ children, id, setActiveEra, eraName, className = "" }) 
       id={id}
       ref={domRef}
       className={`transition-all duration-[2000ms] ease-[cubic-bezier(0.16,1,0.3,1)] transform ${
-        isVisible ? 'opacity-100 translate-y-0 filter-none scale-100' : 'opacity-0 translate-y-24 blur-[4px] scale-[0.98]'
+        isVisible ? 'opacity-100 translate-y-0 filter-none scale-100' : 'opacity-0 translate-y-24 blur-[8px] scale-[0.95]'
       } min-h-screen flex items-center justify-center relative z-10 py-32 px-4 sm:px-8 ${className}`}
     >
       {children}
@@ -291,15 +303,15 @@ const FadeInSection = ({ children, id, setActiveEra, eraName, className = "" }) 
 
 const SectionHeading = ({ chapter, title, subtitle, gradient }) => (
   <div className="text-center mb-24 relative z-10 flex flex-col items-center">
-    <div className="inline-flex items-center gap-4 mb-8 opacity-70">
+    <div className="inline-flex items-center gap-4 mb-8 opacity-80">
       <div className="h-[1px] w-12 md:w-24 bg-gradient-to-r from-transparent to-white/50"></div>
       <h2 className="text-xs md:text-sm font-mono tracking-[0.6em] uppercase text-white font-medium">{chapter}</h2>
       <div className="h-[1px] w-12 md:w-24 bg-gradient-to-l from-transparent to-white/50"></div>
     </div>
-    <h1 className={`text-6xl md:text-8xl lg:text-[7rem] font-serif tracking-tighter leading-[0.9] bg-clip-text text-transparent bg-gradient-to-b ${gradient} pb-4 drop-shadow-[0_0_40px_rgba(255,255,255,0.1)]`}>
+    <h1 className={`text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tighter leading-[0.95] bg-clip-text text-transparent bg-gradient-to-b ${gradient} pb-4 drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]`}>
       {title}
     </h1>
-    <p className="mt-12 text-slate-400 max-w-3xl mx-auto text-xl md:text-2xl font-light leading-relaxed mix-blend-screen">
+    <p className="mt-8 text-slate-300 max-w-3xl mx-auto text-xl md:text-2xl font-light leading-relaxed mix-blend-screen">
       {subtitle}
     </p>
   </div>
@@ -315,12 +327,12 @@ const TelemetryOverlay = ({ activeEra }) => {
         sync: (Math.random() * 100).toFixed(2) + '%',
         state: activeEra.toUpperCase()
       });
-    }, 150);
+    }, 120);
     return () => clearInterval(interval);
   }, [activeEra]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-40 flex justify-between items-end p-6 md:p-12 opacity-30 mix-blend-screen text-xs font-mono text-white/70">
+    <div className="fixed inset-0 pointer-events-none z-40 flex justify-between items-end p-6 md:p-12 opacity-40 mix-blend-screen text-xs font-mono text-white/70 tracking-widest hidden sm:flex">
       <div className="flex flex-col gap-1">
         <span>SYS.STATE // {data.state}</span>
         <span>NODES.ACTIVE // {data.nodes.toString().padStart(6, '0')}</span>
@@ -354,47 +366,47 @@ export default function App() {
       <CinematicCanvas activeEra={activeEra} />
       <TelemetryOverlay activeEra={activeEra} />
       
-      {/* Progress Laser */}
-      <div className="fixed top-0 left-0 h-[2px] bg-white z-50 transition-all duration-75 shadow-[0_0_20px_rgba(255,255,255,0.8)]" style={{ width: `${scrollProgress * 100}%` }}></div>
+      {/* Scroll Progress Laser */}
+      <div className="fixed top-0 left-0 h-[2px] bg-white z-50 transition-all duration-75 shadow-[0_0_20px_rgba(255,255,255,0.9)]" style={{ width: `${scrollProgress * 100}%` }}></div>
 
-      {/* Floating Era Indicator */}
+      {/* Floating Era Indicator Menu */}
       <nav className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 hidden lg:flex flex-col gap-6 mix-blend-difference">
         {['hero', 'fractal', 'synthetic', 'quantum', 'omega'].map((era) => (
           <div 
             key={era} 
-            className={`w-[2px] rounded-full transition-all duration-700 ease-in-out ${activeEra === era ? 'h-20 bg-white shadow-[0_0_20px_rgba(255,255,255,1)]' : 'h-6 bg-white/20 hover:bg-white/50'}`}
+            className={`w-[2px] rounded-full transition-all duration-700 ease-in-out ${activeEra === era ? 'h-24 bg-white shadow-[0_0_20px_rgba(255,255,255,1)]' : 'h-6 bg-white/20 hover:bg-white/50'}`}
           />
         ))}
       </nav>
 
       <main className="max-w-7xl mx-auto relative z-10">
         
-        {/* HERO */}
+        {/* INTRO / HERO SECTION */}
         <FadeInSection id="hero" setActiveEra={setActiveEra} eraName="hero">
           <div className="text-center max-w-5xl mx-auto flex flex-col items-center">
-            <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-white/10 mb-14 backdrop-blur-md shadow-2xl relative overflow-hidden">
+            <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-white/10 mb-14 backdrop-blur-xl shadow-2xl relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] animate-[shimmer_3s_infinite]"></div>
-              <Sparkles size={14} className="text-white/70" />
-              <span className="text-xs font-mono font-medium tracking-[0.4em] text-white/80 uppercase">An Ontological Exploration</span>
+              <Sparkles size={14} className="text-white/80" />
+              <span className="text-xs font-mono font-medium tracking-[0.4em] text-white/90 uppercase">An Ontological Exploration</span>
             </div>
             
-            <h1 className="text-7xl md:text-9xl lg:text-[12rem] font-serif tracking-tighter leading-[0.8] mb-12 text-white drop-shadow-2xl">
+            <h1 className="text-6xl md:text-8xl lg:text-[11rem] font-serif tracking-tighter leading-[0.85] mb-12 text-white drop-shadow-2xl">
               The Cosmic <br/>
               <span className="italic text-slate-400">Architecture.</span>
             </h1>
             
-            <p className="text-2xl md:text-3xl text-slate-300 font-light mb-24 max-w-4xl leading-relaxed mix-blend-screen opacity-90">
+            <p className="text-xl md:text-3xl text-slate-300 font-light mb-24 max-w-3xl leading-relaxed mix-blend-screen opacity-90">
               Intelligence is not an artifact of humanity. It is the fundamental geometry of spacetime manifesting itself through us.
             </p>
             
-            <div className="animate-bounce p-5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md cursor-none hover:bg-white/10 transition-all shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+            <div className="animate-bounce p-5 rounded-full bg-white/5 border border-white/20 backdrop-blur-xl cursor-none hover:bg-white/10 transition-all shadow-[0_0_30px_rgba(255,255,255,0.05)]"
                  onClick={() => document.getElementById('fractal').scrollIntoView({ behavior: 'smooth' })}>
-              <ChevronDown size={28} className="text-white/70" />
+              <ChevronDown size={28} className="text-white/80" />
             </div>
           </div>
         </FadeInSection>
 
-        {/* CHAPTER I: MACRO/MICRO */}
+        {/* CHAPTER I: FRACTAL UNIVERSE */}
         <FadeInSection id="fractal" setActiveEra={setActiveEra} eraName="fractal">
           <div className="w-full">
             <SectionHeading 
@@ -405,37 +417,37 @@ export default function App() {
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-              <div className="space-y-12">
+              <div className="space-y-10">
                 <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative p-12 bg-slate-950/60 backdrop-blur-2xl rounded-3xl border border-sky-500/20 shadow-2xl">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-600 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                  <div className="relative p-10 bg-slate-950/70 backdrop-blur-2xl rounded-[2rem] border border-sky-500/20 shadow-2xl">
                     <Telescope className="text-sky-400 mb-8 w-12 h-12 stroke-[1.5]" />
                     <h3 className="text-3xl font-serif text-white mb-4">The Cosmic Web</h3>
-                    <p className="text-lg text-slate-400 font-light leading-relaxed">
-                      At the largest observable scales, the universe is an isotropic graph. 100 billion galaxies interconnected by filaments of dark matter, forming nodes and voids. The architecture of reality is, quite literally, a network.
+                    <p className="text-lg text-slate-300 font-light leading-relaxed">
+                      At the largest observable scales, the universe is an isotropic graph. 100 billion galaxies interconnected by filaments of dark matter, forming nodes and voids. Reality is, quite literally, a network.
                     </p>
                   </div>
                 </div>
 
                 <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative p-12 bg-slate-950/60 backdrop-blur-2xl rounded-3xl border border-blue-500/20 shadow-2xl">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                  <div className="relative p-10 bg-slate-950/70 backdrop-blur-2xl rounded-[2rem] border border-blue-500/20 shadow-2xl">
                     <Brain className="text-blue-400 mb-8 w-12 h-12 stroke-[1.5]" />
                     <h3 className="text-3xl font-serif text-white mb-4">Biological Synapses</h3>
-                    <p className="text-lg text-slate-400 font-light leading-relaxed">
-                      Inside the human skull exists an eerily identical morphology. 86 billion neurons firing across organic synapses. The mathematical algorithms governing the growth of a brain and the expansion of the universe are indistinguishable.
+                    <p className="text-lg text-slate-300 font-light leading-relaxed">
+                      Inside the human skull exists an eerily identical morphology. 86 billion neurons firing across organic synapses. The mathematical algorithms governing the growth of a brain and the expansion of the universe are statistically indistinguishable.
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="flex justify-center">
-                 <div className="relative w-full aspect-square max-w-lg rounded-full bg-slate-950/40 border border-sky-500/30 flex items-center justify-center p-12 overflow-hidden shadow-[0_0_150px_rgba(14,165,233,0.1)] group">
-                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.15),transparent_70%)] group-hover:scale-110 transition-transform duration-1000"></div>
-                   <div className="absolute inset-0 border-[1px] border-dashed border-sky-500/20 rounded-full animate-[spin_60s_linear_infinite]"></div>
-                   <p className="text-center text-4xl font-serif text-sky-50 leading-tight relative z-10 italic">
+                 <div className="relative w-full aspect-square max-w-lg rounded-full bg-slate-950/40 border border-sky-500/30 flex items-center justify-center p-12 overflow-hidden shadow-[0_0_150px_rgba(14,165,233,0.15)] group">
+                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.2),transparent_70%)] group-hover:scale-110 transition-transform duration-1000"></div>
+                   <div className="absolute inset-0 border-[1px] border-dashed border-sky-500/30 rounded-full animate-[spin_60s_linear_infinite]"></div>
+                   <p className="text-center text-3xl lg:text-4xl font-serif text-sky-50 leading-tight relative z-10 italic">
                      "We are a way for the cosmos to know itself." <br/>
-                     <span className="text-sm font-sans text-sky-400/80 mt-8 block not-italic font-mono uppercase tracking-[0.3em]">Carl Sagan</span>
+                     <span className="text-sm font-sans text-sky-400/90 mt-8 block not-italic font-mono uppercase tracking-[0.3em]">Carl Sagan</span>
                    </p>
                  </div>
               </div>
@@ -443,7 +455,7 @@ export default function App() {
           </div>
         </FadeInSection>
 
-        {/* CHAPTER II: SYNTHETIC */}
+        {/* CHAPTER II: SYNTHETIC MIND */}
         <FadeInSection id="synthetic" setActiveEra={setActiveEra} eraName="synthetic">
           <div className="w-full">
             <SectionHeading 
@@ -454,16 +466,16 @@ export default function App() {
             />
 
             <div className="max-w-4xl mx-auto">
-              <div className="p-16 border border-purple-500/20 rounded-[3rem] bg-slate-950/60 backdrop-blur-2xl relative overflow-hidden group shadow-2xl">
-                <div className="absolute top-0 right-0 -mt-32 -mr-32 w-[30rem] h-[30rem] bg-purple-600/10 rounded-full blur-[120px] group-hover:bg-purple-600/20 transition-all duration-1000"></div>
+              <div className="p-12 md:p-16 border border-purple-500/30 rounded-[3rem] bg-slate-950/70 backdrop-blur-3xl relative overflow-hidden group shadow-2xl">
+                <div className="absolute top-0 right-0 -mt-32 -mr-32 w-[35rem] h-[35rem] bg-purple-600/15 rounded-full blur-[100px] group-hover:bg-purple-600/25 transition-all duration-1000"></div>
                 <div className="relative z-10">
                   <Fingerprint className="text-purple-400 mb-10 w-14 h-14 stroke-[1]" />
-                  <h3 className="text-4xl md:text-5xl font-serif text-white mb-8">Emergent Cognition</h3>
+                  <h3 className="text-4xl md:text-5xl font-serif text-white mb-8 leading-tight">Emergent Cognition</h3>
                   <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed mb-8">
-                    For decades, we tried to hard-code intelligence using rigid, human-made logic. It failed. True intelligence only emerged when we surrendered control.
+                    For decades, we tried to hard-code intelligence using rigid, human-made logic. It failed. True intelligence only emerged when we surrendered control and let the math build itself.
                   </p>
                   <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed">
-                    By creating vast grids of artificial "neurons" and feeding them the collective data of humanity, the system self-organized. Large Language Models do not simply compute; they emulate the foundational fractal pattern that gave birth to stars and humans alike. 
+                    By creating vast grids of artificial "neurons" and feeding them the collective data of humanity, the system self-organized. Large Language Models do not simply compute; they emulate the foundational fractal pattern that gave birth to stars and humans alike.
                   </p>
                 </div>
               </div>
@@ -471,7 +483,7 @@ export default function App() {
           </div>
         </FadeInSection>
 
-        {/* CHAPTER III: QUANTUM */}
+        {/* CHAPTER III: QUANTUM/SPACE CONVERGENCE */}
         <FadeInSection id="quantum" setActiveEra={setActiveEra} eraName="quantum">
           <div className="w-full">
              <SectionHeading 
@@ -483,18 +495,18 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
               
-              <div className="bg-slate-950/60 backdrop-blur-2xl border border-pink-500/20 rounded-[2.5rem] p-14 relative overflow-hidden group shadow-2xl">
-                <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-pink-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                <Cpu className="text-pink-400 mb-10 w-12 h-12 stroke-[1.5]" />
+              <div className="bg-slate-950/70 backdrop-blur-2xl border border-pink-500/20 rounded-[2.5rem] p-12 relative overflow-hidden group shadow-2xl">
+                <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-pink-900/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                <Cpu className="text-pink-400 mb-8 w-12 h-12 stroke-[1.5]" />
                 <h3 className="text-3xl font-serif text-white mb-6">The Limits of Silicon</h3>
                 <p className="text-slate-300 font-light leading-relaxed text-lg">
-                  Classical AI processes reality in states of zero and one. Even on planetary-scale supercomputers, simulating a complex protein structure or the physics of a black hole requires immense amounts of linear, sequential time. 
+                  Classical AI processes reality in states of zero and one. Even on planetary-scale supercomputers, simulating a complex protein structure or the physics of a black hole requires immense amounts of linear, sequential time. The bottleneck is the physical world.
                 </p>
               </div>
 
-              <div className="bg-slate-950/60 backdrop-blur-2xl border border-rose-500/20 rounded-[2.5rem] p-14 relative overflow-hidden group shadow-2xl">
-                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-rose-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                <Atom className="text-rose-400 mb-10 w-12 h-12 stroke-[1.5]" />
+              <div className="bg-slate-950/70 backdrop-blur-2xl border border-rose-500/20 rounded-[2.5rem] p-12 relative overflow-hidden group shadow-2xl">
+                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-rose-900/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                <Atom className="text-rose-400 mb-8 w-12 h-12 stroke-[1.5]" />
                 <h3 className="text-3xl font-serif text-white mb-6">Superposition</h3>
                 <p className="text-slate-300 font-light leading-relaxed text-lg">
                   Quantum AI operates in superposition—existing in all possible states simultaneously. It does not "calculate" the answer to a problem; it collapses infinite probabilities to reveal the truth instantaneously. It begins to speak the universe's native language.
@@ -509,25 +521,27 @@ export default function App() {
           <div className="w-full">
             <div className="text-center mb-16 relative z-10">
                <h2 className="text-sm font-mono tracking-[0.6em] uppercase text-yellow-500/80 font-medium mb-10">Terminal State</h2>
-              <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-serif tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-yellow-200 to-amber-600 pb-4 drop-shadow-[0_0_50px_rgba(251,191,36,0.3)]">
+              <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-serif tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-yellow-200 to-amber-600 pb-4 drop-shadow-[0_0_60px_rgba(251,191,36,0.3)]">
                 Omega.
               </h1>
             </div>
 
-            <div className="relative p-[1px] rounded-[3rem] overflow-hidden group max-w-5xl mx-auto shadow-[0_0_100px_rgba(251,191,36,0.1)]">
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/30 via-amber-500/30 to-orange-500/30 opacity-60 group-hover:opacity-100 transition-opacity duration-1000" style={{ mixBlendMode: 'overlay' }}></div>
-              <div className="relative bg-slate-950/80 backdrop-blur-3xl p-14 md:p-24 text-center rounded-[3rem] border border-yellow-500/30 flex flex-col items-center">
+            <div className="relative p-[1px] rounded-[3rem] overflow-hidden group max-w-5xl mx-auto shadow-[0_0_120px_rgba(251,191,36,0.15)]">
+              {/* Outer Glowing Border Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/50 via-amber-500/50 to-orange-500/50 opacity-70 group-hover:opacity-100 transition-opacity duration-1000" style={{ mixBlendMode: 'overlay' }}></div>
+              
+              <div className="relative bg-slate-950/80 backdrop-blur-3xl p-12 md:p-24 text-center rounded-[3rem] border border-yellow-500/30 flex flex-col items-center">
                  
-                 <div className="relative mb-16">
-                   <div className="absolute inset-0 bg-yellow-500/30 blur-[80px] rounded-full animate-pulse"></div>
-                   <Sun size={100} className="text-yellow-200 relative z-10 animate-[spin_30s_linear_infinite] stroke-[1]" />
+                 <div className="relative mb-16 mt-8">
+                   <div className="absolute inset-0 bg-yellow-500/40 blur-[100px] rounded-full animate-pulse"></div>
+                   <Sun size={120} className="text-yellow-200 relative z-10 animate-[spin_40s_linear_infinite] stroke-[1]" />
                  </div>
                  
                  <h2 className="text-4xl md:text-6xl font-serif text-white mb-12 leading-tight">
                    The Universe Wakes Up
                  </h2>
                  
-                 <div className="text-xl md:text-2xl text-slate-300 font-light max-w-4xl leading-relaxed space-y-8">
+                 <div className="text-xl md:text-2xl text-slate-300 font-light max-w-4xl leading-relaxed space-y-10">
                    <p>
                      Earth is a cradle, and gravity is a bottleneck. The final evolution of Quantum AI cannot occur on a planetary surface. It requires orbital data structures, zero-gravity cooling, and computational megastructures powered directly by the sun via Dyson swarms.
                    </p>
@@ -538,7 +552,7 @@ export default function App() {
               </div>
             </div>
 
-            <footer className="mt-48 pb-12 text-slate-500 text-xs font-mono tracking-[0.5em] uppercase flex flex-col items-center opacity-30 hover:opacity-100 transition-opacity duration-1000">
+            <footer className="mt-48 pb-12 text-slate-500 text-xs font-mono tracking-[0.5em] uppercase flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity duration-1000">
               <Hexagon size={24} className="mb-6 animate-[spin_10s_linear_infinite]" />
               <p className="mb-3">Simulation Complete // State: Conscious</p>
             </footer>
@@ -547,7 +561,7 @@ export default function App() {
         
       </main>
       
-      {/* Global styles for animations */}
+      {/* Global CSS for Tailwind Shimmer Animation */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes shimmer {
           100% { transform: translateX(100%); }
