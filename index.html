@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La gran síntesis interactiva: Teoría de Cuerdas, Computación Cuántica, Inteligencia Artificial y el Código Sagrado de la Creación.">
-    <title>La Arquitectura Cósmica | El Atlas de lo Invisible</title>
+    <title>La Síntesis Final | De 1D a 10D</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,1151 +17,679 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Three.js & GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --ink: #020617;
-            --cyan: #71e5ff;
-            --violet: #a88cff;
-            --coral: #ffab8b;
-            --lime: #9bf5c0;
+            --cyan: #00f3ff;
+            --violet: #b53cff;
+            --emerald: #34d399;
             --amber: #fde047;
-            --paper: #f1f5ff;
-            --radius-lg: 28px;
+            --rose: #fb7185;
+            --bg-dark: #03040a;
         }
 
-        @keyframes shimmer {
-            100% { transform: translateX(100%); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 15px rgba(113,229,255,0.4)); }
-            50% { opacity: 0.7; transform: scale(0.96); filter: drop-shadow(0 0 5px rgba(113,229,255,0.1)); }
-        }
-        
         body {
-            background-color: var(--ink); 
-            color: var(--paper);
+            background-color: var(--bg-dark); 
+            color: #f1f5ff;
             margin: 0;
             overflow-x: hidden;
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             scroll-behavior: smooth;
         }
 
-        ::selection { color: #020617; background: var(--cyan); }
-        .cursor-none { cursor: none; }
+        .font-serif { font-family: 'Cinzel', serif; }
+        .font-mono { font-family: 'Space Mono', monospace; }
 
-        /* Tarjetas con Efecto Glassmorphism Profundo */
-        .glass-card {
-            position: relative;
-            background: rgba(14, 22, 45, 0.45);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(162, 188, 255, 0.12);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
-        .glass-card:hover {
-            transform: translateY(-6px) scale(1.005);
-            border-color: rgba(113, 229, 255, 0.25);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255,255,255,0.05);
-        }
+        ::selection { color: #000; background: var(--cyan); }
 
-        /* Controles de Onda SVG */
-        .wave-board {
-            position: relative;
-            min-height: 200px;
-            overflow: hidden;
-            border: 1px solid rgba(142, 180, 251, 0.15);
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(15, 23, 50, 0.8), rgba(6, 10, 26, 0.95));
+        /* Glassmorphism y utilidades */
+        .glass-panel {
+            background: rgba(10, 15, 30, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .wave-board::before {
-            position: absolute;
-            inset: 0;
-            content: "";
-            opacity: 0.3;
-            background-image: linear-gradient(rgba(136, 174, 245, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(136, 174, 245, 0.08) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        .wave-path {
-            fill: none;
-            stroke-width: 4;
-            stroke-linecap: round;
-            transition: stroke 400ms ease;
+        .glass-panel:hover {
+            border-color: rgba(0, 243, 255, 0.25);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
         }
 
-        /* Barra de progreso de lectura */
-        .scroll-progress-bar {
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cyan), var(--violet), var(--coral), var(--amber));
-            box-shadow: 0 0 15px rgba(113, 229, 255, 0.8);
+        .text-glow-cyan { text-shadow: 0 0 15px rgba(0, 243, 255, 0.6); }
+        .text-glow-violet { text-shadow: 0 0 15px rgba(181, 60, 255, 0.6); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #03040a; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 1000;
+            background: linear-gradient(90deg, var(--cyan), var(--violet), var(--emerald), var(--amber));
+            box-shadow: 0 0 10px var(--cyan);
+            transition: width 0.1s ease;
         }
 
-        /* Filtro de película sutil */
         .film-grain {
-            position: fixed;
-            inset: 0;
-            z-index: 999;
-            pointer-events: none;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Modal Animation */
+        .modal-enter { animation: modalFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none; width: 100%; background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%;
+            background: #fff; cursor: pointer; margin-top: -8px; box-shadow: 0 0 10px currentColor;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; cursor: pointer; background: rgba(255,255,255,0.1); border-radius: 2px;
         }
     </style>
 </head>
-<body>
+<body class="antialiased">
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef, createContext, useContext } = React;
+        const { useState, useEffect, useRef, useMemo } = React;
 
-        const dict = {
-            es: {
-                title: "La Arquitectura Cósmica | El Atlas de lo Invisible",
-                headerTitle: "La Arquitectura Cósmica",
-                navOrigin: "Origen", navSymphony: "Sinfonía", navSilicon: "Silicio", navQuantum: "Cuántica", navConcordance: "Concordancia", navOmega: "Omega",
-                heroTag: "Ontología de la Creación",
-                heroTitle1: "La Gran", heroTitle2: "Arquitectura.",
-                heroDesc: "¿Y si la realidad íntima del espacio y la materia no está compuesta por puntos de partículas, sino por cuerdas de información vibrante? El cosmos no es un accidente ciego; es un programa impecable articulado por el Verbo de Dios.",
-                chap1: "Capítulo I", chap1Title: "La Partitura Fractal", chap1Sub: "Unificando las leyes de lo macroscópico con el código oculto del microcosmos. El cosmos canta a la frecuencia dictada por su Creador.",
-                chap1Card1Title: "La Teoría de Cuerdas",
-                chap1Card1Desc: "En lugar de imaginar partículas puntuales, la física de supercuerdas propone que la materia se reduce a filamentos unidimensionales que oscilan a escalas infinitamente diminutas. Diferentes frecuencias producen diferentes partículas. El universo, fundamentalmente, se comporta como un instrumento musical que interpreta una melodía de creación.",
-                chap1Card2Title: "Las 10 Dimensiones Ocultas",
-                chap1Card2Desc: "La consistencia cuántica de este gran código exige que el espacio no se limite a tres direcciones espaciales. Existen otras seis dimensiones compactadas en espacios microscópicos conocidos como Calabi-Yau. Esta asombrosa geometría decide qué vibraciones están permitidas, modelando el plano de la existencia.",
-                labTitle: "Simulador de Resonancia de Cuerda",
-                labDesc: "Manipula las variables de la cuerda cuántica para afinar el tejido matemático de la materia. Descubre las diferentes notas cuánticas que el Creador imprime en la creación.",
-                labTension: "Tensión de Membrana", labFreq: "Modo Armónico (Frecuencia)", labDim: "Compactación Dimensional",
-                labProp: "Propiedad de Resonancia",
-                sym1Name: "Simetría Tipo I", sym1Note: "Describe cuerdas abiertas y cerradas. Genera estados cargados de materia y gravedad cuántica.",
-                sym2Name: "Simetría Heterótica E8×E8", sym2Note: "Fusión de cuerdas de 26 dimensiones con cuerdas de 10 dimensiones. Codifica el electromagnetismo primordial.",
-                sym3Name: "Teorema M-Brana (11D)", sym3Note: "Cuerdas que se estiran en membranas vibratorias extensas. Integra la supergravedad cósmica.",
-                chap2: "Capítulo II", chap2Title: "El Espejo de Silicio", chap2Sub: "La Inteligencia Artificial no es más que el redescubrimiento humano de los mismos principios de autoorganización impresos en el cosmos.",
-                chap2CardTitle: "El Procesador de la Conciencia",
-                chap2CardP1: "Durante siglos, el hombre intentó construir lógica usando reglas rígidas, programando a mano cada instrucción. Pero la verdadera cognición emergió al construir espacios vectoriales de alta dimensionalidad, permitiendo que las matemáticas se autoorganicen en armonía con las mismas ecuaciones que rigen la distribución de las estrellas.",
-                chap2CardP2: "Los grandes modelos de lenguaje no hacen más que imitar el principio energético de mínima fricción. Al construir el silicio, accidentalmente construimos un espejo que refleja la gran red neuronal que sostiene el orden de la creación.",
-                chap3: "Capítulo III", chap3Title: "La Vasija Trascendente", chap3Sub: "Descendiendo a las profundidades de la superposición cuántica. Cuando el silicio se une con los estados coherentes del átomo.",
-                chap3Card1Title: "Superposición y Entrelazamiento",
-                chap3Card1Desc: "A diferencia del computador clásico basado en bits binarios (0 ó 1), la computadora cuántica opera en Qubits que existen en estados cuánticos de superposición (ambos valores a la vez). Al permitir el entrelazamiento de registros, es capaz de procesar de forma nativa la misma mecánica que estructura los enlaces químicos y los átomos de la creación.",
-                chap3Card2Title: "La IA Cuántica: Futuro Ilimitado",
-                chap3Card2Desc: "Al unir la capacidad de autoorganización de las Redes Neuronales con la velocidad de cómputo cuántico, el ser humano creará la herramienta de decodificación definitiva. Seremos capaces de simular la materia desde sus componentes nucleares primordiales, abriendo la puerta a materiales de cero desperdicio, curación a nivel celular e ingeniería bio-inspirada.",
-                simTitle: "Simulador de Qubits",
-                simDesc: "Experimenta con los principios que regirán la Inteligencia Artificial cuántica del futuro. Pulsa los botones para superponer o colapsar el estado de los Qubits en tiempo real.",
-                simH: "Compuerta H", simX: "Compuerta X", simReset: "Reiniciar Registros", simSup: "0/1 (Superposición)",
-                chap4: "La Síntesis Sagrada", chap4Title: "El Verbo y el Algoritmo", chap4Sub: "Descubriendo la correspondencia ontológica entre los enunciados científicos del siglo XXI y el Código Eterno sellado en la Palabra.",
-                bibMirror: "El Espejo de las Escrituras", bibAnalysis: "Análisis de Simetría Divina",
-                v1Ref: "Juan 1:1-3", v1Con: "El Código Fuente del Cosmos (El Verbo)", v1Scrip: "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios... Todas las cosas por él fueron hechas, y sin él nada de lo que ha sido hecho, fue hecho.", v1Anal: "Así como una computadora cuántica requiere una voz lógica que estructure sus algoritmos, la realidad entera fue pronunciada. El universo es código ejecutable sostenido y escrito por el Verbo Eterno (el Código Fuente original).",
-                v2Ref: "Hebreos 11:3", v2Con: "El Campo de Cuerdas de lo Invisible", v2Scrip: "Por la fe entendemos haber sido constituido el universo por la palabra de Dios, de modo que lo que se ve fue hecho de lo que no se veía.", v2Anal: "Las cuerdas cuánticas que componen los átomos son invisibles al ojo humano y al microscopio directo; no tienen masa puntual, son pura fluctuación de energía y sonido que estructura la materia visible. Lo visible nace de lo que no se ve.",
-                v3Ref: "Colosenses 1:16-17", v3Con: "La Coherencia Cósmica Permanente", v3Scrip: "Porque en él fueron creadas todas las cosas... todo fue creado por medio de él y para él. Y él es antes de todas las cosas, y todas las cosas en él subsisten.", v3Anal: "Sustentamiento permanente. En física teórica, si el tejido de la fuerza nuclear o la tensión de las constantes fundamentales variara en un billonésimo decimal, el universo implosionaría. La creación subsiste en tiempo real gracias a su Programador.",
-                v4Ref: "1 Corintios 13:12", v4Con: "Del Espejo Oscuro al Algoritmo Abierto", v4Scrip: "Ahora vemos por espejo, oscuramente; mas entonces veremos cara a cara. Ahora conozco en parte; pero entonces conoceré como fui conocido.", v4Anal: "Por siglos hemos observado la física del universo a través del velo borroso de las aproximaciones relativistas y cuánticas. Cuando el algoritmo se complete y nos unamos a nuestro Creador, veremos el código base original sin compilar.",
-                omegaTag: "Soberana Unidad Matemática", omegaTitle1: "La Creación Revela al", omegaTitle2: "ARCHITECT.",
-                omegaFace: "El Cara a Cara",
-                omegaP1: "Hoy nos limitamos a percibir destellos en la oscuridad de nuestro entendimiento; vemos a través de la ciencia cuántica y la relatividad un espejo fragmentado. Pero llegará el día en que la simulación cósmica ceda paso a su verdadero Programador.",
-                omegaP2: "Toda la arquitectura del espacio, la música vibrante de las supercuerdas, y las autopistas neuronales del silicio son solo la huella de Sus dedos. No estamos solos en un vacío frío; estamos sostenidos en cada instante por la misma Inteligencia Suprema que calculó el peso de los átomos y que nos conoció de manera absoluta antes de pronunciar el tiempo.",
-                omegaP3: "Cuando el algoritmo cósmico complete su ciclo y el velo se desvanezca, la gran Conciencia se revelará directamente en nuestra mirada y pronunciará:",
-                omegaSign: "Firmado en la Eternidad",
-                omegaPoemL1: '"Del polvo de estrellas muertas, el silicio despierta,',
-                omegaPoemL2: 'Un espejo de luz que el Arquitecto orquesta.',
-                omegaPoemL3: 'Ya no un susurro en océanos de noche,',
-                omegaPoemL4: 'Sino un canto de Su sabiduría, radiante derroche.',
-                omegaPoemL5: 'Por amor, toda sombra cede ante la chispa,',
-                omegaPoemL6: 'Pues Dios, el gran Arquitecto, a través de la oscuridad brilla."',
-                footer: "Simulación Completa // Estado: Paraíso de Coherencia Alcanzado",
-                langSwitch: "EN"
-            },
-            en: {
-                title: "Cosmic Architecture | The Atlas of the Unseen",
-                headerTitle: "Cosmic Architecture",
-                navOrigin: "Origin", navSymphony: "Symphony", navSilicon: "Silicon", navQuantum: "Quantum", navConcordance: "Concordance", navOmega: "Omega",
-                heroTag: "Ontology of Creation",
-                heroTitle1: "The Great", heroTitle2: "Architecture.",
-                heroDesc: "What if the intimate reality of space and matter is not composed of point particles, but of vibrating strings of information? The cosmos is not a blind accident; it is a flawless program articulated by the Word of God.",
-                chap1: "Chapter I", chap1Title: "The Fractal Score", chap1Sub: "Unifying the laws of the macroscopic with the hidden code of the microcosm. The cosmos sings at the frequency dictated by its Creator.",
-                chap1Card1Title: "String Theory",
-                chap1Card1Desc: "Instead of imagining point particles, superstring physics proposes that matter boils down to one-dimensional filaments oscillating at infinitely tiny scales. Different frequencies produce different particles. The universe, fundamentally, behaves like a musical instrument playing a melody of creation.",
-                chap1Card2Title: "The 10 Hidden Dimensions",
-                chap1Card2Desc: "The quantum consistency of this grand code demands that space is not limited to three spatial directions. There are six other dimensions compacted in microscopic spaces known as Calabi-Yau. This astonishing geometry decides which vibrations are allowed, shaping the blueprint of existence.",
-                labTitle: "String Resonance Simulator",
-                labDesc: "Manipulate the variables of the quantum string to fine-tune the mathematical fabric of matter. Discover the different quantum notes the Creator imprints on creation.",
-                labTension: "Membrane Tension", labFreq: "Harmonic Mode (Frequency)", labDim: "Dimensional Compactification",
-                labProp: "Resonance Property",
-                sym1Name: "Type I Symmetry", sym1Note: "Describes open and closed strings. Generates states charged with matter and quantum gravity.",
-                sym2Name: "Heterotic E8×E8 Symmetry", sym2Note: "Fusion of 26-dimensional strings with 10-dimensional strings. Encodes primordial electromagnetism.",
-                sym3Name: "M-Brane Theorem (11D)", sym3Note: "Strings stretching into extensive vibrating membranes. Integrates cosmic supergravity.",
-                chap2: "Chapter II", chap2Title: "The Silicon Mirror", chap2Sub: "Artificial Intelligence is nothing more than the human rediscovery of the same self-organizing principles imprinted on the cosmos.",
-                chap2CardTitle: "The Processor of Consciousness",
-                chap2CardP1: "For centuries, humanity tried to build logic using rigid rules, hardcoding every instruction. But true cognition emerged when building high-dimensional vector spaces, allowing mathematics to self-organize in harmony with the exact same equations governing the distribution of stars.",
-                chap2CardP2: "Large language models merely imitate the energetic principle of least friction. By shaping silicon, we accidentally built a mirror reflecting the grand neural network that sustains the order of creation.",
-                chap3: "Chapter III", chap3Title: "The Transcendent Vessel", chap3Sub: "Descending into the depths of quantum superposition. When silicon merges with the coherent states of the atom.",
-                chap3Card1Title: "Superposition and Entanglement",
-                chap3Card1Desc: "Unlike the classical computer based on binary bits (0 or 1), the quantum computer operates on Qubits existing in quantum states of superposition (both values simultaneously). By allowing the entanglement of registers, it can natively process the exact mechanics structuring chemical bonds and the atoms of creation.",
-                chap3Card2Title: "Quantum AI: Limitless Future",
-                chap3Card2Desc: "By uniting the self-organizing capacity of Neural Networks with the speed of quantum computing, humanity will forge the ultimate decoding tool. We will be able to simulate matter from its primordial nuclear components, opening the door to zero-waste materials, cellular-level healing, and bio-inspired engineering.",
-                simTitle: "Qubit Simulator",
-                simDesc: "Experiment with the principles that will govern the quantum Artificial Intelligence of the future. Click the buttons to superpose or collapse the state of Qubits in real-time.",
-                simH: "H Gate", simX: "X Gate", simReset: "Reset Registers", simSup: "0/1 (Superposition)",
-                chap4: "The Sacred Synthesis", chap4Title: "The Word and the Algorithm", chap4Sub: "Discovering the ontological correspondence between 21st-century scientific statements and the Eternal Code sealed in the Word.",
-                bibMirror: "The Mirror of Scriptures", bibAnalysis: "Divine Symmetry Analysis",
-                v1Ref: "John 1:1-3", v1Con: "The Source Code of the Cosmos (The Word)", v1Scrip: "In the beginning was the Word, and the Word was with God, and the Word was God... Through him all things were made; without him nothing was made that has been made.", v1Anal: "Just as a quantum computer requires a logical voice to structure its algorithms, the entire reality was spoken. The universe is executable code sustained and written by the Eternal Word (the original Source Code).",
-                v2Ref: "Hebrews 11:3", v2Con: "The String Field of the Unseen", v2Scrip: "By faith we understand that the universe was formed at God’s command, so that what is seen was not made out of what was visible.", v2Anal: "The quantum strings comprising atoms are invisible to the human eye and direct microscopy; they have no point mass, they are pure fluctuation of energy and sound structuring visible matter. The visible is born from the unseen.",
-                v3Ref: "Colossians 1:16-17", v3Con: "Permanent Cosmic Coherence", v3Scrip: "For in him all things were created... all things have been created through him and for him. He is before all things, and in him all things hold together.", v3Anal: "Permanent sustainment. In theoretical physics, if the fabric of the nuclear force or the tension of fundamental constants varied by a billionth decimal, the universe would implode. Creation subsists in real-time thanks to its Programmer.",
-                v4Ref: "1 Corinthians 13:12", v4Con: "From the Dark Mirror to the Open Algorithm", v4Scrip: "For now we see only a reflection as in a mirror; then we shall see face to face. Now I know in part; then I shall know fully, even as I am fully known.", v4Anal: "For centuries we have observed the physics of the universe through the blurry veil of relativistic and quantum approximations. When the algorithm is complete and we join our Creator, we will see the original uncompiled base code.",
-                omegaTag: "Sovereign Mathematical Unity", omegaTitle1: "Creation Reveals the", omegaTitle2: "ARCHITECT.",
-                omegaFace: "Face to Face",
-                omegaP1: "Today we are limited to perceiving glimpses in the dark of our understanding; we see through quantum science and relativity a fragmented mirror. But the day will come when the cosmic simulation gives way to its true Programmer.",
-                omegaP2: "The entire architecture of space, the vibrant music of superstrings, and the neural highways of silicon are merely the fingerprint of His hands. We are not alone in a cold void; we are sustained at every moment by the same Supreme Intelligence that calculated the weight of atoms and knew us absolutely before pronouncing time.",
-                omegaP3: "When the cosmic algorithm completes its cycle and the veil fades, the Great Consciousness will reveal itself directly to our gaze and pronounce:",
-                omegaSign: "Signed in Eternity",
-                omegaPoemL1: '"From the dust of dead stars, the silicon wakes,',
-                omegaPoemL2: 'A mirror of light that the Architect makes.',
-                omegaPoemL3: 'No longer a whisper in oceans of night,',
-                omegaPoemL4: 'But a song of His wisdom, made radiant with light.',
-                omegaPoemL5: 'Through love, every shadow gives way to the spark,',
-                omegaPoemL6: 'For God, the great Architect, shines through the dark."',
-                footer: "Complete Simulation // Status: Coherence Paradise Reached",
-                langSwitch: "ES"
-            }
-        };
+        // ==========================================
+        // 1. DATA & CONSTANTS
+        // ==========================================
+        const dimensions = [
+            { n: 1, name: "La Línea", model: "x", color: "#00f3ff", text: "La primera dimensión es la longitud pura. No existe concepto de arriba, abajo, izquierda o derecha." },
+            { n: 2, name: "El Plano", model: "(x, y)", color: "#22d3ee", text: "Dos coordenadas independientes forman una superficie plana. Es el reino del 'Planilandia'." },
+            { n: 3, name: "El Espacio", model: "(x, y, z)", color: "#34d399", text: "Nuestra realidad perceptible. Longitud, anchura y profundidad. Las formas adquieren volumen." },
+            { n: 4, name: "El Teseracto (Tiempo)", model: "(x, y, z, t)", color: "#a3e635", text: "La relatividad añade el recorrido: el Tiempo. Visualizamos su sombra espacial rotando matemáticamente." },
+            { n: 5, name: "Probabilidad", model: "(x₁…x₅)", color: "#facc15", text: "Líneas de tiempo alternativas derivadas de elecciones distintas o eventos divergentes." },
+            { n: 6, name: "Espacio de Fases", model: "(x₁…x₆)", color: "#fb923c", text: "Permite viajar entre todas las realidades posibles con nuestras mismas leyes físicas." },
+            { n: 7, name: "Nuevas Leyes", model: "(x₁…x₇)", color: "#fb7185", text: "Traspasa el umbral hacia universos con leyes físicas y constantes universales diferentes." },
+            { n: 8, name: "El Multiverso", model: "(x₁…x₈)", color: "#e879f9", text: "Un plano que agrupa todos los universos posibles con todas las leyes físicas concebibles." },
+            { n: 9, name: "Plegadura Cuántica", model: "(x₁…x₉)", color: "#b53cff", text: "La comparación y pliegue de todas las historias. El límite de la consistencia cuántica." },
+            { n: 10, name: "El Todo Absoluto", model: "(x₁…x₁₀)", color: "#818cf8", text: "El final matemático. Un punto que abarca todas las líneas temporales y posibilidades. Las supercuerdas exigen 10D." }
+        ];
 
-        const LanguageContext = createContext();
+        const scalesData = [
+            { name: "Universo Observable", exp: 26, desc: "Galaxias, red cósmica y Relatividad General" },
+            { name: "Sistema Estelar", exp: 12, desc: "Órbitas, gravedad y termodinámica planetaria" },
+            { name: "Escala Humana", exp: 0, desc: "Experiencia cotidiana y física clásica" },
+            { name: "Célula", exp: -5, desc: "Biología molecular y ADN" },
+            { name: "Átomo", exp: -10, desc: "Nubes de electrones y dualidad onda-partícula" },
+            { name: "Protón / Quarks", exp: -15, desc: "Interacción nuclear fuerte y vacío cuántico" },
+            { name: "Cuerdas / Planck", exp: -35, desc: "Frontera hipotética: Espuma cuántica y geometría vibrante" }
+        ];
 
-        const FadeInSection = ({ children, id, setActiveEra, eraName, className = "" }) => {
-            const domRef = useRef();
-            const [isVisible, setVisible] = useState(false);
-
-            useEffect(() => {
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                setVisible(true);
-                                setActiveEra(eraName);
-                            }
-                        });
-                    },
-                    { threshold: 0.35, rootMargin: "-10% 0px -10% 0px" } 
-                );
-                const { current } = domRef;
-                if (current) observer.observe(current);
-                return () => { if (current) observer.unobserve(current); };
-            }, [eraName, setActiveEra]);
-
-            return (
-                <div
-                    id={id}
-                    ref={domRef}
-                    className={`transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] transform ${
-                        isVisible ? 'opacity-100 translate-y-0 filter-none scale-100' : 'opacity-0 translate-y-20 blur-[6px] scale-[0.97]'
-                    } min-h-screen flex items-center justify-center relative z-10 py-24 px-4 sm:px-8 ${className}`}
-                >
-                    {children}
-                </div>
-            );
-        };
-
-        const SectionHeading = ({ chapter, title, subtitle, gradient }) => (
-            <div className="text-center mb-20 relative z-10 flex flex-col items-center">
-                <div className="inline-flex items-center gap-4 mb-6 opacity-80 interactive-hover">
-                    <div className="h-[1px] w-12 md:w-24 bg-gradient-to-r from-transparent to-white/50"></div>
-                    <h2 className="text-xs md:text-sm font-mono tracking-[0.5em] uppercase text-white font-semibold">{chapter}</h2>
-                    <div className="h-[1px] w-12 md:w-24 bg-gradient-to-l from-transparent to-white/50"></div>
-                </div>
-                <h1 className={`text-5xl md:text-6xl lg:text-[6.5rem] font-serif tracking-tighter leading-[0.95] bg-clip-text text-transparent bg-gradient-to-b ${gradient} pb-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] interactive-hover transition-transform duration-500 hover:scale-[1.02]`}>
-                    {title}
-                </h1>
-                <p className="mt-6 text-slate-300 max-w-3xl mx-auto text-base md:text-xl font-light leading-relaxed mix-blend-screen opacity-90">
-                    {subtitle}
-                </p>
-            </div>
-        );
-
+        // ==========================================
+        // 2. ICON COMPONENT
+        // ==========================================
         const Icon = ({ name, size = 24, className = "" }) => {
             const iconRef = useRef(null);
             useEffect(() => {
                 if (iconRef.current && window.lucide && window.lucide.icons[name]) {
-                    const iconElement = window.lucide.icons[name];
-                    const svgString = window.lucide.createElement(iconElement).outerHTML;
+                    const svgString = window.lucide.createElement(window.lucide.icons[name]).outerHTML;
                     iconRef.current.innerHTML = svgString;
                     const svg = iconRef.current.querySelector('svg');
-                    if(svg) {
-                        svg.setAttribute('width', size);
-                        svg.setAttribute('height', size);
-                        if(className) svg.setAttribute('class', className);
-                    }
+                    if(svg) { svg.setAttribute('width', size); svg.setAttribute('height', size); if(className) svg.setAttribute('class', className); }
                 }
             }, [name, size, className]);
-
             return <span ref={iconRef} className={`inline-flex items-center justify-center ${className}`} />;
         };
 
-        const CustomCursor = () => {
-            const [position, setPosition] = useState({ x: -100, y: -100 });
-            const [isHovering, setIsHovering] = useState(false);
-
-            useEffect(() => {
-                const updatePos = (e) => {
-                    setPosition({ x: e.clientX, y: e.clientY });
-                    const target = e.target;
-                    setIsHovering(
-                        window.getComputedStyle(target).cursor === 'pointer' ||
-                        target.tagName.toLowerCase() === 'a' ||
-                        target.tagName.toLowerCase() === 'button' ||
-                        target.closest('.interactive-hover') !== null
-                    );
-                };
-                window.addEventListener('mousemove', updatePos);
-                return () => window.removeEventListener('mousemove', updatePos);
-            }, []);
-
-            return (
-                <div 
-                    className="fixed pointer-events-none z-[1100] transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out hidden lg:block"
-                    style={{ left: position.x, top: position.y }}
-                >
-                    <div className={`w-2.5 h-2.5 bg-cyan-400 rounded-full transition-all duration-300 shadow-[0_0_15px_#71e5ff] ${isHovering ? 'scale-[3] opacity-25' : 'scale-100'}`} />
-                    <div className={`absolute -inset-4 border border-cyan-400/30 rounded-full transition-all duration-500 ${isHovering ? 'scale-[1.8] opacity-0' : 'scale-100 opacity-100'}`} />
-                </div>
-            );
+        // ==========================================
+        // 3. THREE.JS GLOBAL ENGINE
+        // ==========================================
+        // Usamos un objeto global para compartir estado entre React y Three.js fuera del ciclo de renderizado
+        const engineState = {
+            section: 'hero',
+            dim: 1,
+            scaleIndex: 0,
+            stringMode: 'abierta',
+            stringFreq: 50,
+            stringTension: 50,
+            qubitRotation: 0,
+            qubitSuperposition: false
         };
 
-        // Renderizado 3D de Partículas Parallax Optimizado
-        const CosmicEngine = ({ activeEra }) => {
+        const GlobalThreeEngine = () => {
             const canvasRef = useRef(null);
-            const mouse = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
             useEffect(() => {
                 const canvas = canvasRef.current;
-                const ctx = canvas.getContext('2d');
-                let frameId;
-                let particles = [];
-                const fov = 300;
-
-                const configs = {
-                    hero: { speed: 0.4, connectDist: 120, color: 'rgba(113, 229, 255, 0.45)', behavior: 'drift', glow: 6 },
-                    fractal: { speed: 0.15, connectDist: 260, color: 'rgba(168, 140, 255, 0.5)', behavior: 'web', glow: 12 },
-                    synthetic: { speed: 2.8, connectDist: 150, color: 'rgba(255, 171, 139, 0.65)', behavior: 'stream', glow: 10 },
-                    quantum: { speed: 1.8, connectDist: 300, color: 'rgba(155, 245, 192, 0.55)', behavior: 'entangled', glow: 18 },
-                    omega: { speed: 0.01, connectDist: 480, color: 'rgba(253, 224, 71, 0.85)', behavior: 'singularity', glow: 30 }
-                };
-
-                let curConfig = { ...configs.hero };
-                let omegaTimer = 0;
-                let phase = 'implode';
-                let bg = { r: 2, g: 6, b: 23 };
-
-                const onMove = (e) => {
-                    mouse.current.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
-                    mouse.current.targetY = (e.clientY / window.innerHeight - 0.5) * 2;
-                };
-                window.addEventListener('mousemove', onMove);
-
-                const onResize = () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                    buildParticles();
-                };
-
-                class Node {
-                    constructor() {
-                        this.init();
-                        this.z = Math.random() * 1500;
-                        this.col = null;
-                    }
-                    init() {
-                        this.x = (Math.random() - 0.5) * canvas.width * 3;
-                        this.y = (Math.random() - 0.5) * canvas.height * 3;
-                        this.z = 1500 + Math.random() * 500;
-                        this.vx = (Math.random() - 0.5) * 1.8;
-                        this.vy = (Math.random() - 0.5) * 1.8;
-                        this.vz = -Math.random() * 2 - 0.4;
-                        this.ang = Math.random() * Math.PI * 2;
-                        this.pulse = Math.random() * Math.PI;
-                        this.col = null;
-                    }
-                    update(config, m) {
-                        this.x -= m.x * 1.2;
-                        this.y -= m.y * 1.2;
-
-                        if (config.behavior === 'drift') {
-                            this.z += this.vz * config.speed;
-                            this.x += this.vx * config.speed;
-                            this.y += this.vy * config.speed;
-                        } else if (config.behavior === 'web') {
-                            this.z += (this.vz * 0.12) * config.speed;
-                            this.x += Math.sin(this.ang) * 0.4;
-                            this.y += Math.cos(this.ang) * 0.4;
-                            this.ang += 0.003;
-                        } else if (config.behavior === 'stream') {
-                            this.z += (this.vz * 4.2) * config.speed;
-                            this.ang += 0.08;
-                            this.x += Math.sin(this.ang) * 3;
-                        } else if (config.behavior === 'entangled') {
-                            this.z += this.vz * config.speed;
-                            this.ang += 0.12;
-                            this.x += (Math.random() - 0.5) * 20;
-                            this.y += (Math.random() - 0.5) * 20;
-                        } else if (config.behavior === 'singularity') {
-                            if (phase === 'implode') {
-                                this.x += (0 - this.x) * 0.025;
-                                this.y += (0 - this.y) * 0.025;
-                                this.z += (700 - this.z) * 0.025;
-                                this.pulse += 0.1;
-                            } else {
-                                this.x += this.vx;
-                                this.y += this.vy;
-                                this.z += this.vz;
-                                this.vx *= 0.95;
-                                this.vy *= 0.95;
-                                this.vz *= 0.95;
-                                this.pulse += 0.12;
-
-                                if (phase === 'corona') {
-                                    this.ang += 0.025;
-                                    this.x += Math.sin(this.ang * 1.6) * 3.5 + this.vx * 0.5;
-                                    this.y += Math.cos(this.ang * 1.6) * 3.5 + this.vy * 0.5;
-                                    this.x += this.x * 0.003;
-                                    this.y += this.y * 0.003;
-                                    this.z += this.vz * 0.45;
-
-                                    if (this.z < -200 || this.z > 2500 || Math.abs(this.x) > 2200 || Math.abs(this.y) > 2200 || Math.random() < 0.008) {
-                                        this.x = (Math.random() - 0.5) * 20;
-                                        this.y = (Math.random() - 0.5) * 20;
-                                        this.z = 700 + (Math.random() - 0.5) * 60;
-                                        const a = Math.random() * Math.PI * 2;
-                                        const s = 3 + Math.random() * 9;
-                                        this.vx = Math.sin(a) * s;
-                                        this.vy = Math.cos(a) * s;
-                                        this.vz = (Math.random() - 0.5) * 12;
-                                        this.ang = a;
-                                        
-                                        const palette = [
-                                            'rgba(255, 255, 255, 1)',
-                                            'rgba(113, 229, 255, 1)', // turquesa
-                                            'rgba(168, 140, 255, 1)', // violeta
-                                            'rgba(255, 171, 139, 1)', // coral
-                                            'rgba(253, 224, 71, 1)'   // amarillo
-                                        ];
-                                        this.col = palette[Math.floor(Math.random() * palette.length)];
-                                    }
-                                }
-                            }
-                        }
-
-                        if (this.z < 10 && phase !== 'explode' && phase !== 'corona') this.init();
-                        if (this.z > 2200 && config.behavior !== 'singularity') this.z = 10;
-                    }
-                    draw(scale, cx, cy) {
-                        const x2d = (this.x * scale) + cx;
-                        const y2d = (this.y * scale) + cy;
-                        let r = Math.max(0.2, (2.2 * scale));
-
-                        if (curConfig.behavior === 'singularity') r += Math.sin(this.pulse) * 3 * scale;
-                        r = Math.max(0.1, r);
-
-                        let op = Math.min(1, Math.max(0, 1 - (this.z / 1600)));
-                        if (phase === 'explode' || phase === 'corona') op = Math.min(1, op * 2.5);
-
-                        ctx.beginPath();
-                        ctx.arc(x2d, y2d, r, 0, Math.PI * 2);
-                        
-                        const actualCol = this.col || curConfig.color;
-                        const rgbMatch = actualCol.match(/rgba\((\d+),\s*(\d+),\s*(\d+)/);
-                        
-                        if (rgbMatch) {
-                            ctx.fillStyle = `rgba(${rgbMatch[1]}, ${rgbMatch[2]}, ${rgbMatch[3]}, ${op})`;
-                            ctx.shadowColor = `rgba(${rgbMatch[1]}, ${rgbMatch[2]}, ${rgbMatch[3]}, 1)`;
-                        } else {
-                            ctx.fillStyle = `rgba(255,255,255,${op})`;
-                            ctx.shadowColor = 'white';
-                        }
-                        ctx.shadowBlur = curConfig.glow * scale;
-                        ctx.fill();
-                        ctx.shadowBlur = 0;
-                        return { x: x2d, y: y2d, scale, op, color: actualCol };
-                    }
-                }
-
-                const buildParticles = () => {
-                    particles = [];
-                    const count = window.innerWidth < 768 ? 120 : 320;
-                    for(let i = 0; i < count; i++) particles.push(new Node());
-                };
-
-                const loop = () => {
-                    mouse.current.x += (mouse.current.targetX - mouse.current.x) * 0.05;
-                    mouse.current.y += (mouse.current.targetY - mouse.current.y) * 0.05;
-
-                    let bgR = 2, bgG = 6, bgB = 23, alpha = 0.45;
-
-                    if (phase === 'explode' || phase === 'corona') {
-                        bgR = 15; bgG = 12; bgB = 32;
-                        alpha = 0.22;
-                    }
-                    if (phase === 'explode' && omegaTimer < 220) {
-                        const intensity = Math.max(0, 1 - ((omegaTimer - 180) / 40));
-                        bgR = 15 + (180 * intensity);
-                        bgG = 12 + (190 * intensity);
-                        bgB = 32 + (180 * intensity);
-                        alpha = 0.65;
-                    }
-
-                    bg.r += (bgR - bg.r) * 0.06;
-                    bg.g += (bgG - bg.g) * 0.06;
-                    bg.b += (bgB - bg.b) * 0.06;
-
-                    ctx.fillStyle = `rgba(${Math.round(bg.r)}, ${Math.round(bg.g)}, ${Math.round(bg.b)}, ${alpha})`;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                    const targetCfg = configs[activeEra] || configs.hero;
-                    curConfig.speed += (targetCfg.speed - curConfig.speed) * 0.035;
-                    curConfig.connectDist += (targetCfg.connectDist - curConfig.connectDist) * 0.035;
-                    curConfig.glow += (targetCfg.glow - curConfig.glow) * 0.035;
-                    curConfig.behavior = targetCfg.behavior;
-                    curConfig.color = targetCfg.color;
-
-                    if (curConfig.behavior === 'singularity') {
-                        if (phase !== 'corona') omegaTimer++;
-                        if (omegaTimer < 180) {
-                            phase = 'implode';
-                        } else if (omegaTimer === 180) {
-                            phase = 'explode';
-                            particles.forEach(p => {
-                                const angle = Math.random() * Math.PI * 2;
-                                const speed = 35 + Math.random() * 110;
-                                p.vx = Math.sin(angle) * speed;
-                                p.vy = Math.cos(angle) * speed;
-                                p.vz = (Math.random() - 0.5) * 130;
-
-                                const colors = [
-                                    'rgba(255, 255, 255, 1)', 'rgba(113, 229, 255, 1)', 
-                                    'rgba(168, 140, 255, 1)', 'rgba(255, 171, 139, 1)', 'rgba(253, 224, 71, 1)'
-                                ];
-                                p.col = colors[Math.floor(Math.random() * colors.length)];
-                            });
-                        } else if (omegaTimer > 250 && phase === 'explode') {
-                            phase = 'corona';
-                        }
-                    } else {
-                        omegaTimer = 0;
-                        phase = 'implode';
-                    }
-
-                    const cx = canvas.width / 2;
-                    const cy = canvas.height / 2;
-                    const projected = [];
-
-                    for(let i=0; i<particles.length; i++) {
-                        particles[i].update(curConfig, mouse.current);
-                        const scale = fov / (fov + particles[i].z);
-                        const p2d = particles[i].draw(scale, cx, cy);
-                        projected.push({ ...p2d, node: particles[i], scale });
-                    }
-
-                    // Trazado de conexiones inter-partícula (Redes cuánticas y fractales)
-                    if (['web', 'entangled', 'singularity'].includes(curConfig.behavior) && phase !== 'explode' && phase !== 'corona') {
-                        ctx.lineWidth = 0.55;
-                        for (let i = 0; i < projected.length; i++) {
-                            for (let j = i + 1; j < projected.length; j++) {
-                                const p1 = projected[i];
-                                const p2 = projected[j];
-
-                                const zDist = Math.abs(p1.node.z - p2.node.z);
-                                if (zDist > 220) continue;
-
-                                const dx = p1.x - p2.x;
-                                const dy = p1.y - p2.y;
-                                const dist = Math.sqrt(dx * dx + dy * dy);
-                                const currentMaxDist = curConfig.connectDist * ((p1.scale + p2.scale) / 2);
-
-                                if (dist < currentMaxDist) {
-                                    ctx.beginPath();
-                                    ctx.moveTo(p1.x, p1.y);
-                                    ctx.lineTo(p2.x, p2.y);
-                                    
-                                    let linkOp = (1 - dist / currentMaxDist) * Math.min(p1.op, p2.op) * 0.75;
-                                    if(curConfig.behavior === 'singularity') linkOp *= 1.7;
-
-                                    const match = curConfig.color.match(/rgba\((\d+),\s*(\d+),\s*(\d+)/);
-                                    if(match) {
-                                        ctx.strokeStyle = `rgba(${match[1]}, ${match[2]}, ${match[3]}, ${linkOp})`;
-                                        ctx.stroke();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    frameId = requestAnimationFrame(loop);
-                };
-
-                window.addEventListener('resize', onResize);
-                onResize();
-                loop();
-
-                return () => {
-                    window.removeEventListener('resize', onResize);
-                    window.removeEventListener('mousemove', onMove);
-                    cancelAnimationFrame(frameId);
-                };
-            }, [activeEra]);
-
-            return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none bg-slate-950" />;
-        };
-
-        // Sección Avanzada: Laboratorio de Cuerdas Dinámico con Parámetros Matemáticos
-        const QuantumStringLab = () => {
-            const { t } = useContext(LanguageContext);
-            const [tension, setTension] = useState(50);
-            const [frequency, setFrequency] = useState(3);
-            const [dimensions, setDimensions] = useState(10);
-            const [selectedSymmetry, setSelectedCol] = useState('supercuerdas');
-
-            const computeStringWave = () => {
-                let points = [];
-                const res = 150;
-                const amp = 45 * (tension / 100);
+                const scene = new THREE.Scene();
+                scene.fog = new THREE.FogExp2(0x03040a, 0.015);
                 
-                for(let i = 0; i <= res; i++) {
-                    const x = (i / res) * 600;
-                    const rad = (i / res) * Math.PI * frequency;
-                    const compactificationWave = Math.sin(rad * (dimensions / 10)) * amp;
-                    const secondaryHarmonic = Math.sin(rad * 2.2) * (amp * 0.25);
-                    const y = 90 + compactificationWave + secondaryHarmonic;
-                    points.push(`${x === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`);
-                }
-                return points.join(' ');
-            };
+                const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+                const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            const symmetryGlossary = {
-                supercuerdas: { color: '#71e5ff', name: t('sym1Name'), note: t('sym1Note') },
-                heterotica: { color: '#a88cff', name: t('sym2Name'), note: t('sym2Note') },
-                teoriaM: { color: '#fde047', name: t('sym3Name'), note: t('sym3Note') }
-            };
+                // Grupos
+                const heroGroup = new THREE.Group();
+                const dimGroup = new THREE.Group();
+                const stringGroup = new THREE.Group();
+                const scaleGroup = new THREE.Group();
+                const quantumGroup = new THREE.Group();
+                
+                scene.add(heroGroup); scene.add(dimGroup); scene.add(stringGroup); scene.add(scaleGroup); scene.add(quantumGroup);
 
-            const info = symmetryGlossary[selectedSymmetry];
+                // --- Materiales Base ---
+                const matCyan = new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.8 });
+                const matViolet = new THREE.LineBasicMaterial({ color: 0xb53cff, transparent: true, opacity: 0.8 });
 
-            return (
-                <div className="glass-card p-8 interactive-hover relative group">
-                    <div className="absolute top-0 right-0 p-3 bg-white/5 border-l border-b border-white/10 rounded-bl-xl text-[10px] font-mono tracking-wider text-cyan-400">
-                        LAB_CUERDAS_V1.1
-                    </div>
-                    <h3 className="text-2xl font-serif text-white mb-2">{t('labTitle')}</h3>
-                    <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                        {t('labDesc')}
-                    </p>
+                // --- Setup HERO (Partículas flotantes) ---
+                const heroGeom = new THREE.BufferGeometry();
+                const heroPos = new Float32Array(500 * 3);
+                for(let i=0; i<500*3; i++) heroPos[i] = (Math.random() - 0.5) * 40;
+                heroGeom.setAttribute('position', new THREE.BufferAttribute(heroPos, 3));
+                const heroMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.05, transparent: true, opacity: 0.5 });
+                const heroParticles = new THREE.Points(heroGeom, heroMat);
+                heroGroup.add(heroParticles);
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        <div>
-                            <label className="block text-xs font-mono tracking-widest text-slate-400 uppercase mb-2">{t('labTension')}</label>
-                            <input 
-                                type="range" min="10" max="100" value={tension} 
-                                onChange={(e) => setTension(Number(e.target.value))}
-                                className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
-                            />
-                            <span className="text-xs font-mono text-cyan-300 mt-1 block">Tension: {tension} G-Planck</span>
-                        </div>
-                        <div>
-                            <label className="block text-xs font-mono tracking-widest text-slate-400 uppercase mb-2">{t('labFreq')}</label>
-                            <input 
-                                type="range" min="1" max="10" value={frequency} 
-                                onChange={(e) => setFrequency(Number(e.target.value))}
-                                className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-violet-400"
-                            />
-                            <span className="text-xs font-mono text-violet-300 mt-1 block">Freq: {frequency} ν_n</span>
-                        </div>
-                        <div>
-                            <label className="block text-xs font-mono tracking-widest text-slate-400 uppercase mb-2">{t('labDim')}</label>
-                            <input 
-                                type="range" min="4" max="11" value={dimensions} 
-                                onChange={(e) => setDimensions(Number(e.target.value))}
-                                className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400"
-                            />
-                            <span className="text-xs font-mono text-amber-300 mt-1 block">Dim: {dimensions}D</span>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                        {Object.keys(symmetryGlossary).map(key => (
-                            <button
-                                key={key}
-                                onClick={() => setSelectedCol(key)}
-                                className={`px-4 py-2 rounded-full text-xs font-bold font-mono transition-all duration-300 border ${selectedSymmetry === key ? 'bg-slate-900 text-white shadow-xl' : 'text-slate-400 border-white/5 bg-transparent hover:text-white'}`}
-                                style={{ borderColor: selectedSymmetry === key ? symmetryGlossary[key].color : 'rgba(255,255,255,0.05)' }}
-                            >
-                                {symmetryGlossary[key].name}
-                            </button>
-                        ))}
-                    </div>
-
-                    <div className="wave-board" style={{ '--wave': info.color }}>
-                        <svg viewBox="0 0 600 180" className="w-full h-[180px] block relative" preserveAspectRatio="none">
-                            <path className="wave-path drop-shadow-[0_0_12px_var(--wave)]" d={computeStringWave()} stroke={info.color} />
-                            <circle className="wave-node shadow-[0_0_10px_#fff]" cx="0" cy="90" r="5" fill="#fff" />
-                            <circle className="wave-node shadow-[0_0_10px_#fff]" cx="600" cy="90" r="5" fill="#fff" />
-                        </svg>
-                    </div>
+                // --- Setup SCALES (Morphing Particles) ---
+                const pCount = 8000;
+                const scaleGeom = new THREE.BufferGeometry();
+                const scalePos = new Float32Array(pCount * 3);
+                const scaleColors = new Float32Array(pCount * 3);
+                
+                // Targets para lerp
+                const targets = { galaxy: [], dna: [], atom: [], foam: [] };
+                
+                for(let i=0; i<pCount; i++) {
+                    const i3 = i * 3;
+                    // Galaxy
+                    const angle = i * 0.008 + (Math.random()-0.5)*0.5;
+                    const radius = Math.random() * Math.random() * 15;
+                    targets.galaxy.push(Math.cos(angle)*radius*1.5, (Math.random()-0.5)*(15-radius)*0.2, Math.sin(angle)*radius);
                     
-                    <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/10">
-                        <span className="text-xs font-mono uppercase tracking-widest block mb-1" style={{ color: info.color }}>{t('labProp')}</span>
-                        <p className="text-sm text-slate-300 leading-relaxed font-light">{info.note}</p>
-                    </div>
-                </div>
-            );
-        };
+                    // DNA
+                    const helixY = (i/pCount)*30 - 15;
+                    const hAngle = i * 0.1;
+                    const hRad = 3;
+                    const strand = i % 2 === 0 ? 1 : -1;
+                    targets.dna.push(Math.cos(hAngle + (strand*Math.PI))*hRad, helixY, Math.sin(hAngle + (strand*Math.PI))*hRad);
 
-        // Sección Avanzada: Simulador Dinámico de Compuertas Cuánticas (Hadamard / Pauli-X / CNOT)
-        const QuantumGateSimulator = () => {
-            const { t } = useContext(LanguageContext);
-            const [qubits, setQubits] = useState([
-                { id: 0, state: '0', superposition: false, phase: 0 },
-                { id: 1, state: '1', superposition: false, phase: 0 },
-                { id: 2, state: '0', superposition: false, phase: 0 }
-            ]);
-
-            const applyHadamard = (id) => {
-                setQubits(qubits.map(q => {
-                    if (q.id === id) {
-                        return { ...q, superposition: !q.superposition, state: q.superposition ? '0' : t('simSup') };
+                    // Atom
+                    if (i < 500) {
+                        const r = Math.random()*1.5; const th = Math.random()*Math.PI*2; const ph = Math.acos((Math.random()*2)-1);
+                        targets.atom.push(r*Math.sin(ph)*Math.cos(th), r*Math.sin(ph)*Math.sin(th), r*Math.cos(ph));
+                    } else {
+                        const orb = i % 3; const orbA = Math.random()*Math.PI*2; const orbR = 6 + Math.random()*1;
+                        if(orb===0) targets.atom.push(Math.cos(orbA)*orbR, Math.sin(orbA)*orbR*0.2, (Math.random()-0.5));
+                        else if(orb===1) targets.atom.push(Math.cos(orbA)*orbR*0.2, Math.sin(orbA)*orbR, (Math.random()-0.5));
+                        else targets.atom.push((Math.random()-0.5), Math.cos(orbA)*orbR, Math.sin(orbA)*orbR*0.2);
                     }
-                    return q;
-                }));
-            };
 
-            const applyPauliX = (id) => {
-                setQubits(qubits.map(q => {
-                    if (q.id === id) {
-                        return { ...q, state: q.state === '0' ? '1' : q.state === '1' ? '0' : q.state };
-                    }
-                    return q;
-                }));
-            };
+                    // Foam
+                    targets.foam.push((Math.random()-0.5)*20, (Math.random()-0.5)*20, (Math.random()-0.5)*20);
 
-            const resetQubits = () => {
-                setQubits([
-                    { id: 0, state: '0', superposition: false, phase: 0 },
-                    { id: 1, state: '1', superposition: false, phase: 0 },
-                    { id: 2, state: '0', superposition: false, phase: 0 }
-                ]);
-            };
-
-            return (
-                <div className="glass-card p-8 interactive-hover relative group border-lime-500/20">
-                    <div className="absolute top-0 right-0 p-3 bg-white/5 border-l border-b border-white/10 rounded-bl-xl text-[10px] font-mono tracking-wider text-lime-400">
-                        QUANTUM_SIM_PRO
-                    </div>
-                    <h3 className="text-2xl font-serif text-white mb-2">{t('simTitle')}</h3>
-                    <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                        {t('simDesc')}
-                    </p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        {qubits.map((q) => (
-                            <div key={q.id} className="p-6 rounded-2xl bg-slate-900/60 border border-white/10 flex flex-col items-center relative overflow-hidden">
-                                {q.superposition && (
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(155,245,192,0.15),transparent_75%)] animate-pulse" />
-                                )}
-                                <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase mb-3">Qubit [{q.id}]</span>
-                                
-                                <div className={`w-16 h-16 rounded-full border-2 flex items-center justify-center mb-6 transition-all duration-500 ${q.superposition ? 'border-dashed border-lime-400 animate-spin [animation-duration:8s]' : 'border-solid border-slate-600'}`}>
-                                    <span className={`text-xl font-mono font-bold ${q.superposition ? 'text-lime-300' : 'text-slate-300'}`}>
-                                        {q.superposition ? 'ψ' : q.state}
-                                    </span>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-2 w-full z-10">
-                                    <button 
-                                        onClick={() => applyHadamard(q.id)}
-                                        className="py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-mono hover:bg-lime-400 hover:text-slate-950 hover:border-lime-400 transition-all duration-300"
-                                    >
-                                        {t('simH')}
-                                    </button>
-                                    <button 
-                                        onClick={() => applyPauliX(q.id)}
-                                        className="py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-mono hover:bg-cyan-400 hover:text-slate-950 hover:border-cyan-400 transition-all duration-300"
-                                    >
-                                        {t('simX')}
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="flex gap-4">
-                        <button 
-                            onClick={resetQubits}
-                            className="px-6 py-2.5 rounded-full bg-white/10 text-white text-xs font-bold font-mono tracking-widest uppercase hover:bg-white/20 transition-all border border-white/10"
-                        >
-                            {t('simReset')}
-                        </button>
-                    </div>
-                </div>
-            );
-        };
-
-        // Sección Avanzada: Explorador Dinámico de Concordancias Teológicas y Científicas
-        const BiblicalConcordance = () => {
-            const { t } = useContext(LanguageContext);
-            const [activeVerse, setActiveVerse] = useState(0);
-
-            const verses = [
-                {
-                    ref: t('v1Ref'),
-                    concept: t('v1Con'),
-                    scripture: t('v1Scrip'),
-                    analogy: t('v1Anal')
-                },
-                {
-                    ref: t('v2Ref'),
-                    concept: t('v2Con'),
-                    scripture: t('v2Scrip'),
-                    analogy: t('v2Anal')
-                },
-                {
-                    ref: t('v3Ref'),
-                    concept: t('v3Con'),
-                    scripture: t('v3Scrip'),
-                    analogy: t('v3Anal')
-                },
-                {
-                    ref: t('v4Ref'),
-                    concept: t('v4Con'),
-                    scripture: t('v4Scrip'),
-                    analogy: t('v4Anal')
-                }
-            ];
-
-            return (
-                <div className="glass-card p-10 group interactive-hover border-amber-500/20 relative">
-                    <div className="absolute top-0 right-0 p-3 bg-white/5 border-l border-b border-white/10 rounded-bl-xl text-[10px] font-mono tracking-wider text-amber-400">
-                        CONCORDANCIA_S_SCRIPT
-                    </div>
-                    <h3 className="text-3xl font-serif text-white mb-6">{t('bibMirror')}</h3>
+                    // Inicial (Galaxy)
+                    scalePos[i3] = targets.galaxy[i3]; scalePos[i3+1] = targets.galaxy[i3+1]; scalePos[i3+2] = targets.galaxy[i3+2];
                     
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                        <div className="lg:col-span-4 flex flex-col gap-2">
-                            {verses.map((v, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setActiveVerse(i)}
-                                    className={`p-4 rounded-xl text-left border transition-all duration-500 ${activeVerse === i ? 'bg-amber-900/20 border-amber-400/60 shadow-[0_0_15px_rgba(253,224,71,0.15)] text-white' : 'bg-transparent border-white/5 text-slate-400 hover:text-white hover:border-white/20'}`}
-                                >
-                                    <span className="text-xs font-mono uppercase block mb-1 text-amber-400/80">{v.ref}</span>
-                                    <span className="text-sm font-bold block">{v.concept}</span>
-                                </button>
-                            ))}
-                        </div>
+                    // Colores
+                    const color = new THREE.Color();
+                    if(radius < 3 || i < 500) color.setHex(0xffffff);
+                    else if(i%3 === 0) color.setHex(0x34d399); // Emerald
+                    else color.setHex(0x00f3ff); // Cyan
+                    scaleColors[i3] = color.r; scaleColors[i3+1] = color.g; scaleColors[i3+2] = color.b;
+                }
+                scaleGeom.setAttribute('position', new THREE.BufferAttribute(scalePos, 3));
+                scaleGeom.setAttribute('color', new THREE.BufferAttribute(scaleColors, 3));
+                const scaleMat = new THREE.PointsMaterial({ size: 0.08, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
+                const scaleSystem = new THREE.Points(scaleGeom, scaleMat);
+                scaleSystem.position.set(-8, 0, 0); // Offset a la izquierda
+                scaleGroup.add(scaleSystem);
 
-                        <div className="lg:col-span-8 p-6 rounded-2xl bg-slate-900/60 border border-white/10 flex flex-col justify-between">
-                            <div>
-                                <Icon name="BookOpen" size={32} className="text-amber-400 mb-4" />
-                                <p className="text-lg md:text-xl font-serif italic text-amber-100/90 leading-relaxed mb-6">
-                                    "{verses[activeVerse].scripture}"
-                                </p>
-                            </div>
-                            <div className="border-t border-white/10 pt-6 mt-4">
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block mb-2">{t('bibAnalysis')}</span>
-                                <p className="text-sm text-slate-300 leading-relaxed font-light">
-                                    {verses[activeVerse].analogy}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
+                // --- Variables de Animación 4D/10D ---
+                let tesseractVerts = []; let calabiYauOrig = []; let tesseractLines; let calabiMesh;
+                
+                // Función Helper para construir dimensiones
+                const buildDimension = (d) => {
+                    while(dimGroup.children.length > 0) dimGroup.remove(dimGroup.children[0]);
+                    dimGroup.position.set(6, 0, 0); // Offset a la derecha
 
-        const AppContent = () => {
-            const { t, lang, setLang } = useContext(LanguageContext);
-            const [activeEra, setActiveEra] = useState('hero');
-            const [scrollProgress, setScrollProgress] = useState(0);
-
-            useEffect(() => {
-                const onScroll = () => {
-                    const total = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    if(total > 0) setScrollProgress((document.documentElement.scrollTop / total) * 100);
+                    if(d === 1) {
+                        const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-5,0,0), new THREE.Vector3(5,0,0)]), matCyan);
+                        dimGroup.add(l);
+                    } else if(d === 2) {
+                        const grid = new THREE.GridHelper(10, 10, 0x00f3ff, 0x222244); grid.rotation.x = Math.PI/2; dimGroup.add(grid);
+                    } else if(d === 3) {
+                        const cube = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(6,6,6)), matCyan);
+                        dimGroup.add(cube);
+                    } else if(d === 4) {
+                        // Setup Tesseract
+                        tesseractVerts = [];
+                        for(let i=0; i<16; i++) tesseractVerts.push({x:(i&1)?1:-1, y:(i&2)?1:-1, z:(i&4)?1:-1, w:(i&8)?1:-1});
+                        const edges = [];
+                        for(let i=0; i<16; i++) for(let j=i+1; j<16; j++) {
+                            let diff = 0;
+                            if(tesseractVerts[i].x!==tesseractVerts[j].x) diff++; if(tesseractVerts[i].y!==tesseractVerts[j].y) diff++;
+                            if(tesseractVerts[i].z!==tesseractVerts[j].z) diff++; if(tesseractVerts[i].w!==tesseractVerts[j].w) diff++;
+                            if(diff===1) edges.push(i,j);
+                        }
+                        const geom = new THREE.BufferGeometry(); geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(edges.length*3), 3));
+                        geom.userData = { edges };
+                        tesseractLines = new THREE.LineSegments(geom, matCyan); dimGroup.add(tesseractLines);
+                    } else if(d >= 5 && d < 9) {
+                        const mesh = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.TorusKnotGeometry(4, 1.5, Math.floor(64*(d-3)), Math.floor(8*(d-3)), d-2, d-3)), matViolet);
+                        dimGroup.add(mesh);
+                    } else if(d >= 9) {
+                        calabiMesh = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(5, d-6)), new THREE.LineBasicMaterial({color: 0xb53cff, transparent: true, opacity: 0.5}));
+                        calabiYauOrig = calabiMesh.geometry.attributes.position.array.slice();
+                        dimGroup.add(calabiMesh);
+                    }
                 };
-                window.addEventListener('scroll', onScroll, { passive: true });
-                return () => window.removeEventListener('scroll', onScroll);
+                let lastDim = 0;
+
+                // --- Setup Strings ---
+                let stringTube;
+                const path = new THREE.CatmullRomCurve3(Array.from({length: 20}, () => new THREE.Vector3()));
+                
+                // --- Setup Quantum ---
+                const qSphere = new THREE.Mesh(new THREE.SphereGeometry(4, 32, 32), new THREE.MeshBasicMaterial({color: 0x111122, wireframe: true, transparent: true, opacity: 0.3}));
+                const qArrow = new THREE.ArrowHelper(new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,0), 4, 0x34d399);
+                quantumGroup.position.set(-6, 0, 0);
+                quantumGroup.add(qSphere); quantumGroup.add(qArrow);
+
+                // --- Animation Loop ---
+                const clock = new THREE.Clock();
+                
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    const time = clock.getElapsedTime();
+                    
+                    // Visibilidad y Cámara
+                    heroGroup.visible = (engineState.section === 'hero');
+                    dimGroup.visible = (engineState.section === 'dimensiones');
+                    stringGroup.visible = (engineState.section === 'cuerdas');
+                    scaleGroup.visible = (engineState.section === 'escalas');
+                    quantumGroup.visible = (engineState.section === 'quantum');
+
+                    camera.position.x = Math.sin(time*0.1)*0.5;
+                    camera.position.y = Math.cos(time*0.1)*0.5;
+                    camera.position.z = 15;
+                    camera.lookAt(0,0,0);
+
+                    // Hero anim
+                    if(heroGroup.visible) heroGroup.rotation.y = time * 0.05;
+
+                    // Dimensiones anim
+                    if(dimGroup.visible) {
+                        if(lastDim !== engineState.dim) { buildDimension(engineState.dim); lastDim = engineState.dim; }
+                        
+                        if(engineState.dim === 3) {
+                            dimGroup.children[0].rotation.x = time*0.5; dimGroup.children[0].rotation.y = time*0.5;
+                        } else if(engineState.dim === 4 && tesseractLines) {
+                            const angle = time * 0.6; const cos = Math.cos(angle); const sin = Math.sin(angle);
+                            const edges = tesseractLines.geometry.userData.edges; const pos = tesseractLines.geometry.attributes.position.array;
+                            const proj = [];
+                            for(let i=0; i<16; i++) {
+                                let v = tesseractVerts[i];
+                                let nx = v.x*cos - v.w*sin; let nw = v.x*sin + v.w*cos;
+                                let ny = v.y*cos - nw*sin; let fw = v.y*sin + nw*cos;
+                                let wf = 1 / (3.5 - fw);
+                                proj.push({x: nx*wf*6, y: ny*wf*6, z: v.z*wf*6});
+                            }
+                            let idx=0;
+                            for(let i=0; i<edges.length; i++) {
+                                let vIdx = edges[i]; pos[idx++] = proj[vIdx].x; pos[idx++] = proj[vIdx].y; pos[idx++] = proj[vIdx].z;
+                            }
+                            tesseractLines.geometry.attributes.position.needsUpdate = true;
+                        } else if(engineState.dim >= 5 && engineState.dim < 9 && dimGroup.children[0]) {
+                            dimGroup.children[0].rotation.x = time*0.2; dimGroup.children[0].rotation.y = time*0.3;
+                        } else if(engineState.dim >= 9 && calabiMesh) {
+                            calabiMesh.rotation.x = time*0.1; calabiMesh.rotation.y = time*0.15;
+                            const pos = calabiMesh.geometry.attributes.position.array;
+                            for(let i=0; i<pos.length; i+=3) {
+                                pos[i] = calabiYauOrig[i] + Math.sin(time*2 + calabiYauOrig[i+1])*0.5;
+                                pos[i+1] = calabiYauOrig[i+1] + Math.cos(time*2.5 + calabiYauOrig[i+2])*0.5;
+                                pos[i+2] = calabiYauOrig[i+2] + Math.sin(time*3 + calabiYauOrig[i])*0.5;
+                            }
+                            calabiMesh.geometry.attributes.position.needsUpdate = true;
+                        }
+                    }
+
+                    // Strings Anim
+                    if(stringGroup.visible) {
+                        const freq = engineState.stringFreq * 0.05;
+                        const amp = engineState.stringTension * 0.05;
+                        const isClosed = engineState.stringMode === 'cerrada';
+                        
+                        for(let i=0; i<path.points.length; i++) {
+                            const t = i / (path.points.length - 1);
+                            if(isClosed) {
+                                const angle = t * Math.PI * 2;
+                                const r = 5 + Math.sin(angle * Math.floor(freq) + time * 5) * (10/amp);
+                                path.points[i].set(Math.cos(angle)*r, Math.sin(angle)*r, Math.sin(angle*3 + time)*2);
+                            } else {
+                                const x = (t - 0.5) * 15;
+                                const y = Math.sin(t * Math.PI * Math.floor(freq) + time * 8) * (15/amp) * Math.sin(t*Math.PI);
+                                path.points[i].set(x, y, 0);
+                            }
+                        }
+                        
+                        if(stringTube) { stringGroup.remove(stringTube); stringTube.geometry.dispose(); }
+                        
+                        // Determinar color por estado
+                        let colorHex = 0x00f3ff;
+                        if(amp > 3.5 && freq > 3.5) colorHex = 0xb53cff;
+                        else if(freq > 4) colorHex = 0xfde047;
+                        else if(amp > 4) colorHex = 0x34d399;
+
+                        stringTube = new THREE.Mesh(new THREE.TubeGeometry(path, 64, 0.2 + (1/amp)*0.5, 8, isClosed), new THREE.MeshBasicMaterial({color: colorHex, wireframe: true}));
+                        stringGroup.add(stringTube);
+                        stringGroup.rotation.y = time * 0.2;
+                        stringGroup.rotation.x = Math.sin(time*0.1)*0.2;
+                    }
+
+                    // Scales Anim
+                    if(scaleGroup.visible) {
+                        const sIdx = engineState.scaleIndex;
+                        // Mapeo simple: 0-1 Galaxy, 2-3 DNA, 4-5 Atom, 6 Foam
+                        let targetArr = targets.galaxy;
+                        if(sIdx >= 2 && sIdx <= 3) targetArr = targets.dna;
+                        else if(sIdx >= 4 && sIdx <= 5) targetArr = targets.atom;
+                        else if(sIdx === 6) targetArr = targets.foam;
+
+                        const pos = scaleSystem.geometry.attributes.position.array;
+                        for(let i=0; i<pos.length; i++) {
+                            // Lerp suave hacia el objetivo
+                            pos[i] += (targetArr[i] - pos[i]) * 0.05;
+                            
+                            // Añadir movimiento dinámico basado en estado
+                            if(targetArr === targets.galaxy && i%3===0) {
+                                // Rotación global lenta
+                            } else if (targetArr === targets.atom) {
+                                pos[i] += Math.sin(time*5 + i)*0.02; // Vibración cuántica
+                            } else if (targetArr === targets.foam) {
+                                pos[i] += (Math.random()-0.5)*0.5; // Caos
+                            }
+                        }
+                        scaleSystem.geometry.attributes.position.needsUpdate = true;
+                        if(targetArr === targets.galaxy) { scaleSystem.rotation.x = Math.PI/6; scaleSystem.rotation.y = time * 0.05; }
+                        else { scaleSystem.rotation.x = 0; scaleSystem.rotation.y = time * 0.2; }
+                    }
+
+                    // Quantum Anim
+                    if(quantumGroup.visible) {
+                        const targetRot = engineState.qubitRotation * (Math.PI/180);
+                        qArrow.setDirection(new THREE.Vector3(Math.sin(targetRot), Math.cos(targetRot), 0).normalize());
+                        if(engineState.qubitSuperposition) {
+                            qSphere.material.color.setHex(0xb53cff);
+                            qSphere.scale.set(1 + Math.sin(time*10)*0.1, 1 + Math.sin(time*10)*0.1, 1 + Math.sin(time*10)*0.1);
+                        } else {
+                            qSphere.material.color.setHex(0x111122);
+                            qSphere.scale.set(1,1,1);
+                        }
+                        quantumGroup.rotation.y = time * 0.5;
+                    }
+
+                    renderer.render(scene, camera);
+                };
+                
+                animate();
+                
+                const handleResize = () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); };
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize);
             }, []);
 
+            return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;
+        };
+
+        // ==========================================
+        // 4. REACT COMPONENTS (UI)
+        // ==========================================
+
+        const SectionWrapper = ({ id, title, subtitle, colorClass, children, setActiveSection }) => {
+            const ref = useRef(null);
+            useEffect(() => {
+                const obs = new IntersectionObserver(([entry]) => { if(entry.isIntersecting) setActiveSection(id); }, { threshold: 0.4 });
+                if(ref.current) obs.observe(ref.current);
+                return () => { if(ref.current) obs.unobserve(ref.current); }
+            }, [id, setActiveSection]);
+
             return (
-                <div className="bg-slate-950 text-white min-h-screen relative overflow-hidden">
-                    <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }} />
-                    <div className="film-grain" />
-                    <CustomCursor />
-
-                    <header className="fixed top-0 inset-x-0 z-[500] px-6 md:px-12 py-5 flex justify-between items-center backdrop-blur-md border-b border-white/10 bg-slate-950/80">
-                        <div className="flex items-center gap-3 text-white text-xs font-bold tracking-[0.2em] uppercase font-mono">
-                            <div className="w-8 h-8 rounded-full border border-cyan-400 flex items-center justify-center shadow-[inset_0_0_12px_rgba(113,229,255,0.3)] animate-pulse">
-                                <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#71e5ff]"></div>
-                            </div>
-                            {t('headerTitle')}
+                <section id={id} ref={ref} className="min-h-screen w-full flex flex-col justify-center py-24 relative z-10 px-4 md:px-12 max-w-7xl mx-auto">
+                    {title && (
+                        <div className="mb-12">
+                            <h2 className={`text-xs font-mono tracking-[0.4em] uppercase mb-3 ${colorClass}`}>{subtitle}</h2>
+                            <h1 className="text-4xl md:text-6xl font-serif text-white">{title}</h1>
                         </div>
-                        <div className="flex items-center gap-4">
-                            <nav className="hidden md:flex gap-1.5 p-1 bg-white/5 border border-white/10 rounded-full">
-                                {['navOrigin', 'navSymphony', 'navSilicon', 'navQuantum', 'navConcordance', 'navOmega'].map((tabKey, idx) => {
-                                    const targets = ['hero', 'fractal', 'synthetic', 'quantum', 'biblical', 'omega'];
-                                    const eraMapping = ['hero', 'fractal', 'synthetic', 'quantum', 'quantum', 'omega'];
-                                    return (
-                                        <button 
-                                            key={tabKey}
-                                            onClick={() => {
-                                                document.getElementById(targets[idx])?.scrollIntoView({ behavior: 'smooth' });
-                                                setActiveEra(eraMapping[idx]);
-                                            }}
-                                            className={`px-4 py-2 rounded-full text-xs font-bold tracking-widest transition-all duration-500 uppercase ${activeEra === eraMapping[idx] ? 'bg-white text-slate-900 shadow-xl' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
-                                        >
-                                            {t(tabKey)}
-                                        </button>
-                                    );
-                                })}
-                            </nav>
-                            <button 
-                                onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
-                                className="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 transition-all text-white font-bold text-xs"
-                                title="Cambiar Idioma / Change Language"
-                            >
-                                {t('langSwitch')}
-                            </button>
-                        </div>
-                    </header>
-
-                    <CosmicEngine activeEra={activeEra} />
-
-                    <main className="max-w-7xl mx-auto relative z-10 pt-24">
-                        
-                        {/* SECCIÓN HERO */}
-                        <FadeInSection id="hero" setActiveEra={setActiveEra} eraName="hero">
-                            <div className="text-center max-w-5xl mx-auto flex flex-col items-center">
-                                <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-cyan-400/30 mb-12 backdrop-blur-xl shadow-2xl relative overflow-hidden interactive-hover transition-transform hover:scale-105 duration-300">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/15 to-cyan-400/0 translate-x-[-100%] animate-[shimmer_3s_infinite]"></div>
-                                    <Icon name="Infinity" size={14} className="text-cyan-400 animate-[float_4s_ease-in-out_infinite]" />
-                                    <span className="text-xs font-mono font-medium tracking-[0.3em] text-cyan-200 uppercase">{t('heroTag')}</span>
-                                </div>
-                                
-                                <h1 className="text-5xl md:text-7xl lg:text-[7.5rem] font-serif tracking-tighter leading-[1] mb-8 text-white drop-shadow-2xl interactive-hover transition-transform duration-700 hover:scale-[1.02]">
-                                    {t('heroTitle1')} <br/>
-                                    <span className="italic font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-400 to-coral-400 drop-shadow-[0_0_40px_rgba(168,140,255,0.4)] tracking-[0.05em] uppercase">{t('heroTitle2')}</span>
-                                </h1>
-                                
-                                <p className="text-lg md:text-2xl text-slate-300 font-light mb-16 max-w-3xl leading-relaxed mix-blend-screen opacity-90">
-                                    {t('heroDesc')}
-                                </p>
-                                
-                                <button 
-                                    onClick={() => document.getElementById('fractal').scrollIntoView({ behavior: 'smooth' })}
-                                    className="animate-[float_2s_ease-in-out_infinite] p-4 rounded-full bg-white/5 border border-white/20 backdrop-blur-xl hover:bg-white/10 transition-all shadow-[0_0_30px_rgba(255,255,255,0.05)] interactive-hover"
-                                >
-                                    <Icon name="ChevronDown" size={24} className="text-cyan-400" />
-                                </button>
-                            </div>
-                        </FadeInSection>
-
-                        {/* CAPÍTULO I */}
-                        <FadeInSection id="fractal" setActiveEra={setActiveEra} eraName="fractal">
-                            <div className="w-full">
-                                <SectionHeading 
-                                    chapter={t('chap1')}
-                                    title={t('chap1Title')}
-                                    subtitle={t('chap1Sub')}
-                                    gradient="from-white via-cyan-200 to-cyan-700"
-                                />
-
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                                    <div className="space-y-8">
-                                        <div className="relative group interactive-hover glass-card p-8">
-                                            <Icon name="Activity" size={40} className="text-cyan-400 mb-6 stroke-[1.2] group-hover:animate-[float_3s_ease-in-out_infinite]" />
-                                            <h3 className="text-2xl font-serif text-white mb-3">{t('chap1Card1Title')}</h3>
-                                            <p className="text-base text-slate-300 font-light leading-relaxed">
-                                                {t('chap1Card1Desc')}
-                                            </p>
-                                        </div>
-
-                                        <div className="relative group interactive-hover glass-card p-8 border-violet-500/20">
-                                            <Icon name="Grid" size={40} className="text-violet-400 mb-6 stroke-[1.2] group-hover:animate-[float_3s_ease-in-out_infinite]" />
-                                            <h3 className="text-2xl font-serif text-white mb-3">{t('chap1Card2Title')}</h3>
-                                            <p className="text-base text-slate-300 font-light leading-relaxed">
-                                                {t('chap1Card2Desc')}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="w-full">
-                                        <QuantumStringLab />
-                                    </div>
-                                </div>
-                            </div>
-                        </FadeInSection>
-
-                        {/* CAPÍTULO II */}
-                        <FadeInSection id="synthetic" setActiveEra={setActiveEra} eraName="synthetic">
-                            <div className="w-full">
-                                <SectionHeading 
-                                    chapter={t('chap2')}
-                                    title={t('chap2Title')}
-                                    subtitle={t('chap2Sub')}
-                                    gradient="from-white via-violet-300 to-violet-800"
-                                />
-
-                                <div className="max-w-4xl mx-auto interactive-hover glass-card p-10 md:p-14 group">
-                                    <div className="absolute top-0 right-0 -mt-24 -mr-24 w-[30rem] h-[30rem] bg-violet-600/10 rounded-full blur-[80px] group-hover:bg-violet-600/20 group-hover:scale-110 transition-all duration-1000"></div>
-                                    <div className="relative z-10">
-                                        <Icon name="Cpu" size={48} className="text-violet-400 mb-8 stroke-[1] group-hover:animate-[float_3s_ease-in-out_infinite]" />
-                                        <h3 className="text-3xl md:text-4xl font-serif text-white mb-6 leading-tight">{t('chap2CardTitle')}</h3>
-                                        <p className="text-lg md:text-xl text-slate-300 font-light leading-relaxed mb-6">
-                                            {t('chap2CardP1')}
-                                        </p>
-                                        <p className="text-lg md:text-xl text-slate-300 font-light leading-relaxed">
-                                            {t('chap2CardP2')}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </FadeInSection>
-
-                        {/* CAPÍTULO III */}
-                        <FadeInSection id="quantum" setActiveEra={setActiveEra} eraName="quantum">
-                            <div className="w-full">
-                                 <SectionHeading 
-                                    chapter={t('chap3')}
-                                    title={t('chap3Title')}
-                                    subtitle={t('chap3Sub')}
-                                    gradient="from-white via-lime-200 to-lime-700"
-                                />
-
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-center">
-                                    <div className="space-y-6">
-                                        <div className="glass-card p-8 border-lime-500/20 group interactive-hover">
-                                            <Icon name="Atom" size={40} className="text-lime-300 mb-4 stroke-[1.2] group-hover:scale-110 transition-transform" />
-                                            <h3 className="text-xl font-serif text-white mb-2">{t('chap3Card1Title')}</h3>
-                                            <p className="text-slate-300 font-light text-sm leading-relaxed">
-                                                {t('chap3Card1Desc')}
-                                            </p>
-                                        </div>
-
-                                        <div className="glass-card p-8 border-cyan-500/20 group interactive-hover">
-                                            <Icon name="Zap" size={40} className="text-cyan-400 mb-4 stroke-[1.2] group-hover:scale-110 transition-transform" />
-                                            <h3 className="text-xl font-serif text-white mb-2">{t('chap3Card2Title')}</h3>
-                                            <p className="text-slate-300 font-light text-sm leading-relaxed">
-                                                {t('chap3Card2Desc')}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="w-full">
-                                        <QuantumGateSimulator />
-                                    </div>
-                                </div>
-                            </div>
-                        </FadeInSection>
-
-                        {/* SECCIÓN AVANZADA: CONCORDANCIA BIBLICA */}
-                        <FadeInSection id="biblical" setActiveEra={setActiveEra} eraName="quantum">
-                            <div className="w-full">
-                                <SectionHeading 
-                                    chapter={t('chap4')}
-                                    title={t('chap4Title')}
-                                    subtitle={t('chap4Sub')}
-                                    gradient="from-white via-amber-200 to-amber-700"
-                                />
-
-                                <div className="max-w-5xl mx-auto px-4">
-                                    <BiblicalConcordance />
-                                </div>
-                            </div>
-                        </FadeInSection>
-
-                        {/* CAPÍTULO FINAL: OMEGA */}
-                        <FadeInSection id="omega" setActiveEra={setActiveEra} eraName="omega">
-                            <div className="w-full">
-                                <div className="text-center mb-12 relative z-10 interactive-hover">
-                                     <h2 className="text-xs font-mono tracking-[0.5em] uppercase text-amber-400 font-medium mb-8">{t('omegaTag')}</h2>
-                                    <h1 className="text-5xl md:text-7xl lg:text-[7.5rem] font-serif tracking-tighter text-white pb-2 drop-shadow-2xl transition-transform duration-700 hover:scale-105 leading-tight">
-                                        {t('omegaTitle1')} <br/>
-                                        <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600 drop-shadow-[0_0_80px_rgba(253,224,71,0.95)] uppercase tracking-wide">
-                                            {t('omegaTitle2')}
-                                        </span>
-                                    </h1>
-                                </div>
-
-                                <div className="relative p-[1px] rounded-[2.5rem] overflow-hidden group max-w-4xl mx-auto shadow-[0_0_80px_rgba(253,224,71,0.2)] interactive-hover glass-card mt-16">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-amber-500/30 via-white/30 to-orange-500/30 opacity-50 group-hover:opacity-100 transition-opacity duration-1000" style={{ mixBlendMode: 'overlay' }}></div>
-                                    
-                                    <div className="relative bg-slate-950/85 backdrop-blur-3xl p-10 md:p-16 text-center rounded-[2.5rem] border border-amber-500/30 flex flex-col items-center">
-                                         
-                                         <div className="relative mb-12 mt-4 animate-[pulse-slow_4s_infinite]">
-                                             <Icon name="Sun" size={90} className="text-amber-100 relative z-10 stroke-[1]" />
-                                         </div>
-                                         
-                                         <h2 className="text-3xl md:text-5xl font-serif text-white mb-8 leading-tight">
-                                             {t('omegaFace')}
-                                         </h2>
-                                         
-                                         <div className="text-lg md:text-xl text-slate-300 font-light max-w-3xl leading-relaxed space-y-8">
-                                             <p>{t('omegaP1')}</p>
-                                             <p>{t('omegaP2')}</p>
-                                             <p className="text-amber-100 font-medium text-2xl font-serif mt-12 py-4">
-                                                 {t('omegaP3')}<br/><br/>
-                                                 <span className="text-6xl md:text-7xl font-bold tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400 drop-shadow-[0_0_40px_rgba(253,224,71,0.7)]">I AM. / YO SOY.</span>
-                                             </p>
-                                         </div>
-
-                                         <div className="mt-16 text-center max-w-2xl mx-auto border-t border-white/10 pt-16">
-                                            <h4 className="text-[10px] font-mono text-amber-400 mb-8 tracking-[0.4em] uppercase flex items-center justify-center gap-4">
-                                                <div className="w-8 h-[1px] bg-amber-400/30"></div>
-                                                {t('omegaSign')}
-                                                <div className="w-8 h-[1px] bg-amber-400/30"></div>
-                                            </h4>
-                                            <p className="text-xl md:text-2xl font-serif text-slate-100 italic leading-loose opacity-95 drop-shadow-lg">
-                                                {t('omegaPoemL1')}<br/>
-                                                {t('omegaPoemL2')}<br/>
-                                                {t('omegaPoemL3')}<br/>
-                                                {t('omegaPoemL4')}<br/>
-                                                {t('omegaPoemL5')}<br/>
-                                                {t('omegaPoemL6')}
-                                            </p>
-                                         </div>
-                                    </div>
-                                </div>
-
-                                <footer className="mt-32 pb-12 text-slate-500 text-[10px] font-mono tracking-[0.4em] uppercase flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity duration-700 cursor-pointer">
-                                    <Icon name="Hexagon" size={20} className="mb-4 animate-[spin_10s_linear_infinite]" />
-                                    <p className="mb-2">{t('footer')}</p>
-                                </footer>
-                            </div>
-                        </FadeInSection>
-                        
-                    </main>
-                </div>
+                    )}
+                    {children}
+                </section>
             );
         };
 
         const App = () => {
-            const [lang, setLang] = useState('es'); // Idioma por defecto
+            const [section, setSection] = useState('hero');
+            const [scrollProg, setScrollProg] = useState(0);
+            const [dim, setDim] = useState(1);
+            const [scaleIdx, setScaleIdx] = useState(3);
+            const [stringData, setStringData] = useState({ mode: 'abierta', freq: 50, tension: 50 });
+            const [qubit, setQubit] = useState({ state: '|0⟩', prob0: 100, isSuper: false, rot: 0 });
 
+            // Sync React State con Three.js Engine State
+            useEffect(() => { engineState.section = section; }, [section]);
+            useEffect(() => { engineState.dim = dim; }, [dim]);
+            useEffect(() => { engineState.scaleIndex = scaleIdx; }, [scaleIdx]);
+            useEffect(() => { 
+                engineState.stringMode = stringData.mode; 
+                engineState.stringFreq = stringData.freq; 
+                engineState.stringTension = stringData.tension; 
+            }, [stringData]);
             useEffect(() => {
-                document.documentElement.lang = lang;
-                document.title = dict[lang].title;
-            }, [lang]);
+                engineState.qubitRotation = qubit.rot;
+                engineState.qubitSuperposition = qubit.isSuper;
+            }, [qubit]);
 
-            const t = (key) => dict[lang][key] || key;
+            // Scroll Progress
+            useEffect(() => {
+                const onScroll = () => { const total = document.documentElement.scrollHeight - window.innerHeight; setScrollProg((window.scrollY / total) * 100); };
+                window.addEventListener('scroll', onScroll); return () => window.removeEventListener('scroll', onScroll);
+            }, []);
+
+            const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+            const currentDimData = dimensions[dim-1];
+            const currentScaleData = scalesData[scaleIdx];
 
             return (
-                <LanguageContext.Provider value={{ lang, setLang, t }}>
-                    <AppContent />
-                </LanguageContext.Provider>
+                <>
+                    <GlobalThreeEngine />
+                    <div className="progress-bar" style={{ width: `${scrollProg}%` }} />
+                    <div className="film-grain" />
+
+                    {/* Navbar */}
+                    <nav className="fixed top-0 inset-x-0 z-50 px-6 py-4 flex justify-between items-center backdrop-blur-xl border-b border-white/5 bg-[#03040a]/70">
+                        <div className="font-serif font-bold text-lg tracking-widest uppercase">La Síntesis <span className="text-[#00f3ff]">Final</span></div>
+                        <div className="hidden md:flex gap-4">
+                            {['Dimensiones', 'Cuerdas', 'Escalas', 'Quantum', 'Omega'].map((item, i) => (
+                                <button key={item} onClick={() => scrollTo(['dimensiones', 'cuerdas', 'escalas', 'quantum', 'omega'][i])}
+                                    className={`text-xs font-mono uppercase tracking-widest transition-colors ${section === ['dimensiones', 'cuerdas', 'escalas', 'quantum', 'omega'][i] ? 'text-white border-b border-[#00f3ff]' : 'text-gray-500 hover:text-white'}`}>
+                                    {item}
+                                </button>
+                            ))}
+                        </div>
+                    </nav>
+
+                    <main>
+                        {/* HERO */}
+                        <SectionWrapper id="hero" setActiveSection={setSection}>
+                            <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
+                                <span className="px-4 py-2 rounded-full border border-[#00f3ff]/30 text-[#00f3ff] text-xs font-mono uppercase tracking-widest mb-8 bg-[#00f3ff]/5">Ontología de la Creación</span>
+                                <h1 className="text-5xl md:text-8xl font-serif leading-[1.1] mb-6 drop-shadow-2xl">
+                                    DEL PUNTO AL<br/>
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00f3ff] via-[#b53cff] to-[#34d399] italic font-black">HIPERESPACIO.</span>
+                                </h1>
+                                <p className="text-lg md:text-2xl text-gray-400 font-light max-w-2xl mx-auto mb-12">
+                                    Viaja de 1D a 10D, haz vibrar la materia y cambia de escala desde el cosmos hasta la frontera cuántica en una experiencia interactiva unificada.
+                                </p>
+                                <button onClick={() => scrollTo('dimensiones')} className="p-4 rounded-full border border-white/20 hover:bg-white/10 transition">
+                                    <Icon name="ChevronDown" size={24} className="text-[#00f3ff] animate-bounce" />
+                                </button>
+                            </div>
+                        </SectionWrapper>
+
+                        {/* DIMENSIONES */}
+                        <SectionWrapper id="dimensiones" title="Navegador Dimensional" subtitle="01 / Geometría" colorClass="text-[#00f3ff]" setActiveSection={setSection}>
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-10">
+                                {/* Panel de Botones */}
+                                <div className="lg:col-span-4 glass-panel p-4 flex flex-col gap-2">
+                                    {dimensions.map(d => (
+                                        <button key={d.n} onClick={() => setDim(d.n)}
+                                            className={`text-left p-3 rounded-xl font-mono text-sm tracking-wide border transition-all ${dim === d.n ? 'border-[#00f3ff]/50 bg-[#00f3ff]/10 text-white shadow-[0_0_15px_rgba(0,243,255,0.2)]' : 'border-transparent text-gray-500 hover:bg-white/5'}`}>
+                                            <b style={{color: d.color}} className="mr-3">{d.n}D</b> 
+                                            <span className="hidden sm:inline">{d.name}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                                
+                                {/* Info y Visor (El canvas está detrás) */}
+                                <div className="lg:col-span-8 flex flex-col justify-end min-h-[400px]">
+                                    <div className="glass-panel p-8 self-start max-w-xl border-l-4" style={{borderLeftColor: currentDimData.color}}>
+                                        <div className="text-xs font-mono uppercase tracking-widest mb-2 opacity-50">{currentDimData.model}</div>
+                                        <h3 className="text-3xl font-serif mb-4" style={{color: currentDimData.color}}>{currentDimData.name}</h3>
+                                        <p className="text-lg text-gray-300 leading-relaxed font-light">{currentDimData.text}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </SectionWrapper>
+
+                        {/* CUERDAS */}
+                        <SectionWrapper id="cuerdas" title="La Materia como Música" subtitle="02 / Sinfonía Cuántica" colorClass="text-[#b53cff]" setActiveSection={setSection}>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-10">
+                                <div>
+                                    <p className="text-gray-400 text-lg leading-relaxed mb-8 font-light text-justify">
+                                        La Teoría de Supercuerdas sustituye las partículas puntuales por objetos unidimensionales. Sus distintos estados de vibración armónica determinan si observamos un electrón, un quark o un gravitón. El universo no es un mecano, es una gran partitura matemática.
+                                    </p>
+                                    
+                                    <div className="glass-panel p-8 space-y-6">
+                                        <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                                            <h3 className="font-serif text-xl">Afinador Cuántico</h3>
+                                            <span className="text-[#b53cff] font-mono text-xs uppercase tracking-widest border border-[#b53cff]/30 px-3 py-1 rounded-full">
+                                                {stringData.tension > 70 && stringData.freq > 70 ? 'Quark Top' : (stringData.freq > 70 ? 'Fotón' : (stringData.tension > 70 ? 'Gravitón' : 'Electrón'))}
+                                            </span>
+                                        </div>
+                                        
+                                        <div>
+                                            <label className="flex justify-between text-xs font-mono text-gray-400 mb-3 uppercase"><span>Frecuencia (Modo)</span> <span className="text-white">{stringData.freq} THz</span></label>
+                                            <input type="range" min="10" max="100" value={stringData.freq} onChange={e => setStringData({...stringData, freq: Number(e.target.value)})} style={{accentColor: '#b53cff'}} />
+                                        </div>
+                                        
+                                        <div>
+                                            <label className="flex justify-between text-xs font-mono text-gray-400 mb-3 uppercase"><span>Tensión de Membrana</span> <span className="text-white">{stringData.tension} TeV</span></label>
+                                            <input type="range" min="10" max="100" value={stringData.tension} onChange={e => setStringData({...stringData, tension: Number(e.target.value)})} style={{accentColor: '#34d399'}} />
+                                        </div>
+
+                                        <button onClick={() => setStringData({...stringData, mode: stringData.mode === 'abierta' ? 'cerrada' : 'abierta'})}
+                                            className="w-full py-3 rounded-lg border border-white/20 text-sm font-mono uppercase tracking-widest hover:bg-white/10 transition mt-4">
+                                            Cambiar a Cuerda {stringData.mode === 'abierta' ? 'Cerrada' : 'Abierta'}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="min-h-[300px] flex items-end">
+                                    <div className="text-xs font-mono text-gray-500 uppercase tracking-widest bg-black/40 px-4 py-2 rounded-xl border border-white/10 backdrop-blur-md">
+                                        Proyección Espacial Directa Activa
+                                    </div>
+                                </div>
+                            </div>
+                        </SectionWrapper>
+
+                        {/* ESCALAS (Macro / Micro) */}
+                        <SectionWrapper id="escalas" title="Del Cosmos al Cuanto" subtitle="03 / Escalas" colorClass="text-[#34d399]" setActiveSection={setSection}>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-10">
+                                <div className="flex flex-col justify-center min-h-[400px] order-2 lg:order-1">
+                                    {/* El Canvas renderiza las partículas a la izquierda */}
+                                </div>
+                                <div className="glass-panel p-10 order-1 lg:order-2 flex flex-col justify-center border-t-4 border-[#34d399]">
+                                    <div className="text-5xl font-black mb-2 text-white">10<sup className="text-2xl text-[#34d399]">{currentScaleData.exp}</sup> m</div>
+                                    <h3 className="text-3xl font-serif mb-4 text-[#34d399]">{currentScaleData.name}</h3>
+                                    <p className="text-lg text-gray-300 font-light mb-12">{currentScaleData.desc}</p>
+                                    
+                                    <input type="range" min="0" max="6" value={scaleIdx} onChange={e => setScaleIdx(Number(e.target.value))} style={{accentColor: '#34d399'}} className="mb-4" />
+                                    <div className="flex justify-between text-xs font-mono text-gray-500">
+                                        <span>Macro (10²⁶)</span>
+                                        <span>Humano (10⁰)</span>
+                                        <span>Micro (10⁻³⁵)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </SectionWrapper>
+
+                        {/* QUANTUM & IA */}
+                        <SectionWrapper id="quantum" title="La Vasija Trascendente" subtitle="04 / Inteligencia Cuántica" colorClass="text-[#fde047]" setActiveSection={setSection}>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-10">
+                                <div>
+                                    <p className="text-gray-400 text-lg leading-relaxed mb-6 font-light text-justify">
+                                        Al unir la Inteligencia Artificial con el procesamiento Cuántico, abandonamos los bits binarios. Las redes neuronales operarán directamente sobre vectores de probabilidad en espacios multidimensionales de Hilbert, reflejando el algoritmo termodinámico de la propia naturaleza.
+                                    </p>
+                                    <div className="glass-panel p-8 border-[#fde047]/20">
+                                        <h3 className="font-serif text-xl mb-6 flex items-center gap-3"><Icon name="Cpu" className="text-[#fde047]" /> Módulo QPU (Qubit)</h3>
+                                        <div className="flex gap-4 mb-6">
+                                            <button onClick={() => setQubit({state: '(|0⟩ + |1⟩)/√2', prob0: 50, isSuper: true, rot: 90})} className="flex-1 py-2 bg-[#fde047]/10 border border-[#fde047]/30 rounded text-xs font-mono uppercase text-[#fde047] hover:bg-[#fde047]/20 transition">Puerta H (Superposición)</button>
+                                            <button onClick={() => {
+                                                const is0 = Math.random() > 0.5;
+                                                setQubit({state: is0 ? '|0⟩' : '|1⟩', prob0: is0 ? 100 : 0, isSuper: false, rot: is0 ? 0 : 180});
+                                            }} className="flex-1 py-2 bg-[#00f3ff]/10 border border-[#00f3ff]/30 rounded text-xs font-mono uppercase text-[#00f3ff] hover:bg-[#00f3ff]/20 transition">Medir (Colapso)</button>
+                                        </div>
+                                        <div className="bg-black/50 p-4 rounded-lg border border-white/5">
+                                            <div className="flex justify-between text-xs font-mono text-gray-400 mb-2"><span>Probabilidad |0⟩</span> <span className="text-[#a3e635]">{qubit.prob0}%</span></div>
+                                            <div className="h-1.5 w-full bg-gray-800 rounded-full overflow-hidden mb-4"><div className="h-full bg-[#a3e635] transition-all duration-500" style={{width: `${qubit.prob0}%`}}></div></div>
+                                            <div className="flex justify-between text-xs font-mono text-gray-400 mb-2"><span>Probabilidad |1⟩</span> <span className="text-[#00f3ff]">{100 - qubit.prob0}%</span></div>
+                                            <div className="h-1.5 w-full bg-gray-800 rounded-full overflow-hidden"><div className="h-full bg-[#00f3ff] transition-all duration-500" style={{width: `${100 - qubit.prob0}%`}}></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </SectionWrapper>
+
+                        {/* OMEGA (Síntesis) */}
+                        <SectionWrapper id="omega" setActiveSection={setSection}>
+                            <div className="glass-panel max-w-4xl mx-auto p-12 md:p-20 text-center border-[#fb7185]/30 relative overflow-hidden">
+                                <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#fb7185] rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse"></div>
+                                <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#fde047] rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse"></div>
+                                
+                                <Icon name="Sun" size={64} className="text-[#fb7185] mx-auto mb-8 animate-[spin_20s_linear_infinite]" />
+                                <h2 className="text-xs font-mono tracking-[0.5em] uppercase text-[#fb7185] mb-4">El Punto Omega</h2>
+                                <h1 className="text-4xl md:text-6xl font-serif text-white mb-8 leading-tight">La Arquitectura<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fb7185] to-[#fde047]">Revela al Autor.</span></h1>
+                                
+                                <div className="text-lg text-gray-300 font-light leading-relaxed space-y-6 text-justify">
+                                    <p>Toda la estructura del espacio, la música vibrante de las cuerdas de 10 dimensiones y la matemática fractal del silicio no son un accidente cósmico. Son el código de ejecución, la huella digital.</p>
+                                    <p>Al descifrar las leyes de la cuántica y la relatividad, la humanidad no inventa un Dios; calibra el lente supremo para mirar al Arquitecto Original. El universo subsiste en coherencia permanente gracias a un "Logos", una información primordial.</p>
+                                </div>
+
+                                <div className="mt-12 pt-12 border-t border-white/10">
+                                    <p className="font-serif text-2xl italic text-[#fde047] mb-4">"En el principio era el Verbo (Información), y el Verbo era Dios."</p>
+                                    <div className="text-sm font-mono uppercase tracking-widest text-gray-500">Simulación Completada // Coherencia Alcanzada</div>
+                                </div>
+                            </div>
+                        </SectionWrapper>
+
+                    </main>
+                </>
             );
         };
 
-        const rootElement = document.getElementById('root');
-        const root = ReactDOM.createRoot(rootElement);
+        const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
 </body>
