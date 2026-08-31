@@ -5,6 +5,7 @@ import { EVIDENCE, EVIDENCE_BY_ID, ROLE_LABEL, PROFILE, ROLES, EDUCATION } from 
 import { COMPANY_FACTS, PRODUCT_INFERENCES, SOURCES, ASK_THEM } from '../data/company.js';
 import { CAST, ACCOUNTS, TIMELINE, PRODUCT, DISCLAIMER } from '../data/world.js';
 import { LESSON_BY_ID } from '../data/curriculum.js';
+import { WORKED, KIND_LABEL } from '../data/worked.js';
 
 const FIT = { strong:['tag--sage','Strong match'], partial:['tag--amber','Partial'], gap:['tag--rose','Gap'] };
 
@@ -58,6 +59,7 @@ function roleChapter(b) {
           el('p', { class: 'dim sm', style: { marginBottom: '.9rem' } }, g.why),
           el('div', { class: 'slug', style: { marginBottom: '.4rem' } }, 'How to close it'),
           el('ul', { class: 'sm dim' }, g.close.map(c => el('li', { html: rich(c) }))),
+          workedBlock(g.id),
           (g.concepts || []).length ? el('div', { class: 'wrap', style: { marginTop: '.9rem' } },
             g.concepts.map(c => { const L = LESSON_BY_ID[c];
               return L ? el('a', { class: 'tag tag--amber', href: '#/lesson/' + c, style: { textDecoration: 'none' } },
@@ -74,6 +76,7 @@ function reqPanel(r) {
     r.strength !== '—' ? sub('Where you are strong', r.strength, 'cv') : null,
     sub('What is missing', r.gap, r.fit === 'gap' ? 'check' : 'int'),
     sub('What to do about it', r.action, 'gen'),
+    workedBlock(r.id),
     evid.length ? el('div', { style: { marginTop: '1rem' } },
       el('div', { class: 'slug', style: { marginBottom: '.45rem' } }, 'Supporting evidence'),
       el('div', { class: 'stack', style: { '--gap': '.5rem' } },
@@ -235,6 +238,30 @@ function evidenceChapter(b) {
             el('td', { class: 'dim' }, e.school),
             el('td', { class: 'dim2 mono', style: { whiteSpace: 'nowrap' } }, e.when)))))))
   );
+}
+
+/* ---------------- worked examples ---------------- */
+/* Every piece of advice on this page is followed by two explicit examples:
+   the actual words, or the actual artefact. Never more advice. */
+export function workedBlock(id, source, heading) {
+  const items = (source || WORKED)[id];
+  if (!items || !items.length) return null;
+  return el('div', { class: 'worked' },
+    el('div', { class: 'worked__h' },
+      el('span', { class: 'worked__n' }, String(items.length)),
+      el('span', { class: 'slug' }, heading || 'Worked examples — not more advice'),
+      ev('gen', 'General PM practice')),
+    el('div', { class: 'worked__list' }, items.map((w, i) => workedCard(w, i))));
+}
+
+function workedCard(w, i) {
+  const isSay = w.kind === 'say';
+  return el('figure', { class: 'wex' + (isSay ? ' wex--say' : ' wex--art') },
+    el('figcaption', { class: 'wex__cap' },
+      el('span', { class: 'wex__i' }, String(i + 1)),
+      el('span', { class: 'wex__kind' }, KIND_LABEL[w.kind] || 'Example'),
+      el('span', { class: 'wex__label' }, w.label)),
+    el('div', { class: 'wex__body' }, w.body));
 }
 
 /* ---------------- helpers ---------------- */

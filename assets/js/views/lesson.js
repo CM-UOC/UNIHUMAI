@@ -6,7 +6,8 @@ import { EVIDENCE_BY_ID, ROLE_LABEL } from '../data/profile.js';
 import { REQUIREMENTS } from '../data/role.js';
 import { QUESTIONS } from '../data/questions.js';
 import { termsBlock } from './glossary.js';
-import { renderReference } from './reference.js';
+import { renderReference, workedBlock } from './reference.js';
+import { WORKED_LESSONS } from '../data/worked-lessons.js';
 
 export function renderLesson(main, ctx) {
   const l = LESSON_BY_ID[ctx.param];
@@ -163,6 +164,7 @@ export function renderLesson(main, ctx) {
         el('tr', {},
           el('td', { class: 'tbl__k' }, t.name),
           el('td', { class: 'dim' }, t.note))))))),
+    workedBlock(l.id, WORKED_LESSONS, 'Worked examples — the instruments, filled in'),
     (l.glossary || []).length
       ? el('div', { style: { marginTop: '1.1rem' } }, termsBlock(l.glossary))
       : null));

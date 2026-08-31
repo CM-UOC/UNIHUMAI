@@ -24,6 +24,24 @@ from.
 There is no third section. The glossary is defined inline, inside the chapters
 where the terms are used.
 
+## Advice is always followed by two worked examples
+
+Nowhere on the site does a piece of general product-management advice stand on
+its own. Every one is followed by exactly two explicit examples — either the
+words to say, verbatim, or an artefact you could print and carry in.
+
+- **50 in the role chapter** — two under each of the 18 requirement actions and
+  each of the 7 ranked gaps. "Draft one KPI tree and one SLA/routing table" is
+  followed by a filled-in KPI tree with its counter-metrics, and a filled-in
+  SLA table with the routing matrix underneath it.
+- **58 in the lessons** — two per craft lesson, filling in that lesson's
+  instruments against the running case. RICE actually scored, with the two
+  columns it is missing. A Definition of Ready you could put on a wall. A data
+  contract, a deprecation policy, a runbook page, a RAID log, a one-pager.
+
+Examples are labelled by kind: **Say it like this** (spoken, verbatim) or
+**Bring this on paper** (an artefact).
+
 ## Built from three inputs
 
 | Source | What was taken |
