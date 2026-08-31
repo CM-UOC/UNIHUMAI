@@ -1,102 +1,93 @@
 # PM Runway
 
-A personalised product management learning platform and interview preparation
-system, built for one person applying for one role.
+A product management course and an interview answer set, built for one person
+applying for one role — and taught through a single continuous case set inside
+that job.
 
-**Live:** https://cm-uoc.github.io/unihumai/
+**Live:** https://cm-uoc.github.io/UNIHUMAI/
 
-## What it is
+## Two destinations
 
-A static single-page application that turns three inputs — a CV, a professional
-portfolio, and a job advertisement — into a structured course, an evidence-mapped
-role analysis, an interview question bank and a set of practice drills.
+**Learn** — 32 chapters in 8 parts. Three orientation chapters open it (the role
+and where you actually fit, the business and its market, your own record
+inventoried), then 29 craft lessons. Each craft lesson opens on a scene from the
+job, stops at the decision, and only then names the idea you just watched being
+used. Every lesson carries three strands: the general practice, what your own CV
+and portfolio already give you, and what this role does with it.
 
-The three inputs it was built from:
+**Interview** — 45 questions across 16 categories, each already answered in full.
+No drafting boxes, no scoring, no self-testing. Each answer comes with what the
+interviewer is assessing, the shape it follows, alternative framings, likely
+follow-ups, what a weak answer sounds like, and the quoted evidence it was built
+from.
 
-| Source | What was taken from it |
+There is no third section. The glossary is defined inline, inside the chapters
+where the terms are used.
+
+## Built from three inputs
+
+| Source | What was taken |
 | --- | --- |
-| `Cristian_Malpica_CV.pdf` | Roles, responsibilities, competencies, tools, education — quoted verbatim into an evidence bank |
-| [cmmt.me](https://cmmt.me) | Case studies, the seven B2B decision frameworks, six stated method principles |
-| GIS:Hub Product Manager advertisement | Every responsibility and requirement, decomposed and mapped against the above |
+| `Cristian_Malpica_CV.pdf` | Roles, responsibilities, competencies, tools, education — quoted into an evidence bank |
+| [cmmt.me](https://cmmt.me) | The pricing application, the seven B2B decision frameworks, six method principles, the coursework ventures and their stated evidence boundaries |
+| GIS:Hub Product Manager advertisement | Every responsibility and requirement, decomposed and mapped against the two above |
+
+## The case
+
+Twenty-nine lessons run inside one constructed scenario: eleven weeks into a
+product manager role at GIS:Hub Barcelona, owning a vehicle-condition data
+product called Fleet Pulse, with a recurring cast — a sales lead measured on this
+quarter, a data engineering lead measured on the next three years, a privacy
+counsel who can stop the product, a service operations lead who will own it
+longer than you will, and a portfolio lead in Wolfsburg who sees eleven products
+where you see one.
+
+**The hub, the Data Hub model and the EU regulatory frame are real and sourced.
+The people, products, partners, meetings and figures are invented** so that each
+idea can be learned inside a situation rather than in the abstract. Every scene
+is labelled *Constructed case*, and the site says plainly that none of it should
+be repeated as fact.
 
 ## Provenance
 
-Every factual claim on the site carries a label:
-
-- **From your CV** / **From your portfolio** — quoted from the supplied materials
-- **From the job ad** — quoted from the advertisement
-- **Public company info** — sourced, with links on the Sources tab
-- **Interpretation** — a reasonable reading, not a stated fact
-- **Assumption** — fills a gap; should be checked
-- **General PM guidance** — standard practice, not specific to this person
-- **Verify before using** — uncertain; ask rather than assume
-
-No experience, achievement, metric or qualification appears anywhere on the site
-unless it is present in the supplied materials. Interview questions are presented
-as likely, never as guaranteed.
-
-## Sections
-
-- **Dashboard** — a composite readiness score and a recalculated "do this next" list
-- **Study plan** — four weeks, ordered by what would cost most in the interview
-- **Role fit** — every requirement mapped to evidence, with ranked gaps and strengths
-- **Knowledge hub** — 28 guided sessions across 8 modules, with a Path, an Atlas map and an Index
-- **How orgs work** — an interactive function map, decision rights, altitude and org shapes
-- **Company dossier** — what is known, what is inferred, and what to ask
-- **Glossary** — 140+ terms, searchable and filterable
-- **Question bank** — 40 questions across 16 categories, each with a grounded model answer
-- **Mock interview** — five tracks, adaptive follow-ups, weakness tracking across sessions
-- **Drills** — flashcards with spaced repetition, quizzes, drag-and-drop prioritisation, branching simulations, timed answers
-- **Notebook** — everything written, plus a printable interview-morning one-pager
-
-## Design decisions worth knowing about
-
-**The mastery ladder.** A session is not complete when read. Each concept has four
-rungs — Recognise, Explain, Apply, Teach — and the last two require writing the idea
-in your own words and passing a teach-back coverage check. The readiness score is
-weighted towards doing rather than reading.
-
-**The evidence bank.** Rather than free-text answers that can drift into invented
-experience, the answer composer draws from a bank of atomic, cited facts. An
-"Insert evidence" picker pastes real quotations from the CV or portfolio.
-
-**The claim detector.** Drafted answers are scanned for figures absent from the
-supplied materials, vague quantifiers, hedging, over-use of "we", structure coverage
-and spoken length. It catches mechanical problems, not content quality — the rubric
-handles that.
-
-**Local only.** Notes, drafted answers, confidence ratings, review schedules and mock
-sessions are stored in `localStorage`. Nothing is transmitted. A backup can be
-exported and re-imported from **Progress & data** in the sidebar.
+Every claim carries a label: **From your CV**, **From your portfolio**, **From
+the job ad**, **Interpretation**, **General PM practice**, **Verify before
+using**, **Constructed case**. No experience, achievement, metric or
+qualification appears anywhere unless it is in the supplied materials, and no
+interview question is presented as guaranteed.
 
 ## Technical
 
-No build step, no framework, no runtime dependencies. Vanilla ES modules, served
-statically. All asset paths are relative, so it works from any base path.
+No build step, no framework, no runtime dependencies. Vanilla ES modules served
+statically, relative paths throughout, hash routing.
 
 ```
 index.html
 assets/
-  css/    base.css (tokens, themes) · components.css · layout.css
+  css/cinema.css        tokens, both themes, screenplay-style scene rendering
   js/
-    main.js        hash router, chrome, global search
-    store.js       localStorage persistence, SM-2 spaced repetition
-    progress.js    mastery ladder, readiness score, next actions
-    ui.js          DOM helpers and shared components
-    search.js      flat search index across every content type
-    data/          profile, role, concepts (5 parts), questions (3 parts),
-                   glossary, org, drills, company, plan
-    views/         one module per section
+    main.js             router and chrome
+    store.js            the only stored state: which chapters you have read
+    ui.js               DOM helpers, reveal-on-scroll, rail scroll-spy
+    data/
+      world.js          the case world: premise, cast, accounts, timeline
+      scenarios-1..5    29 scenes, one per craft lesson
+      concepts-1..6     the craft content behind each lesson
+      curriculum.js     8 parts, 32 chapters, joins concepts to scenarios
+      questions-1..4    45 answered interview questions
+      profile.js        the evidence bank, quoted from CV and portfolio
+      role.js           the advertisement decomposed and mapped
+      company.js        sourced public facts, inferences, what to ask
+      glossary.js       terms, surfaced inline in the chapters that use them
+    views/              home, learn, lesson, reference, interview
 ```
 
-Light and dark themes follow the system preference and can be overridden. Focus mode
-hides the sidebar and search for distraction-free study. Fully responsive; the only
-horizontally scrolling elements are diagrams and wide tables, inside their own
-containers.
+Dark by default with a light theme; system fonts fall back cleanly if Google
+Fonts is unavailable. Responsive from 390px with no horizontal overflow. The only
+thing stored in the browser is which chapters you have opened.
 
 ## Local development
 
 ```bash
 python3 -m http.server 8000
-# then open http://localhost:8000
 ```

@@ -1,0 +1,23 @@
+export const FRAMEWORKS = [
+  { id:'star', name:'STAR', use:'Behavioural questions asking for a specific past event.',
+    steps:['Situation — the context, briefly','Task — what you were responsible for','Action — what you specifically did','Result — what happened, quantified where honest'],
+    caution:'Weakest on Result, because people describe activity rather than change. Not suitable for "how would you" questions, which want a process, not a story.' },
+  { id:'carl', name:'CARL', use:'Failures and difficult decisions, where the reflection is the strongest part.',
+    steps:['Context','Action','Result','Learning — the specific change you made, with evidence you made it'],
+    caution:'Only better than STAR if the Learning is genuine and applied. A generic lesson is worse than none.' },
+  { id:'circles', name:'CIRCLES', use:'Open product-design questions.',
+    steps:['Comprehend the situation','Identify the customer','Report their needs','Cut through prioritisation','List solutions','Evaluate trade-offs','Summarise the recommendation'],
+    caution:'Too long to walk aloud in full. Name it, then abbreviate — comprehend, pick a customer, prioritise one need, two or three solutions, trade-off, recommendation.' },
+  { id:'hypothesis', name:'Hypothesis statement', use:'Any validation or experiment question.',
+    steps:['We believe [X]','We will know we are right when [measure] passes [threshold]','If it does not, we will [action]'],
+    caution:'The third clause is the one that matters and the one most people omit.' },
+  { id:'onepager', name:'Recommendation one-pager', use:'Escalating a decision, or any written product argument.',
+    steps:['Recommendation, first sentence','Context — what changed','Options with costs, including doing nothing','Evidence, labelled known / inferred / assumed','Consequences','Decision needed from [name] by [date]'],
+    caution:'If there is no named decision-maker and no date, it is a newsletter.' },
+  { id:'fourrisks', name:'The four risks', use:'Discovery and validation questions.',
+    steps:['Value — will they use it','Usability — can they use it','Feasibility — can we build it','Viability — may we, legally and commercially'],
+    caution:'Order by consequence for the specific idea. In vehicle data, viability usually comes first and is cheapest to test.' },
+  { id:'noframework', name:'No framework', use:'Short factual questions, questions about your own experience, and any moment where a framework would sound rehearsed.',
+    steps:['Answer the question','Give one concrete example','Stop'],
+    caution:'Forcing every answer into a structure is itself a weak signal. These are scaffolding, not a script.' }
+];
