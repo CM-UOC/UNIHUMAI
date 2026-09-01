@@ -13,7 +13,7 @@ export function renderLearn(main) {
       el('h1', { class: 'd-lg anim-rise', style: { margin: '1rem 0 1.2rem', maxWidth: '17ch' } },
         'The whole field, taught inside one job.'),
       el('p', { class: 'lead read anim-rise', style: { animationDelay: '.07s' },
-        html: rich('Three orientation chapters first — the role and where you genuinely fit, the business you would be joining, and an inventory of everything your own record proves. Then twenty-nine craft lessons. Each one opens on a scene from the job, stops at the decision, and only then names the idea. Every lesson carries three strands: the **general practice**, **what your own experience already gives you**, and **what this role does with it**.') }),
+        html: rich('Three chapters to get oriented: the job and where you honestly fit, the business you would be joining, and a full list of what your own background proves. Then twenty-nine skill lessons. Each one opens on a scene from the job, pauses at the decision, and only then names the idea. Every lesson covers three things: **how this is done in general**, **what your own experience already gives you**, and **what this specific job does with it**.') }),
       el('div', { class: 'wrap anim-rise', style: { marginTop: '1.8rem', animationDelay: '.14s' } },
         el('a', { class: 'btn btn--go', href: '#/lesson/' + next.id },
           icon('arrow', 15), readCount ? 'Continue — ' + next.title : 'Begin'),
@@ -35,7 +35,7 @@ export function renderLearn(main) {
               part.kind === 'reference' ? el('span', { class: 'tag tag--ice' }, 'Reference') : null,
               el('span', { class: 'xs dim2' }, done + '/' + items.length)),
             el('h2', { class: 'd-md', style: { marginBottom: '.5rem' } }, part.title),
-            el('p', { class: 'dim' }, part.blurb))),
+            el('p', { class: 'dim', html: rich(part.blurb) }))),
         el('div', {}, items.map(l => row(l))));
     })));
 }
@@ -46,6 +46,6 @@ function row(l) {
     el('span', { class: 'lessonrow__n' }, done ? '✓' : String(l.n).padStart(2, '0')),
     el('span', {},
       el('span', { class: 'lessonrow__t' }, l.title),
-      el('span', { class: 'lessonrow__s' }, l.oneLine)),
+      el('span', { class: 'lessonrow__s', html: rich(l.oneLine) })),
     el('span', { class: 'lessonrow__x' }, (l.minutes || 10) + 'm'));
 }

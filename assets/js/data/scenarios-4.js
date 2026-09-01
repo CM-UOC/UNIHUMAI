@@ -24,7 +24,7 @@ orgmap: {
     ]
   },
   outcome: 'Eleven corrections come back in four days. Two contradict each other, which is the finding. The contradiction goes up and is settled in a fortnight. The document becomes the thing new people are sent in week one, and nobody remembers you wrote it — which is the correct outcome.',
-  principle: 'In a new organisation the scarcest thing is not direction. It is clarity about who decides. A product manager who supplies that clarity buys back weeks for everybody, including themselves.',
+  principle: 'In a new organization the scarcest thing is not direction. It is clarity about who decides. A product manager who supplies that clarity buys back weeks for everybody, including themselves.',
   wrong: 'Work around it like everyone else. You will lose nine days per decision, permanently, and you will discover the real approver during a launch, from someone with the power to stop it.',
   carry: [
     'Write down what you believe and invite correction. It is faster than asking.',
@@ -51,13 +51,13 @@ stakeholders: {
       'Know, before you start anything, which four or five people can stop it. Here: Petra on privacy, legal on contract, the brand steward on attribution, security on access.',
       'Engage them while it is still a question, not once it is a plan. Early it is a requirement like any other; late it is a veto.',
       'Learn what each of them is measured on. Petra is measured on defensibility, Jonas on maintainability, Marta on this quarter\'s deals, Andrés on tickets he can resolve. None of them is wrong.',
-      'Set a standing touchpoint at definition rather than an escalation at launch. A half-hour recurring meeting is cheaper than one cancelled release.',
+      'Set a standing touchpoint at definition rather than an escalation at launch. A half-hour recurring meeting is cheaper than one canceled release.',
       'Never let a significant decision be met for the first time in a group meeting. Pre-wire it.'
     ]
   },
   outcome: 'You put a fifteen-minute privacy slot into the definition stage of every product. Petra now answers precise questions in a day. In week nineteen, when Aurora arrives, that relationship is nine weeks old and it saves the deal.',
   principle: 'A blocking stakeholder raising a blocking concern is not obstruction. If they raise it late, that is a mapping failure — and the remedy is a calendar change, not a complaint.',
-  wrong: 'Route around them. You will get one release out and then a much larger intervention, with your judgement rather than your process under review.',
+  wrong: 'Route around them. You will get one release out and then a much larger intervention, with your judgment rather than your process under review.',
   carry: [
     'Engage the people who can stop you while it is still a question.',
     'The stakeholder you avoid is the one who escalates.',
@@ -76,7 +76,7 @@ crossfunctional: {
     { t:'action', x:'Four correct answers to four different questions, and an hour a month spent discovering that again.' }
   ],
   beat: {
-    q: 'The fix is unglamorous. What is it worth?',
+    q: 'The fix is unexciting. What is it worth?',
     weak: 'Ask everyone to use Jonas\'s number. Three functions now have a metric that does not answer their question, so they will quietly keep their own.',
     strong: [
       'Agree one primary definition and write it down: contracted vehicles that returned usable data in the last seven days.',
@@ -87,7 +87,7 @@ crossfunctional: {
     ]
   },
   outcome: 'The reconciliation hour disappears. It comes back for one month when a new report is written against the wrong variant, which is how you find out the glossary needs an owner rather than an author.',
-  principle: 'A large share of cross-functional conflict is two correct people using one word differently. Checking the definition costs ten minutes and dissolves more disputes than any amount of alignment.',
+  principle: 'Much of cross-functional conflict is two correct people using one word differently. Checking the definition costs ten minutes and dissolves more disputes than any amount of alignment.',
   wrong: 'Escalate it as a data-quality problem. You will get an investigation into pipelines that are working fine, and the meeting will still take an hour next month.',
   carry: [
     'Write the definitions down. "Active", "done" and "launched" are the usual offenders.',
@@ -101,7 +101,7 @@ leadership: {
   slug: 'Thursday, sometime after seven · Week 20',
   premise: 'Two decisions on your desk on the same evening. Handled the same way, one of them is a mistake.',
   scene: [
-    { t:'action', x:'One: what to name a field in a beta endpoint that three internal consumers use. Iker has an opinion. Jonas has a different one. You have been asked to arbitrate.' },
+    { t:'action', x:'One: what to name a field in a beta endpoint that three internal consumers use. Iker has an opinion. Jonas has a different one. You have been asked to settle.' },
     { t:'action', x:'Two: the pricing metric for Fleet Pulse. Per call, per vehicle, or per use case. Marta needs it for the Aurora proposal and for the NordFleet reseller terms.' },
     { t:'action', x:'The first has been open for six days. The second, Marta wants tomorrow.' },
     { t:'action', x:'You have been treating both as though they carry the same weight, and they do not.' }
@@ -117,9 +117,9 @@ leadership: {
       'Some decisions are never yours: accepting legal, privacy or financial risk on the company\'s behalf.'
     ]
   },
-  outcome: 'The field name is settled before you leave. The pricing metric becomes a one-pager on Monday: three options, what each does to customer behaviour and to your own roadmap, a recommendation of per-vehicle, and the consequence of each. Hanna decides on Wednesday. It holds for two years.',
+  outcome: 'The field name is settled before you leave. The pricing metric becomes a one-pager on Monday: three options, what each does to customer behavior and to your own roadmap, a recommendation of per-vehicle, and the consequence of each. Hanna decides on Wednesday. It holds for two years.',
   principle: 'Ask what it costs to undo this in three months. If the answer is very little, decide now, alone. If the answer is a renegotiation, it needs evidence, a written argument and probably a different decision-maker.',
-  wrong: 'Decide the pricing metric at seven in the evening to unblock a proposal. You will be renegotiating eleven contracts in eighteen months, and nobody will remember it was a favour.',
+  wrong: 'Decide the pricing metric at seven in the evening to unblock a proposal. You will be renegotiating eleven contracts in eighteen months, and nobody will remember it was a favor.',
   carry: [
     'Reversibility determines speed and ceremony. Most PM pain is applying the wrong mode.',
     'Push reversible decisions down. Your throughput is not the product\'s speed limit.',
@@ -143,14 +143,14 @@ writing: {
       'Recommendation, first sentence: “Price Fleet Pulse per contracted vehicle per month, not per API call.”',
       'Context: what changed that makes this a question now — NordFleet reseller terms and the Aurora proposal both need it.',
       'Options, three, each with what it costs and what it gives up, including the status quo of deciding per deal.',
-      'Evidence, labelled: what is known, what is inferred, what is still assumed. This is the section most people omit and the one that makes the document trustworthy.',
+      'Evidence, labeled: what is known, what is inferred, what is still assumed. This is the section most people omit and the one that makes the document trustworthy.',
       'Consequences: per-vehicle means we must meter and expose vehicle-level activity, which is engineering work we have not scoped.',
       'Decision needed from Hanna and finance by Wednesday.',
-      'Circulate forty-eight hours ahead. Then the meeting is fifteen minutes about the disagreement rather than an hour of catching up.'
+      'Share forty-eight hours ahead. Then the meeting is fifteen minutes about the disagreement rather than an hour of catching up.'
     ]
   },
   outcome: 'The meeting takes eleven minutes. Two comments arrive in the document before it starts. Finance raises the metering cost, which you had flagged in Consequences, and the decision includes it rather than discovering it in April.',
-  principle: 'In a distributed organisation most decisions are made by people reading, not by people meeting. Writing is how a product manager scales beyond their own calendar — and a decision that is written down stops being reopened by whoever missed the room.',
+  principle: 'In a distributed organization most decisions are made by people reading, not by people meeting. Writing is how a product manager scales beyond their own calendar — and a decision that is written down stops being reopened by whoever missed the room.',
   wrong: 'Present it live. You get a decision from the people who attended, no record of the reasoning, and the same conversation again in six weeks with someone who was not there.',
   carry: [
     'Recommendation first. Let the reader choose how much reasoning to take.',

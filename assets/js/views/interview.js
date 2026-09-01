@@ -17,7 +17,7 @@ export function renderInterview(main, { query }) {
       el('h1', { class: 'd-lg anim-rise', style: { margin: '1rem 0 1.2rem', maxWidth: '16ch' } },
         'What they will ask, and what to say.'),
       el('p', { class: 'lead read anim-rise', style: { animationDelay: '.07s' },
-        html: rich('Every answer is written out in full and built **only** from what your CV and portfolio actually say. Read them, then say them your own way — a memorised answer is audible, and the follow-up will find the seam. These are likely questions, not guaranteed ones.') }),
+        html: rich('Every answer is written out in full and built **only** from what your CV and portfolio actually say. Read them, then say them your own way — a memorized answer is audible, and the follow-up will find the gap. These are likely questions, not guaranteed ones.') }),
       el('div', { class: 'wrap anim-rise', style: { marginTop: '1.6rem', animationDelay: '.13s' } },
         el('span', { class: 'tag tag--rose tag--dot' }, critical + ' very likely'),
         el('span', { class: 'tag tag--line' }, 'Answers grounded in your materials'),
@@ -78,7 +78,7 @@ function qRow(q, open) {
       el('div', { class: 'panel', style: { borderColor: 'color-mix(in srgb, var(--amber) 30%, transparent)', marginBottom: '1.1rem' } },
         el('div', { class: 'wrap', style: { marginBottom: '.9rem' } },
           el('span', { class: 'slug' }, 'Your answer'), ev('cv'), ev('pf')),
-        el('div', { class: 'answer' }, q.example),
+        el('div', { class: 'answer', html: rich(q.example) }),
         el('div', { class: 'wrap', style: { marginTop: '1.1rem' } },
           el('button', { class: 'btn btn--sm btn--ghost', onClick: e => {
             navigator.clipboard?.writeText(q.example).then(() => toast('Answer copied')).catch(() => toast('Select and copy'));
@@ -88,11 +88,11 @@ function qRow(q, open) {
       el('div', { class: 'g2', style: { marginBottom: '1.1rem' } },
         el('div', { class: 'cardish cardish--ice' },
           el('div', { class: 'cardish__t' }, icon('target', 13), 'What they are testing'),
-          el('p', { class: 'sm' }, q.assess)),
+          el('p', { class: 'sm', html: rich(q.assess) })),
         el('div', { class: 'cardish cardish--note' },
           el('div', { class: 'cardish__t' }, icon('film', 13), 'The shape · ' + q.structure.name),
           el('ol', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.structure.steps.map(s => el('li', { html: rich(s) }))),
-          el('p', { class: 'xs dim2', style: { marginTop: '.6rem' } }, q.structure.when))),
+          el('p', { class: 'xs dim2', style: { marginTop: '.6rem' }, html: rich(q.structure.when) }))),
 
       el('div', { class: 'g2', style: { marginBottom: '1.1rem' } },
         (q.alternatives || []).length ? el('div', { class: 'cardish cardish--note' },
@@ -100,15 +100,15 @@ function qRow(q, open) {
           el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.alternatives.map(a => el('li', { html: rich(a) })))) : null,
         (q.followups || []).length ? el('div', { class: 'cardish cardish--note' },
           el('div', { class: 'cardish__t' }, 'What comes next'),
-          el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.followups.map(f => el('li', {}, f)))) : null),
+          el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.followups.map(f => el('li', { html: rich(f) })))) : null),
 
       el('div', { class: 'cardish cardish--bad', style: { marginBottom: '1.1rem' } },
         el('div', { class: 'cardish__t' }, icon('x', 13), 'What a weak answer sounds like'),
-        el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.weak.map(w => el('li', {}, w)))),
+        el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.weak.map(w => el('li', { html: rich(w) })))),
 
       el('div', { class: 'cardish cardish--good', style: { marginBottom: '1.1rem' } },
         el('div', { class: 'cardish__t' }, icon('check', 13), 'A strong answer does all of this'),
-        el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.rubric.map(r => el('li', {}, r)))),
+        el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, q.rubric.map(r => el('li', { html: rich(r) })))),
 
       (q.evidence || []).length ? el('div', { class: 'panel panel--sunk', style: { marginBottom: '1.1rem' } },
         el('div', { class: 'slug', style: { marginBottom: '.7rem' } }, 'Where this answer comes from'),
@@ -155,8 +155,8 @@ function frameworksPanel() {
       el('div', { class: 'spread', style: { marginBottom: '.4rem', flexWrap: 'wrap', gap: '.5rem' } },
         el('h3', { class: 'h-md' }, f.name),
         el('span', { class: 'tag tag--line' }, f.use)),
-      el('ol', { class: 'sm dim', style: { paddingLeft: '1.1em' } }, f.steps.map(s => el('li', {}, s))),
-      el('p', { class: 'xs dim2', style: { marginTop: '.5rem' } }, el('strong', {}, 'Watch out: '), f.caution))));
+      el('ol', { class: 'sm dim', style: { paddingLeft: '1.1em' } }, f.steps.map(x => el('li', { html: rich(x) }))),
+      el('p', { class: 'xs dim2', style: { marginTop: '.5rem' } }, el('strong', {}, 'Watch out: '), rx(f.caution)))));
 
   const btn = el('button', { class: 'btn', onClick: () => {
     box.hidden = !box.hidden;

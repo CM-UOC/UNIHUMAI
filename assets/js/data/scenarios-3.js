@@ -8,7 +8,7 @@ analytics: {
   scene: [
     { t:'line', who:'Marta', x:'Calls doubled. Adoption is working.' },
     { t:'action', x:'You spent forty minutes on this on Sunday because the shape of the curve was wrong — it went up on a Wednesday and stayed flat.' },
-    { t:'line', who:'You', x:'Before we report that upward, three things. Unique vehicles queried went up eleven per cent, not a hundred. Error rate went from two per cent to nine. And sixty per cent of the increase is one partner.' },
+    { t:'line', who:'You', x:'Before we report that upward, three things. Unique vehicles queried went up eleven percent, not a hundred. Error rate went from two percent to nine. And sixty percent of the increase is one partner.' },
     { t:'line', who:'Hanna', x:'So what is it?' },
     { t:'line', who:'You', x:'One partner has a poller retrying against a failure. We are being paid for our own errors.' }
   ],
@@ -16,7 +16,7 @@ analytics: {
     q: 'Build the tree that would have caught this on the Wednesday.',
     weak: 'A dashboard of everything, or one headline number with no counter-metric.',
     strong: [
-      'North star: contracted vehicles actively delivering usable data weekly. Usable is the load-bearing word.',
+      'North star: contracted vehicles actively delivering usable data weekly. Usable is the essential word.',
       'Adoption: partners integrated, time from contract to first successful call, share of contracted VINs actually queried.',
       'Reliability: availability, p95 latency, data freshness, share of responses failing plausibility checks.',
       'Commercial: revenue per active vehicle, expansion rate, churn.',
@@ -25,7 +25,7 @@ analytics: {
       'And the honesty: none of this proves Meridian priced remarketing better. That needs a separate, harder study, and saying so out loud is what makes the rest of the numbers trustworthy.'
     ]
   },
-  outcome: 'The slide changes to active vehicles with error rate beside it. Hanna asks for that pairing across the whole portfolio. The partner\'s poller is fixed within a week — a conversation that only happened because the metric was decomposed.',
+  outcome: 'The slide changes to active vehicles with error rate beside it. Hanna asks for that pairing across the whole portfolio. The partner\'s poller is fixed within a week — a conversation that only happened because the metric was broken down.',
   principle: 'Volume is an output that rises for good and bad reasons. Every target creates an incentive to game it, and a counter-metric is the cheapest protection you will ever buy.',
   wrong: 'Report the doubling. It goes into a portfolio pack, becomes a comparison against other products, and in three months someone asks why revenue did not follow — and the honest answer is that you were billing for retries.',
   carry: [
@@ -51,7 +51,7 @@ dataquality: {
     weak: 'Tighten the schema. The value was already legal. Or tell Meridian to sanity-check their inputs, which defeats the purpose of buying a data product.',
     strong: [
       'Add plausibility rules, not just structural ones: rate of change against a physical maximum, and cross-field consistency.',
-      'Decide the behaviour per consumer, in the data contract: suppress and return the previous value with an older timestamp, return it flagged low-confidence, or return nothing. A leasing customer wants it suppressed or flagged. A diagnostics customer might want the anomaly itself, because it may indicate a fault cluster.',
+      'Decide the behavior per consumer, in the data contract: suppress and return the previous value with an older timestamp, return it flagged low-confidence, or return nothing. A leasing customer wants it suppressed or flagged. A diagnostics customer might want the anomaly itself, because it may indicate a fault cluster.',
       'Expose quality to the consumer. They can handle imperfection; they cannot handle invisible imperfection.',
       'Trace upstream. Fixing it in the serving layer creates permanent divergence between what the vehicle said and what you serve.',
       'Set thresholds per dimension and monitor them like availability, because this is not a cleanup project.'
@@ -88,10 +88,10 @@ dataproduct: {
       'A versioning and breaking-change policy published before the first partner integrates, not after the first complaint.',
       'Lineage — where the value came from and what transformed it — for debugging and for audit.',
       'An owner. Not a team, a person.',
-      '“Standardised across six brands” is work you do, not a property you inherit.'
+      '“Standardized across six brands” is work you do, not a property you inherit.'
     ]
   },
-  outcome: 'The data contract takes two weeks and is the single most reused artefact of the quarter. Aurora\'s technical due diligence, three months later, is answered almost entirely from it. NordFleet integrates.',
+  outcome: 'The data contract takes two weeks and is the single most reused artifact of the quarter. Aurora\'s technical due diligence, three months later, is answered almost entirely from it. NordFleet integrates.',
   principle: 'A data product is data packaged so a consumer can rely on it without understanding how it was produced. The pipeline is not the product; the promise about the pipeline is.',
   wrong: 'Ship the field with ambiguous semantics and every consumer invents their own interpretation. The misuse is silent, and you discover it through a customer complaint about a number that was technically correct.',
   carry: [
@@ -104,13 +104,13 @@ dataproduct: {
 compliance: {
   title: 'The same field, two answers',
   slug: 'Call with Wolfsburg · Tuesday 16:00 · Week 19',
-  premise: 'Aurora Assurance want driving-behaviour data for risk pricing. Marta has told them it is “a data question, not a legal one”. It is entirely a legal one.',
+  premise: 'Aurora Assurance want driving-behavior data for risk pricing. Marta has told them it is “a data question, not a legal one”. It is entirely a legal one.',
   scene: [
     { t:'line', who:'Marta', x:'We already hold the data. They just want to use it differently.' },
     { t:'action', x:'This is the sentence that sinks data products. You get Petra on the call before you answer it.' },
     { t:'line', who:'Petra', x:'Whose vehicles?' },
     { t:'line', who:'You', x:'Mixed. Some corporate fleet, some private lease.' },
-    { t:'line', who:'Petra', x:'Then they are two products. For a company-owned vehicle where drivers are informed under an employment framework, that is one conversation. For a private lease, driving behaviour is personal data revealing a great deal about an individual. Consent must be explicit, specific and revocable.' },
+    { t:'line', who:'Petra', x:'Then they are two products. For a company-owned vehicle where drivers are informed under an employment framework, that is one conversation. For a private lease, driving behavior is personal data revealing a great deal about an individual. Consent must be explicit, specific and revocable.' },
     { t:'line', who:'You', x:'Revocable means we need a mechanism, not a policy. If someone withdraws consent the flow has to actually stop.' },
     { t:'line', who:'Petra', x:'Yes. And that is a product requirement, which is why I would rather have this call now than in week thirty.' }
   ],
@@ -121,7 +121,7 @@ compliance: {
       'Holding the data does not grant the right to use it this way. Purpose limitation means a new purpose usually needs a new basis.',
       'The corporate-fleet subset may be reachable sooner than the private-lease subset. That is a real, sellable answer.',
       'Revocation needs a mechanism in the product, which is engineering work nobody has scoped.',
-      'Anonymisation is not an escape route: movement and behaviour patterns are frequently re-identifiable, so pseudonymised is still personal data.',
+      'Anonymisation is not an escape route: movement and behavior patterns are frequently re-identifiable, so pseudonymized is still personal data.',
       'Your job is to frame the question precisely, name the owner and record the answer — not to give the opinion. Confidence without authority is the dangerous combination here.'
     ]
   },

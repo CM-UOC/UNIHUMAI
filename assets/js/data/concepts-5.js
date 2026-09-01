@@ -25,15 +25,15 @@ export default [
   },
   mistakes: [
     { mistake: 'Treating the pipeline as the product.', instead: 'The product is what the consumer can rely on: semantics, quality, stability, support.' },
-    { mistake: 'Shipping a field without defining its semantics.', instead: 'Ambiguous semantics produce silent, expensive misuse. Define measurement, units, frequency and null behaviour.' },
+    { mistake: 'Shipping a field without defining its semantics.', instead: 'Ambiguous semantics produce silent, expensive misuse. Define measurement, units, frequency and null behavior.' },
     { mistake: 'No freshness indicator.', instead: 'Always return the timestamp with the value. Stale-but-plausible is the most damaging data failure there is.' },
     { mistake: 'Breaking a schema without versioning and notice.', instead: 'Partners have built products on your contract. Version, notify, run in parallel.' },
-    { mistake: 'Assuming brand uniformity.', instead: 'Six brands, many model years, differing signal availability. "Standardised" is work you do, not a property you inherit.' },
-    { mistake: 'Forgetting that much of this is personal data.', instead: 'Location and driving behaviour are personal data. Purpose limitation applies from the first design conversation.' }
+    { mistake: 'Assuming brand uniformity.', instead: 'Six brands, many model years, differing signal availability. "Standardized" is work you do, not a property you inherit.' },
+    { mistake: 'Forgetting that much of this is personal data.', instead: 'Location and driving behavior are personal data. Purpose limitation applies from the first design conversation.' }
   ],
   tools: [
     { name: 'Data contract', note: 'Schema, semantics, freshness, quality thresholds, versioning, breaking-change process, owner.' },
-    { name: 'Data dictionary', note: 'One definition per field, with units, source and null behaviour.' },
+    { name: 'Data dictionary', note: 'One definition per field, with units, source and null behavior.' },
     { name: 'Data quality dimensions', note: 'Accuracy, completeness, consistency, timeliness, validity, uniqueness.' },
     { name: 'Lineage', note: 'Where a value came from and what transformed it. Required for both debugging and audit.' },
     { name: 'Semantic versioning', note: 'Major for breaking, minor for additive, patch for fixes. Publish the policy.' }
@@ -47,14 +47,14 @@ export default [
       'The vehicle is not in the contracted fleet.'
     ],
     answer: 1,
-    why: 'Vehicles report intermittently. Without a timestamp presented as prominently as the value, consumers assume currency. This single design decision — always ship the age with the reading — prevents a large share of data-product complaints.'
+    why: 'Vehicles report intermittently. Without a timestamp presented as prominently as the value, consumers assume currency. This single design decision — always ship the age with the reading — prevents much of data-product complaints.'
   },
-  ownWords: 'Take a data field you own today. Write its semantics, its refresh behaviour, and what a consumer sees when it is stale.',
+  ownWords: 'Take a data field you own today. Write its semantics, its refresh behavior, and what a consumer sees when it is stale.',
   teachBack: {
     prompt: 'Explain how owning product master data in SAP and PIM prepares you for owning a vehicle-data product — and be honest about what does not transfer.',
     mustMention: ['semantics', 'quality', 'owner', 'freshness']
   },
-  roleLink: { reqs: ['r9', 'r3', 'i5'], text: '"Automotive-data product knowledge" is a named requirement and your largest gap. Publicly, GIS operates a Data Hub offering standardised static and dynamic data across six Group brands — Volkswagen Passenger Cars, Volkswagen Commercial Vehicles, Audi, Škoda, SEAT and Cupra — with API access to over 100 data points per vehicle, serving workshops, fleets, insurers and digital service providers under a one-contract-per-use-case model.' },
+  roleLink: { reqs: ['r9', 'r3', 'i5'], text: '"Automotive-data product knowledge" is a named requirement and your largest gap. Publicly, GIS operates a Data Hub offering standardized static and dynamic data across six Group brands — Volkswagen Passenger Cars, Volkswagen Commercial Vehicles, Audi, Škoda, SEAT and Cupra — with API access to over 100 data points per vehicle, serving workshops, fleets, insurers and digital service providers under a one-contract-per-use-case model.' },
   youLink: { evidence: ['e-productdata', 'e-datapartofproduct', 'e-app-built'], text: 'Your bridge is genuinely strong and you should use it deliberately: you own the business quality of hierarchies, classifications, commercial attributes and supplier references across SAP, PIM and digital channels in two markets, and you argue that product data is part of the product. Be equally clear about what does not transfer — master data is slow and curated, vehicle data is high-frequency, intermittent and personal.' },
   depends: ['requirements', 'serviceops'],
   glossary: ['data-product', 'data-contract', 'freshness', 'lineage', 'semantic-versioning', 'data-quality', 'vin', 'telematics']
@@ -63,8 +63,8 @@ export default [
 {
   id: 'compliance', module: 'm7', order: 24, minutes: 13,
   title: 'Governance, privacy and compliance for data products',
-  oneLine: 'Knowing which questions must be answered before a data product may exist — and who owns each answer.',
-  definition: 'Governance is the system of decision rights, policies and controls that determines what may be done with data. For connected-vehicle data in Europe the two dominant frames are the GDPR — which governs personal data, requiring a lawful basis, purpose limitation, data minimisation and bounded retention — and the EU Data Act, which gives users a right to the data their connected product generates and to have it shared with third parties on fair, reasonable and non-discriminatory terms. They coexist: the Data Act may create a right of access while the GDPR still governs how personal data within it may be processed.',
+  oneLine: 'Knowing which questions have to be answered before a data product is even allowed to exist, and who owns each answer.',
+  definition: 'Governance is the system of decision rights, policies and controls that determines what may be done with data. For connected-vehicle data in Europe the two dominant frames are the GDPR — which governs personal data, requiring a lawful basis, purpose limitation, data minimization and bounded retention — and the EU Data Act, which gives users a right to the data their connected product generates and to have it shared with third parties on fair, reasonable and non-discriminatory terms. They coexist: the Data Act may create a right of access while the GDPR still governs how personal data within it may be processed.',
   why: 'In this business, compliance is not a stage at the end. It determines whether a product can exist, for whom, and for what purpose. A PM who treats it as paperwork will design products that cannot ship. A PM who understands the shape of the questions will design products that clear the bar the first time.',
   when: 'From ideation. The permission question is usually the cheapest risk to test and the most expensive to discover late.',
   people: [
@@ -76,17 +76,17 @@ export default [
     { who: 'Brand', does: 'Owns constraints specific to each Group brand.' }
   ],
   inputs: ['Proposed purpose and data fields', 'Existing consents and contracts', 'Regulatory obligations', 'Retention and residency requirements'],
-  activities: ['Classify data: personal, mixed, non-personal', 'Identify the lawful basis for the purpose', 'Assess purpose limitation and minimisation', 'Trigger a DPIA where required', 'Record decisions and evidence', 'Design controls into the product'],
+  activities: ['Classify data: personal, mixed, non-personal', 'Identify the lawful basis for the purpose', 'Assess purpose limitation and minimization', 'Trigger a DPIA where required', 'Record decisions and evidence', 'Design controls into the product'],
   outputs: ['Purpose and lawful-basis record', 'DPIA where required', 'Retention and access policy', 'Contract clauses on permitted use', 'Audit evidence'],
   outcomes: ['Products that clear review the first time', 'Compliance evidence available before it is demanded', 'Trust with brands, partners and regulators'],
   example: {
     title: 'The same field, two answers',
-    body: 'A fleet customer asks for location data. For a commercial fleet where the vehicle is a company asset and drivers are informed under an employment framework, this is one conversation. For a private lease where the driver is an individual, location is personal data revealing movement patterns, and consent must be explicit, specific and revocable — with a product consequence: revocation must actually stop the flow, which means the product needs a mechanism for it, not just a policy. Same field, same API, two different products. The PM job is not to know which answer is right — it is to recognise, at ideation, that this is the question, and to bring privacy in before the roadmap says the feature is coming.'
+    body: 'A fleet customer asks for location data. For a commercial fleet where the vehicle is a company asset and drivers are informed under an employment framework, this is one conversation. For a private lease where the driver is an individual, location is personal data revealing movement patterns, and consent must be explicit, specific and revocable — with a product consequence: revocation must actually stop the flow, which means the product needs a mechanism for it, not just a policy. Same field, same API, two different products. The PM job is not to know which answer is right — it is to recognize, at ideation, that this is the question, and to bring privacy in before the roadmap says the feature is coming.'
   },
   mistakes: [
     { mistake: 'Involving legal and privacy at the end.', instead: 'Bring them the question at ideation. It is cheap then and can be fatal later.' },
     { mistake: 'Treating consent as a checkbox.', instead: 'Consent must be specific, informed and revocable — and revocation needs a product mechanism.' },
-    { mistake: 'Assuming anonymised means outside GDPR.', instead: 'Vehicle data is often re-identifiable from movement patterns. Pseudonymised is not anonymous.' },
+    { mistake: 'Assuming anonymised means outside GDPR.', instead: 'Vehicle data is often re-identifiable from movement patterns. Pseudonymized is not anonymous.' },
     { mistake: 'Reusing data for a new purpose because you already hold it.', instead: 'Purpose limitation. A new purpose usually needs a new basis.' },
     { mistake: 'A PM giving a legal opinion.', instead: 'Frame the question, name the owner, record the answer. Confidence without authority is the dangerous combination.' },
     { mistake: 'No retention policy.', instead: 'Holding data indefinitely is itself a compliance failure and a security liability.' }
@@ -94,13 +94,13 @@ export default [
   tools: [
     { name: 'Data classification', note: 'Personal, mixed, non-personal. Determines which rules apply.' },
     { name: 'Lawful basis assessment', note: 'Consent, contract, legitimate interest, legal obligation. Chosen per purpose, not per dataset.' },
-    { name: 'DPIA', note: 'Data Protection Impact Assessment. Required for high-risk processing; a useful design instrument regardless.' },
+    { name: 'DPIA', note: 'Data Protection Impact Assessment. Required for high-risk processing; a useful design tool regardless.' },
     { name: 'Records of processing (ROPA)', note: 'What you process, why, on what basis, for how long.' },
-    { name: 'Privacy by design', note: 'Controls built into the product, not bolted on. Minimisation, purpose binding, revocation mechanics.' },
+    { name: 'Privacy by design', note: 'Controls built into the product, not bolted on. Minimization, purpose binding, revocation mechanics.' },
     { name: 'FRAND terms', note: 'Fair, reasonable and non-discriminatory — the Data Act standard for third-party data sharing.' }
   ],
   check: {
-    q: 'A customer already receiving maintenance data asks to reuse it for driver-behaviour scoring. What is the first thing a PM should establish?',
+    q: 'A customer already receiving maintenance data asks to reuse it for driver-behavior scoring. What is the first thing a PM should establish?',
     options: [
       'Whether the technical integration supports the additional load.',
       'Whether the commercial contract permits an upsell.',
@@ -108,7 +108,7 @@ export default [
       'Whether competitors offer a similar scoring product.'
     ],
     answer: 2,
-    why: 'Purpose limitation is the governing principle. Load, contract and competition are all real questions, but they are irrelevant if the purpose is not permitted — and driver-behaviour data is among the most sensitive categories in this domain.'
+    why: 'Purpose limitation is the governing principle. Load, contract and competition are all real questions, but they are irrelevant if the purpose is not permitted — and driver-behavior data is among the most sensitive categories in this domain.'
   },
   ownWords: 'In your own words: what is purpose limitation, and what does it mean for a product roadmap?',
   teachBack: {
@@ -118,7 +118,7 @@ export default [
   roleLink: { reqs: ['r3', 'r11'], text: 'Privacy and legal are two of the five requirement families named in the ad, and "Governance and compliance knowledge" is a separate listed requirement. The credible position for you is not expertise — it is knowing which questions apply and who owns each answer.' },
   youLink: { evidence: ['e-compliance', 'e-datapartofproduct', 'e-productdata'], text: 'Your real strength here is structural: in your world a product cannot reach the market without its Declaration of Performance, CE marking and EPD. You already treat compliance evidence as a release gate rather than as documentation. Say that, then name honestly what is new — the specific privacy frames.' },
   depends: ['dataproduct', 'risk'],
-  glossary: ['gdpr', 'data-act', 'lawful-basis', 'purpose-limitation', 'dpia', 'frand', 'pseudonymisation', 'retention']
+  glossary: ['gdpr', 'data-act', 'lawful-basis', 'purpose-limitation', 'dpia', 'frand', 'pseudonymization', 'retention']
 },
 
 /* ---------------- Module 8: chosen for this profile ---------------- */
@@ -126,9 +126,9 @@ export default [
   id: 'writing', module: 'm8', order: 25, minutes: 10,
   title: 'Product writing and decision records',
   oneLine: 'Writing clearly enough that a decision survives you leaving the room.',
-  chosenBecause: 'You are joining a hub with two parent organisations, in a role whose first verb is "translate". Most of your influence will travel as writing that other people read without you present — and your own materials show you already write with unusual precision about evidence. Sharpening this is a high-leverage, low-cost advantage.',
+  chosenBecause: 'You are joining a hub with two parent organizations, in a role whose first verb is "translate". Most of your influence will travel as writing that other people read without you present — and your own materials show you already write with unusual precision about evidence. Sharpening this is a high-leverage, low-cost advantage.',
   definition: 'Product writing is the craft of turning a decision, a requirement or a recommendation into a document that is unambiguous to a reader you are not in the room with. Its core forms are the one-pager (recommendation with options and consequences), the decision record (what was decided, why, and what it costs), the requirement, and the update. Good product writing has a shape: the conclusion first, the reasoning after, the detail in an appendix.',
-  why: 'In a distributed, matrixed organisation, most decisions are made by people reading rather than by people meeting. Writing is how a PM scales beyond their own calendar. It is also the only defence against decisions being reopened endlessly — an undocumented decision is a decision that will be made again by whoever missed the meeting.',
+  why: 'In a distributed, matrixed organization, most decisions are made by people reading rather than by people meeting. Writing is how a PM scales beyond their own calendar. It is also the only defense against decisions being reopened endlessly — an undocumented decision is a decision that will be made again by whoever missed the meeting.',
   when: 'Before any significant decision, at every gate, and whenever the same conversation happens a third time.',
   people: [
     { who: 'Product Manager', does: 'Writes it and owns its clarity.' },
@@ -136,12 +136,12 @@ export default [
     { who: 'Decision-maker', does: 'Decides on the record and their reasoning is captured.' }
   ],
   inputs: ['The decision or recommendation', 'Options genuinely considered', 'Evidence and its confidence', 'Consequences and who bears them'],
-  activities: ['State the recommendation in the first paragraph', 'Give the options you actually weighed, including doing nothing', 'Show the evidence and label its confidence', 'Name the consequences and who carries them', 'Circulate before the meeting, not during'],
+  activities: ['State the recommendation in the first paragraph', 'Give the options you actually weighed, including doing nothing', 'Show the evidence and label its confidence', 'Name the consequences and who carries them', 'Share before the meeting, not during'],
   outputs: ['One-pager', 'Decision record', 'Written update', 'FAQ for recurring questions'],
   outcomes: ['Decisions made faster and reopened less', 'Influence that works across time zones and org boundaries', 'A written trail that is also compliance evidence'],
   example: {
     title: 'The one-pager that ends the meeting',
-    body: 'Structure: (1) Recommendation — one sentence, up front. (2) Context — what changed that makes this a question now. (3) Options — three, each with what it costs and what it gives up, including the status quo. (4) Evidence — what we know, what we infer, what is still assumed, each labelled. (5) Consequences — what becomes harder if we do this. (6) Decision needed from — the named person, by a date. Circulated 48 hours ahead. The meeting then takes fifteen minutes and is about the disagreement, not about catching up. Note that section 4 is the one most PMs omit and the one that makes the document trustworthy.'
+    body: 'Structure: (1) Recommendation — one sentence, up front. (2) Context — what changed that makes this a question now. (3) Options — three, each with what it costs and what it gives up, including the status quo. (4) Evidence — what we know, what we infer, what is still assumed, each labeled. (5) Consequences — what becomes harder if we do this. (6) Decision needed from — the named person, by a date. Shared 48 hours ahead. The meeting then takes fifteen minutes and is about the disagreement, not about catching up. Note that section 4 is the one most PMs omit and the one that makes the document trustworthy.'
   },
   mistakes: [
     { mistake: 'Building to the conclusion.', instead: 'Recommendation first. A busy reader should get the answer in ten seconds and the reasoning if they want it.' },
@@ -154,14 +154,14 @@ export default [
     { name: 'One-pager / narrative memo', note: 'Prose beats bullets for reasoning. Bullets hide the logic.' },
     { name: 'ADR (architecture/any decision record)', note: 'Context, options, decision, consequences. One page, permanent.' },
     { name: 'BLUF', note: 'Bottom line up front. Military brevity convention, and it works.' },
-    { name: 'Pre-read protocol', note: 'Circulate ahead; open the meeting with silent reading if people did not.' },
-    { name: 'Evidence labelling', note: 'Known / inferred / assumed. Your own portfolio already does this.' }
+    { name: 'Pre-read protocol', note: 'Share ahead; open the meeting with silent reading if people did not.' },
+    { name: 'Evidence labeling', note: 'Known / inferred / assumed. Your own portfolio already does this.' }
   ],
   check: {
     q: 'Which structure makes a recommendation memo most likely to produce a decision?',
     options: [
       'Background, analysis, options, then recommendation at the end so the reader follows the reasoning.',
-      'Recommendation first, then context, options with consequences, labelled evidence, and a named decision-maker with a date.',
+      'Recommendation first, then context, options with consequences, labeled evidence, and a named decision-maker with a date.',
       'A slide deck presented live so questions can be handled in the room.',
       'A detailed requirements document with the recommendation embedded in the relevant section.'
     ],
@@ -173,8 +173,8 @@ export default [
     prompt: 'Explain why you label evidence as known, inferred or assumed in a product document.',
     mustMention: ['trust', 'challenge', 'confidence', 'decision']
   },
-  roleLink: { reqs: ['r3', 'i2'], text: '"Define, document, and align" — document is the middle verb. Across two parent organisations in different countries, your written artefacts will do more alignment work than your meetings.' },
-  youLink: { evidence: ['e-method-assumptions', 'e-app-honesty', 'e-solarboundary'], text: 'You already do the hardest part of this. Your portfolio labels what a piece of work does not prove, and one of your stated principles is recording what is known, what is inferred and what still needs validation. Bring a written artefact to the interview — it will demonstrate this faster than describing it.' },
+  roleLink: { reqs: ['r3', 'i2'], text: '"Define, document, and align" — document is the middle verb. Across two parent organizations in different countries, your written artifacts will do more alignment work than your meetings.' },
+  youLink: { evidence: ['e-method-assumptions', 'e-app-honesty', 'e-solarboundary'], text: 'You already do the hardest part of this. Your portfolio labels what a piece of work does not prove, and one of your stated principles is recording what is known, what is inferred and what still needs validation. Bring a written artifact to the interview — it will show this faster than describing it.' },
   depends: ['leadership'],
   glossary: ['one-pager', 'adr', 'bluf', 'pre-read', 'decision-log']
 },
@@ -186,41 +186,41 @@ export default [
   chosenBecause: 'The ad makes you the day-to-day Sales interface, and nothing in your materials evidences a formal refusal of a large commercial request. This is the most likely competency gap an interviewer will probe, and it is the one where a prepared, principled answer separates candidates.',
   definition: 'Scope negotiation is the practice of converting a demand into a decision. It has three moves: understand the underlying need rather than the requested solution; make the trade-off explicit in terms the requester values; and offer a real alternative rather than a refusal. When the trade-off cannot be resolved at your level, escalate it as a choice for someone else, not as a complaint.',
   why: 'A PM who cannot say no builds a roadmap of one-customer promises and a product that serves nobody well. A PM who says no badly loses the Sales relationship that supplies their market evidence. In a hub where the PM is explicitly the Sales interface, the quality of your no is a core professional skill, not a personality trait.',
-  when: 'Whenever a request would displace prioritised work, create a bespoke variant, or commit to something not yet validated.',
+  when: 'Whenever a request would displace prioritized work, create a bespoke variant, or commit to something not yet validated.',
   people: [
     { who: 'Product Manager', does: 'Holds the trade-off and offers the alternative.' },
     { who: 'Sales / account team', does: 'Owns the customer relationship and the revenue exposure.' },
     { who: 'Leadership', does: 'Decides when the trade-off exceeds your decision right.' },
     { who: 'Engineering', does: 'Supplies the honest cost, including compounding maintenance cost.' }
   ],
-  inputs: ['The request and its underlying need', 'Revenue and relationship exposure', 'True cost including future maintenance', 'The prioritised alternative being displaced'],
-  activities: ['Ask what the customer is trying to achieve', 'Find how many other customers share the need', 'Cost it honestly, including the long tail', 'Name what would be displaced', 'Offer an alternative — a subset, a timeline, a workaround, or a generalised version', 'Escalate the trade-off if it is above your level'],
+  inputs: ['The request and its underlying need', 'Revenue and relationship exposure', 'True cost including future maintenance', 'The prioritized alternative being displaced'],
+  activities: ['Ask what the customer is trying to achieve', 'Find how many other customers share the need', 'Cost it honestly, including the long tail', 'Name what would be displaced', 'Offer an alternative — a subset, a timeline, a workaround, or a generalized version', 'Escalate the trade-off if it is above your level'],
   outputs: ['A decision with rationale', 'An alternative offered', 'An updated backlog or an escalation'],
   outcomes: ['A roadmap that stays coherent', 'Sales who trust the process because they can predict it', 'Fewer bespoke variants taxing every future change'],
   example: {
     title: 'The four sentences',
-    body: '"Tell me what they are trying to do with it" — the request is a solution; the need might be met three cheaper ways. "How many other customers have asked for something like this?" — reach turns a favour into a product decision. "If we do this in Q3, the freshness work moves to Q4; is that the trade you want to make?" — the trade-off is now visible and it is not personal. "Here is what I can do by then, and here is what I would need in order to do the rest" — you have offered something real. If the answer is still that the deal requires it and the deal matters more than the roadmap, that is a legitimate outcome — but it is now a leadership decision made knowingly, not a PM decision made under pressure.'
+    body: '"Tell me what they are trying to do with it" — the request is a solution; the need might be met three cheaper ways. "How many other customers have asked for something like this?" — reach turns a favor into a product decision. "If we do this in Q3, the freshness work moves to Q4; is that the trade you want to make?" — the trade-off is now visible and it is not personal. "Here is what I can do by then, and here is what I would need to do the rest" — you have offered something real. If the answer is still that the deal requires it and the deal matters more than the roadmap, that is a legitimate outcome — but it is now a leadership decision made knowingly, not a PM decision made under pressure.'
   },
   mistakes: [
     { mistake: 'Saying no on principle.', instead: 'Say no on criteria, and show them. Principle sounds like preference.' },
     { mistake: 'Saying yes to protect the relationship.', instead: 'The relationship is destroyed faster by a missed commitment than by a clear no.' },
-    { mistake: 'Hiding behind the process.', instead: '"The framework says" is a shield, not an argument. Own the judgement.' },
+    { mistake: 'Hiding behind the process.', instead: '"The framework says" is a shield, not an argument. Own the judgment.' },
     { mistake: 'Refusing without an alternative.', instead: 'Always leave the requester with something they can take back to the customer.' },
     { mistake: 'Escalating as a complaint.', instead: 'Escalate as a written choice with options and consequences.' },
     { mistake: 'Not costing the long tail.', instead: 'A bespoke variant is a permanent tax on every future change. Say so in the moment.' }
   ],
   tools: [
     { name: 'Underlying-need question', note: '"What are they trying to achieve?" Reframes a solution back into a problem.' },
-    { name: 'Reach test', note: 'How many customers share this need? Converts a favour into a product decision.' },
+    { name: 'Reach test', note: 'How many customers share this need? Converts a favor into a product decision.' },
     { name: 'Explicit trade-off', note: '"If this, then not that." Never decline without naming what it displaces.' },
-    { name: 'Alternative ladder', note: 'Full build / subset / manual workaround / generalised later / partner solution.' },
+    { name: 'Alternative ladder', note: 'Full build / subset / manual workaround / generalized later / partner solution.' },
     { name: 'Escalation as a written choice', note: 'Options, costs, recommendation, named decision-maker.' }
   ],
   check: {
     q: 'A sales director says a €400k renewal depends on a bespoke data field for one customer. What is the strongest response?',
     options: [
       'Commit to it — the revenue clearly outweighs the roadmap.',
-      'Decline, citing the prioritisation framework.',
+      'Decline, citing the prioritization framework.',
       'Establish the underlying need and whether others share it, cost it including ongoing maintenance of a variant, name what it displaces, offer the nearest alternative, and if the trade-off still stands, escalate it as an explicit leadership decision.',
       'Agree to it but deprioritise it quietly so it slips.'
     ],
@@ -232,9 +232,9 @@ export default [
     prompt: 'Explain to a sales colleague why you are not building their prospect\'s request — and end with something they can take back to the customer.',
     mustMention: ['need', 'reach', 'trade-off', 'alternative']
   },
-  roleLink: { reqs: ['r4', 'r5', 'i3'], text: 'You are the primary day-to-day interface with Sales for all product-related customer discussions. This concept is the daily craft of that responsibility, and it is the most likely subject of a behavioural question in your interview.' },
+  roleLink: { reqs: ['r4', 'r5', 'i3'], text: 'You are the primary day-to-day interface with Sales for all product-related customer discussions. This concept is the daily craft of that responsibility, and it is the most likely subject of a behavioral question in your interview.' },
   youLink: { evidence: ['e-feedbackloop', 'e-pricingpassthrough', 'e-salesteam'], text: 'Two genuine advantages: you have led a sales team, so you know what a good no sounds like from the receiving end; and you already refuse the easy uniform answer on pricing because products play different roles. Use that as your template — differentiate by role and evidence, not by rule.' },
-  depends: ['prioritisation', 'stakeholders'],
+  depends: ['prioritization', 'stakeholders'],
   glossary: ['trade-off', 'bespoke', 'escalation', 'reach', 'alternative']
 },
 
@@ -245,7 +245,7 @@ export default [
   chosenBecause: 'This is where your existing strength and this role\'s domain gap actually meet. You already own the business quality of product data across SAP and PIM. Reframing that as a product attribute with thresholds and monitoring is the shortest credible bridge from what you have done to what they need.',
   definition: 'Data quality is measured across dimensions: accuracy (does it match reality), completeness (is anything missing), consistency (do systems agree), timeliness or freshness (is it current enough for the decision), validity (does it conform to its rules), and uniqueness (are there duplicates). Treating quality as a product attribute means picking thresholds per dimension, monitoring them continuously, exposing them to consumers, and treating a breach as an incident rather than as a backlog item.',
   why: 'A data product\'s reputation is destroyed by silent wrongness far faster than by outage. Customers forgive an endpoint that is down and cannot forgive one that confidently returns a wrong number, because the wrong number reaches their own customers. Quality thresholds also make the product negotiable: a consumer who needs 99% completeness and a consumer who needs 80% are buying different things.',
-  when: 'Defined at definition, instrumented before launch, monitored continuously, reviewed in service reviews.',
+  when: 'Defined at definition, measured from before launch, monitored continuously, reviewed in service reviews.',
   people: [
     { who: 'Product Manager', does: 'Sets thresholds by consumer need and defends them.' },
     { who: 'Data steward / governance', does: 'Owns definitions and quality rules.' },
@@ -253,7 +253,7 @@ export default [
     { who: 'Source system owners', does: 'Own the upstream cause of most quality problems.' },
     { who: 'Consumers', does: 'Define what "good enough" means for their decision.' }
   ],
-  inputs: ['Consumer decisions the data supports', 'Source system behaviour and known gaps', 'Existing quality measurements', 'Contractual commitments'],
+  inputs: ['Consumer decisions the data supports', 'Source system behavior and known gaps', 'Existing quality measurements', 'Contractual commitments'],
   activities: ['Define quality dimensions and thresholds per field', 'Implement automated validation at ingestion and at serving', 'Monitor and alert on breach', 'Expose quality to consumers — a status or confidence indicator', 'Trace issues upstream and fix causes, not symptoms'],
   outputs: ['Quality rules and thresholds', 'Quality dashboards and alerts', 'Consumer-facing quality indicators', 'Root-cause records'],
   outcomes: ['Consumers can calibrate trust', 'Problems caught before customers see them', 'Upstream causes actually fixed'],
@@ -300,9 +300,9 @@ export default [
 {
   id: 'partners', module: 'm8', order: 28, minutes: 10,
   title: 'Partner and ecosystem management',
-  oneLine: 'Building products with and through organisations you do not control.',
+  oneLine: 'Building products with, and through, companies you do not control.',
   chosenBecause: 'GIS has publicly announced a series of fleet-data partnerships with telematics and analytics providers. That tells you the commercial motion is substantially partner-led — and it is the part of the role least visible in a job ad. Understanding it will let you ask a question almost no other candidate asks.',
-  definition: 'Partner management is the practice of building product value through other organisations: channel partners who resell or embed your product, technology partners who integrate it, and data partners who supply or consume. Each relationship has its own economics, its own roadmap and its own customers — none of which you control. The product implications are concrete: your interface becomes someone else\'s dependency, your support model gains a tier, and your pricing must leave room for their margin.',
+  definition: 'Partner management is the practice of building product value through other organizations: channel partners who resell or embed your product, technology partners who integrate it, and data partners who supply or consume. Each relationship has its own economics, its own roadmap and its own customers — none of which you control. The product implications are concrete: your interface becomes someone else\'s dependency, your support model gains a tier, and your pricing must leave room for their margin.',
   why: 'Partners are the fastest route to scale in a fragmented B2B market, and the most dangerous source of hidden requirements. A partner who has built their business on your endpoint has effectively become a stakeholder in your roadmap, with escalation power your direct customers do not have.',
   when: 'Considered during go-to-market design; managed continuously; renegotiated when either roadmap shifts.',
   people: [
@@ -314,11 +314,11 @@ export default [
   ],
   inputs: ['Partner strategy and target segments', 'Integration requirements from the partner side', 'Commercial terms and margin structure', 'Support and escalation model'],
   activities: ['Assess partner fit: reach, capability, strategic alignment', 'Define the integration surface and its stability commitments', 'Agree a change and deprecation policy', 'Define joint support routing', 'Enable the partner to sell accurately', 'Review performance jointly'],
-  outputs: ['Partner integration specification', 'Change and deprecation policy', 'Joint support routing', 'Partner enablement material', 'Joint review cadence'],
+  outputs: ['Partner integration specification', 'Change and deprecation policy', 'Joint support routing', 'Partner enablement material', 'Joint review rhythm'],
   outcomes: ['Reach without proportional cost', 'Predictable integrations', 'Fewer escalations caused by unannounced change'],
   example: {
     title: 'The partner\'s roadmap is now your constraint',
-    body: 'A fleet-management platform integrates your vehicle-data API so their customers can connect Group vehicles without hardware. Three consequences follow immediately. First, your schema is now load-bearing for someone else\'s product — a breaking change is not a release note, it is a commercial event requiring notice, versioning and a parallel-run window. Second, your support model gains a tier: when a fleet manager sees a wrong value, they call the platform, who calls you, and the routing matrix needs a row for that. Third, your roadmap is partly theirs — a field you plan for Q4 may block a launch they have already announced. None of this is bad; all of it is invisible until it happens, which is why the change policy is agreed at the start.'
+    body: 'A fleet-management platform integrates your vehicle-data API so their customers can connect Group vehicles without hardware. Three consequences follow immediately. First, your schema is now essential to someone else\'s product — a breaking change is not a release note, it is a commercial event requiring notice, versioning and a parallel-run window. Second, your support model gains a tier: when a fleet manager sees a wrong value, they call the platform, who calls you, and the routing matrix needs a row for that. Third, your roadmap is partly theirs — a field you plan for Q4 may block a launch they have already announced. None of this is bad; all of it is invisible until it happens, which is why the change policy is agreed at the start.'
   },
   mistakes: [
     { mistake: 'Treating a partner like a customer.', instead: 'A customer consumes; a partner resells or embeds. They need stability commitments and margin, not just access.' },
@@ -338,7 +338,7 @@ export default [
     q: 'A telematics partner has embedded your API in their fleet product. You need to change a field\'s semantics. What does good partner management require?',
     options: [
       'Ship the change and document it in release notes.',
-      'Version the change, give the agreed notice period, run both versions in parallel, and support the migration — because their product and their customers depend on the old behaviour.',
+      'Version the change, give the agreed notice period, run both versions in parallel, and support the migration — because their product and their customers depend on the old behavior.',
       'Ask the partner to update their integration before you ship.',
       'Avoid the change entirely; partner integrations should be frozen.'
     ],

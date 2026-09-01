@@ -9,7 +9,7 @@ strategy: {
     { t:'action', x:'The whiteboard still has last week\'s schema on it. Hanna does not sit down.' },
     { t:'line', who:'Hanna', x:'The portfolio goal for next year is growth in commercial B2B data revenue. That is what I have been given. What I need from you is what that means for Fleet Pulse.' },
     { t:'line', who:'Marta', x:'It means insurance. Aurora is the biggest number in my pipeline by a factor of four. Everything else is rounding.' },
-    { t:'action', x:'Jonas, from the corner, without looking up: “Insurance needs driving behaviour. Different data, different consent, different everything.”' },
+    { t:'action', x:'Jonas, from the corner, without looking up: “Insurance needs driving behavior. Different data, different consent, different everything.”' },
     { t:'line', who:'Marta', x:'So we build it. That is the job, isn\'t it?' },
     { t:'action', x:'Hanna turns to you. She has eleven products and forty minutes in Barcelona.' },
     { t:'line', who:'Hanna', x:'You have one product and you have been here eleven weeks. Tell me where it plays.' }
@@ -28,7 +28,7 @@ strategy: {
   principle: 'Strategy is not the ambition. It is the four doors named out loud, one of them chosen, and the cost of the others made visible to whoever is allowed to overrule you.',
   wrong: 'Say yes to Aurora in the room and you have committed a nine-person hub to a consent model, a new capability and a new buyer — by nodding. Six weeks later, when nothing is shipped, nobody will remember that you were being agreeable.',
   carry: [
-    'The non-goals are the load-bearing part. Without them nothing can be refused.',
+    'The non-goals are the part that holds it up. Without them nothing can be refused.',
     'Never refuse a big opportunity. Price it, and hand the trade-off up.',
     'A strategy you cannot state in ninety seconds is not one your team can use.'
   ]
@@ -75,7 +75,7 @@ valueprop: {
     { t:'action', x:'Slide four says: “Over 100 data points per vehicle. Six brands. One API. One contract.”' },
     { t:'action', x:'Across the table, Meridian\'s remarketing manager is polite and unmoved. Twenty minutes in, she asks the only question that matters.' },
     { t:'line', who:'Meridian', x:'What do I stop doing?' },
-    { t:'action', x:'Marta starts on integration effort. You put your hand flat on the table, which you will apologise for later.' },
+    { t:'action', x:'Marta starts on integration effort. You put your hand flat on the table, which you will apologize for later.' },
     { t:'line', who:'You', x:'Today, when a car comes off lease, how do you price it?' },
     { t:'line', who:'Meridian', x:'Mileage band and an inspection at the depot. The inspection is two weeks after the vehicle is back and by then we have already quoted.' },
     { t:'line', who:'You', x:'So you quote on a band, and then you find out.' },
@@ -107,7 +107,7 @@ lifecycle: {
   slug: 'Portfolio review · Thursday 11:20 · Week 11',
   premise: 'Not everything at GIS:Hub is new. There is a legacy fuel-level endpoint from before the hub existed, and Hanna wants it gone.',
   scene: [
-    { t:'line', who:'Hanna', x:'Three partners, low call volume, it predates the standardisation work. It is noise on the portfolio. Retire it.' },
+    { t:'line', who:'Hanna', x:'Three partners, low call volume, it predates the standardization work. It is noise on the portfolio. Retire it.' },
     { t:'action', x:'You have spent an afternoon on this because Andrés asked you to before you agreed to anything.' },
     { t:'line', who:'You', x:'Two things first. One of the three has built a customer-facing product on it — their end users see our numbers. And the replacement returns state of charge for electric vehicles but has no equivalent field for combustion fuel level. It is not a rename. It is a different measurement.' },
     { t:'line', who:'Hanna', x:'So the migration is not one-to-one.' },
@@ -218,11 +218,11 @@ market: {
     weak: 'Treating regulation as a compliance cost line and leaving the feature comparison as the competitive story.',
     strong: [
       'It lowers the barrier for everyone. Competitors who could not previously get Group vehicle data will be able to ask for it on the user\'s behalf. Access stops being a moat.',
-      'Which means the defensible position moves to the things access does not give you: standardisation across six brands and many model years, one contract instead of six, reliability, and semantics a partner can build a business on.',
+      'Which means the defensible position moves to the things access does not give you: standardization across six brands and many model years, one contract instead of six, reliability, and semantics a partner can build a business on.',
       'And the real competitor list is: the manual process, the customer\'s own IT team, and only then the vendors. Three of the four losses were to the first two.'
     ]
   },
-  outcome: 'The pack goes up with a different slide: four alternatives, three of them not vendors, and a note that the moat is standardisation rather than access. Hanna uses that framing in Wolfsburg. It is the first time your reading of the market has travelled further than the room you said it in.',
+  outcome: 'The pack goes up with a different slide: four alternatives, three of them not vendors, and a note that the moat is standardization rather than access. Hanna uses that framing in Wolfsburg. It is the first time your reading of the market has travelled further than the room you said it in.',
   principle: 'Competitor analysis is about the alternatives a buyer can actually choose. In a regulated market, the largest force is often not a company at all.',
   wrong: 'Win the feature comparison and lose the market. A tick-box slide cannot explain why three quarters of your losses were to people who chose to do nothing.',
   carry: [
@@ -256,7 +256,7 @@ experimentation: {
   },
   outcome: 'Two of three integrate inside six weeks. The third takes eleven, and the reason is the error semantics the Meridian developer described. That single finding reshapes the week-sixteen plan more than any feature request in the backlog.',
   principle: 'An experiment is not defined by its method. It is defined by the fact that the measure, the threshold and the consequence were agreed before anyone looked at the result.',
-  wrong: 'Run the pilot without a rule and you get a quarter of ambiguity that everyone reads in their own favour, and a general-availability date defended on feeling.',
+  wrong: 'Run the pilot without a rule and you get a quarter of ambiguity that everyone reads in their own favor, and a general-availability date defended on feeling.',
   carry: [
     'Write the decision rule before the test. It is the whole discipline.',
     'In B2B, integration time is usually the risk worth measuring.',

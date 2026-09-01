@@ -66,6 +66,30 @@ idea can be learned inside a situation rather than in the abstract. Every scene
 is labelled *Constructed case*, and the site says plainly that none of it should
 be repeated as fact.
 
+## Plain American English, with every term explained
+
+The copy is professional American English, written to be read quickly. Technical
+terms and acronyms are kept — API, SLA, latency, backlog, purpose limitation —
+because the interview will use them. What changed is everything around them.
+
+Each time a technical term appears in a paragraph, the renderer follows it with a
+short plain-English explanation in a muted color:
+
+> An **SLA** <span>(a service promise written into the contract)</span> is only half
+> of it. It needs a **routing matrix** <span>(a table saying who receives which kind
+> of problem)</span> underneath.
+
+There are 134 terms in `assets/js/data/plain.js`, and roughly 1,080 explanations
+render across the site. The matcher works on the original text, so an explanation
+is never inserted inside another one, compound terms like "KPI tree" and "data
+product" are explained as a unit rather than split down the middle, and a term is
+explained again in each new paragraph rather than only on first use.
+
+**Verbatim quotes are never touched.** The 64 quoted strings from the CV, the
+portfolio and the job posting are rendered as plain text and skip this pass
+entirely, so nothing attributed to a source is ever reworded or annotated.
+Monospace artifacts skip it too, so their alignment holds.
+
 ## Provenance
 
 Every claim carries a label: **From your CV**, **From your portfolio**, **From

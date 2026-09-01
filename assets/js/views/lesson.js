@@ -29,10 +29,10 @@ export function renderLesson(main, ctx) {
         el('span', { class: 'tag tag--line mono' }, 'CHAPTER ' + String(l.n).padStart(2, '0')),
         el('span', { class: 'tag tag--line' }, (l.minutes || 10) + ' min')),
       el('h1', { class: 'd-lg anim-rise', style: { maxWidth: '18ch', marginBottom: '1rem' } }, l.title),
-      el('p', { class: 'lead read anim-rise', style: { animationDelay: '.07s' } }, l.oneLine),
+      el('p', { class: 'lead read anim-rise', style: { animationDelay: '.07s' }, html: rich(l.oneLine) }),
       l.chosenBecause ? el('div', { class: 'cardish cardish--warn anim-rise', style: { marginTop: '1.6rem', maxWidth: '68ch', animationDelay: '.12s' } },
         el('div', { class: 'cardish__t' }, icon('star', 13), 'Why this one is in your curriculum'),
-        el('p', { class: 'sm' }, l.chosenBecause)) : null)));
+        el('p', { class: 'sm', html: rich(l.chosenBecause) })) : null)));
 
   if (l.kind === 'reference') { renderReference(main, l, { prev, next }); footer(main, prev, next); return; }
 
@@ -43,7 +43,7 @@ export function renderLesson(main, ctx) {
     { id: 's-idea',    label: 'The idea' },
     { id: 's-work',    label: 'How it works' },
     { id: 's-wrong',   label: 'Where it breaks' },
-    { id: 's-tools',   label: 'Instruments' },
+    { id: 's-tools',   label: 'Tools' },
     { id: 's-you',     label: 'You and this role' },
     { id: 's-carry',   label: 'Carry this' }
   ];
@@ -67,7 +67,7 @@ export function renderLesson(main, ctx) {
         el('span', { class: 'slug' }, sc.slug),
         el('span', { style: { marginLeft: 'auto' } }, ev('fic'))),
       el('h2', { class: 'd-md', style: { marginBottom: '.8rem' } }, sc.title),
-      el('p', { class: 'lead', style: { marginBottom: '1.6rem' } }, sc.premise),
+      el('p', { class: 'lead', style: { marginBottom: '1.6rem' }, html: rich(sc.premise) }),
       sc.scene.map(b => {
         if (b.t === 'line') return el('div', { class: 'beatline beatline--say' },
           el('span', { class: 'beatline__k' }, b.who), el('div', { class: 'beatline__b', html: rich(b.x) }));
@@ -88,13 +88,13 @@ export function renderLesson(main, ctx) {
   reveal.append(
     el('div', { class: 'cardish cardish--bad', style: { marginBottom: '.9rem' } },
       el('div', { class: 'cardish__t' }, icon('x', 13), 'The easy answer, and why it costs'),
-      el('p', { class: 'sm' }, sc.beat.weak)),
+      el('p', { class: 'sm', html: rich(sc.beat.weak) })),
     el('div', { class: 'cardish cardish--good' },
       el('div', { class: 'cardish__t' }, icon('check', 13), 'What a strong answer contains'),
       el('ul', { class: 'sm', style: { paddingLeft: '1.1em' } }, sc.beat.strong.map(s => el('li', { html: rich(s) })))),
     el('div', { class: 'cardish cardish--note', style: { marginTop: '.9rem' } },
       el('div', { class: 'cardish__t' }, icon('film', 13), 'What happens next'),
-      el('p', { class: 'sm' }, sc.outcome)));
+      el('p', { class: 'sm', html: rich(sc.outcome) })));
 
   body.appendChild(el('section', { class: 'sect reveal', id: 's-beat' },
     chapterMark('02 · The decision'),
@@ -107,7 +107,7 @@ export function renderLesson(main, ctx) {
   body.appendChild(el('section', { class: 'sect reveal', id: 's-idea' },
     chapterMark('03 · The idea you just watched'),
     el('div', { class: 'wrap', style: { marginBottom: '1rem' } }, ev('gen')),
-    el('div', { class: 'pull', style: { marginBottom: '1.8rem' } }, sc.principle),
+    el('div', { class: 'pull', style: { marginBottom: '1.8rem' }, html: rich(sc.principle) }),
     el('div', { class: 'stack' },
       block('What it is', l.definition),
       block('Why it matters', l.why),
@@ -119,7 +119,7 @@ export function renderLesson(main, ctx) {
     el('div', { class: 'panel', style: { marginBottom: '1.1rem' } },
       el('h3', { class: 'h-md', style: { marginBottom: '.9rem' } }, 'Who is involved, and what each of them wants'),
       el('ul', { class: 'plist' }, l.people.map(pp =>
-        el('li', {}, el('span', { class: 'plist__k' }, pp.who), el('span', { class: 'plist__v' }, pp.does))))),
+        el('li', {}, el('span', { class: 'plist__k' }, pp.who), el('span', { class: 'plist__v', html: rich(pp.does) }))))),
     el('div', { class: 'panel' },
       el('h3', { class: 'h-md', style: { marginBottom: '.9rem' } }, 'The shape of the work'),
       el('div', { class: 'quad' },
@@ -128,7 +128,7 @@ export function renderLesson(main, ctx) {
     l.decisionRights ? el('div', { class: 'panel', style: { marginTop: '1.1rem' } },
       el('h3', { class: 'h-md', style: { marginBottom: '.4rem' } }, 'Who decides what'),
       el('p', { class: 'sm dim2', style: { marginBottom: '.9rem' } },
-        'A defensible default, not a universal truth. In a newly formed hub this is exactly the table to write down and circulate for correction.'),
+        'A defensible default, not a universal truth. In a newly formed hub this is exactly the table to write down and share for correction.'),
       el('div', { class: 'scroll-x' }, el('table', { class: 'tbl' },
         el('thead', {}, el('tr', {}, el('th', {}, 'Decision'), el('th', {}, 'You'), el('th', {}, 'Who else'), el('th', {}, 'Note'))),
         el('tbody', {}, l.decisionRights.map(d => el('tr', {},
@@ -146,25 +146,25 @@ export function renderLesson(main, ctx) {
     chapterMark('05 · Where it breaks'),
     el('div', { class: 'cardish cardish--bad', style: { marginBottom: '1.2rem' } },
       el('div', { class: 'cardish__t' }, icon('alert', 13), 'In the scene, if you had got it wrong'),
-      el('p', { class: 'sm' }, sc.wrong)),
+      el('p', { class: 'sm', html: rich(sc.wrong) })),
     el('div', { class: 'panel' },
       el('h3', { class: 'h-md', style: { marginBottom: '.9rem' } }, 'The recurring mistakes'),
       el('div', { class: 'wrongright' }, l.mistakes.map(m =>
         el('div', { class: 'wrongright__r' },
           el('span', { class: 'wrongright__i', style: { color: 'var(--rose)' } }, '✗'),
           el('div', {},
-            el('div', { style: { fontWeight: 550, fontSize: '.94rem', marginBottom: '.15rem' } }, m.mistake),
-            el('div', { class: 'sm dim' }, '→ ' + m.instead)))))) ));
+            el('div', { style: { fontWeight: 550, fontSize: '.94rem', marginBottom: '.15rem' }, html: rich(m.mistake) }),
+            el('div', { class: 'sm dim', html: rich('→ ' + m.instead) })))))) ));
 
-  /* 6 — instruments */
+  /* 6 — tools */
   body.appendChild(el('section', { class: 'sect reveal', id: 's-tools' },
-    chapterMark('06 · Instruments'),
+    chapterMark('06 · Tools'),
     el('div', { class: 'panel' },
       el('div', { class: 'scroll-x' }, el('table', { class: 'tbl tbl--tools' }, el('tbody', {}, l.tools.map(t =>
         el('tr', {},
           el('td', { class: 'tbl__k' }, t.name),
-          el('td', { class: 'dim' }, t.note))))))),
-    workedBlock(l.id, WORKED_LESSONS, 'Worked examples — the instruments, filled in'),
+          el('td', { class: 'dim', html: rich(t.note) }))))))),
+    workedBlock(l.id, WORKED_LESSONS, 'Worked examples — the tools, filled in'),
     (l.glossary || []).length
       ? el('div', { style: { marginTop: '1.1rem' } }, termsBlock(l.glossary))
       : null));
@@ -194,7 +194,7 @@ export function renderLesson(main, ctx) {
                 el('span', { class: 'src__a' }, (x.src === 'cv' ? 'Your CV' : 'cmmt.me') + ' · ' + (ROLE_LABEL[x.role] || ''))))) : null)
         : el('div', { class: 'cardish cardish--warn' },
             el('div', { class: 'cardish__t' }, icon('alert', 13), 'Nothing in your materials evidences this'),
-            el('p', { class: 'sm' }, 'That is a flag, not a problem. Prepare a reasoned position rather than a claimed experience, and say plainly that this is something you have studied rather than practised.'))),
+            el('p', { class: 'sm' }, 'That is a flag, not a problem. Prepare a reasoned position rather than a claimed experience, and say plainly that this is something you have studied rather than practiced.'))),
     relatedQs.length ? el('div', { style: { marginTop: '1.2rem' } },
       el('div', { class: 'slug', style: { marginBottom: '.6rem' } }, 'Questions this chapter answers'),
       el('div', { class: 'wrap' }, relatedQs.map(q =>
@@ -208,7 +208,7 @@ export function renderLesson(main, ctx) {
       el('div', { class: 'stack', style: { '--gap': '1.1rem' } },
         sc.carry.map((c, i) => el('div', { class: 'row', style: { alignItems: 'flex-start', gap: '.9rem' } },
           el('span', { class: 'mono', style: { color: 'var(--amber)', paddingTop: '.35rem', flex: 'none' } }, '0' + (i + 1)),
-          el('span', { style: { fontSize: '1.06rem', lineHeight: 1.5 } }, c)))))));
+          el('span', { style: { fontSize: '1.06rem', lineHeight: 1.5 }, html: rich(c) })))))));
 
   footer(main, prev, next);
   setTimeout(() => railSpy(rail, sections), 60);
@@ -223,7 +223,7 @@ function block(t, body) {
     el('p', { class: 'dim', html: rich(body) }));
 }
 function quad(t, items) {
-  return el('div', { class: 'quad__c' }, el('h4', {}, t), el('ul', {}, (items || []).map(i => el('li', {}, i))));
+  return el('div', { class: 'quad__c' }, el('h4', {}, t), el('ul', {}, (items || []).map(i => el('li', { html: rich(i) }))));
 }
 
 export function footer(main, prev, next) {

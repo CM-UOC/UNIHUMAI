@@ -70,14 +70,14 @@ export const EVIDENCE = [
     id: 'e-lifecycle',
     role: 'sg',
     tags: ['lifecycle', 'portfolio', 'strategy', 'delivery'],
-    claim: 'Drives defined workstreams across the end-to-end lifecycle of B2B product lines in European markets — product definition, portfolio planning, launch execution and post-launch optimisation.',
+    claim: 'Drives defined workstreams across the end-to-end lifecycle of B2B product lines in European markets — product definition, portfolio planning, launch execution and post-launch optimization.',
     quote: 'Drive defined workstreams across the end-to-end lifecycle of B2B product lines in European markets, covering product definition, portfolio planning, launch execution, and post-launch optimization, including range gap analysis, SKU rationalization, and end-of-life recommendations.',
     src: 'cv'
   },
   {
     id: 'e-rolebeforethreshold',
     role: 'sg',
-    tags: ['lifecycle', 'prioritisation', 'decision', 'strategy'],
+    tags: ['lifecycle', 'prioritization', 'decision', 'strategy'],
     claim: 'Assesses products by strategic role — core, growth, specialist, order-on-demand, substitution, withdrawal — rather than applying a uniform sales threshold. "Low historical sales were not sufficient evidence for withdrawal."',
     quote: 'Role before threshold… Low historical sales were not sufficient evidence for withdrawal.',
     src: 'portfolio'
@@ -85,8 +85,8 @@ export const EVIDENCE = [
   {
     id: 'e-evidence-inputs',
     role: 'sg',
-    tags: ['discovery', 'research', 'prioritisation', 'analytics'],
-    claim: 'Turns market trends, customer needs, competitor activity and internal performance data into evidence-based inputs for prioritisation, portfolio evolution and product decisions.',
+    tags: ['discovery', 'research', 'prioritization', 'analytics'],
+    claim: 'Turns market trends, customer needs, competitor activity and internal performance data into evidence-based inputs for prioritization, portfolio evolution and product decisions.',
     quote: 'Turn market trends, customer needs, competitor activity, and internal performance data into evidence-based inputs for prioritization, portfolio evolution, and product decisions.',
     src: 'cv'
   },
@@ -142,7 +142,7 @@ export const EVIDENCE = [
     id: 'e-kpis',
     role: 'sg',
     tags: ['analytics', 'kpi', 'operations', 'lifecycle'],
-    claim: 'Monitors product and launch KPIs, commercial feedback, service levels and availability to identify improvements and inform roadmap, portfolio and stock-plan decisions, analysing rotation and slow-moving stock across the branch network.',
+    claim: 'Monitors product and launch KPIs, commercial feedback, service levels and availability to identify improvements and inform roadmap, portfolio and stock-plan decisions, analyzing rotation and slow-moving stock across the branch network.',
     quote: 'Monitor product and launch KPIs, commercial feedback, service levels, and availability to identify improvements and inform future roadmap, portfolio, and stock-plan decisions, analyzing rotation and slow-moving stock across the branch network.',
     src: 'cv'
   },
@@ -216,7 +216,7 @@ export const EVIDENCE = [
     id: 'e-app-decisions',
     role: 'sg',
     tags: ['decision', 'design', 'quality', 'accessibility'],
-    claim: 'Three design decisions: treat workflow and system output as one problem rather than optimising each separately; make control part of the product rather than a report about it; treat accessibility as a release criterion so no workaround recreates the manual process.',
+    claim: 'Three design decisions: treat workflow and system output as one problem rather than optimizing each separately; make control part of the product rather than a report about it; treat accessibility as a release criterion so no workaround recreates the manual process.',
     quote: 'Make control part of the product, not a report about it.',
     src: 'portfolio'
   },
@@ -265,8 +265,8 @@ export const EVIDENCE = [
   {
     id: 'e-feedbackloop',
     role: 'gvi',
-    tags: ['sales', 'prioritisation', 'pricing', 'discovery'],
-    claim: 'Structured client feedback for pricing and feature-investment discussions, and improved team execution through KPI management, coaching and process optimisation.',
+    tags: ['sales', 'prioritization', 'pricing', 'discovery'],
+    claim: 'Structured client feedback for pricing and feature-investment discussions, and improved team execution through KPI management, coaching and process optimization.',
     quote: 'Structured client feedback for pricing and feature-investment discussions, while improving team execution through KPI management, coaching, and process optimization.',
     src: 'cv'
   },
@@ -286,7 +286,7 @@ export const EVIDENCE = [
     id: 'e-solarmotion',
     role: 'edu',
     tags: ['strategy', 'validation', 'gates', 'coursework', 'risk'],
-    claim: 'Built SOLAR MOTION, an electric-vehicle venture hypothesis, through staged investment gates — opportunity, viability, readiness, local fit — with the explicit rule that "macro attractiveness is not a release gate", modelling a €29,250 cost to roughly €50,593 retail path for Chile.',
+    claim: 'Built SOLAR MOTION, an electric-vehicle venture hypothesis, through staged investment gates — opportunity, viability, readiness, local fit — with the explicit rule that "macro attractiveness is not a release gate", modeling a €29,250 cost to roughly €50,593 retail path for Chile.',
     quote: 'The strongest idea is not the one with the most conviction. It is the one whose assumptions are made visible soon enough to change the decision.',
     src: 'portfolio'
   },
@@ -294,7 +294,7 @@ export const EVIDENCE = [
     id: 'e-solarboundary',
     role: 'edu',
     tags: ['integrity', 'validation', 'coursework'],
-    claim: 'States the evidence boundary explicitly: no incorporation, funding, prototype, customer validation, homologation or observed cost, demand or profitability was claimed — only modelled hypotheses and risk gates.',
+    claim: 'States the evidence boundary explicitly: no incorporation, funding, prototype, customer validation, homologation or observed cost, demand or profitability was claimed — only modeled hypotheses and risk gates.',
     quote: 'Not claimed: company incorporation, external funding, engineering prototype, customer validation, regulatory homologation, sales results, or observed cost, demand or profitability.',
     src: 'portfolio'
   },
@@ -378,7 +378,7 @@ export const EVIDENCE = [
     id: 'e-agile',
     role: 'skills',
     tags: ['agile', 'delivery', 'backlog', 'stories'],
-    claim: 'Delivery competencies listed: backlog prioritisation, requirements, user stories, acceptance criteria, sprint support, release planning, Scrum and Kanban.',
+    claim: 'Delivery competencies listed: backlog prioritization, requirements, user stories, acceptance criteria, sprint support, release planning, Scrum and Kanban.',
     quote: 'Backlog prioritization, requirements, user stories, acceptance criteria, sprint support, release planning, Scrum/Kanban.',
     src: 'cv'
   },

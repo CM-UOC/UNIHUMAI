@@ -6,21 +6,21 @@ export default [
   oneLine: 'Knowing who cares, what they need, what they can block — and keeping them informed before they have to ask.',
   definition: 'Stakeholder management is the deliberate practice of identifying everyone with an interest in or influence over the product, understanding what success means to each, and maintaining the right level of involvement for each. It is not diplomacy for its own sake: the purpose is that decisions hold, and that people who could block late are engaged early enough to shape rather than veto.',
   why: 'A product manager typically has responsibility without authority. Almost everything you need — engineering time, legal approval, a brand sign-off, a sales team\'s attention — belongs to someone who does not report to you. Stakeholder management is how that works. Its absence shows up as late vetoes, surprise escalations, and decisions that get reopened.',
-  when: 'From the first day on a product; refreshed whenever the organisation, the stakeholders or the product\'s stage changes.',
+  when: 'From the first day on a product; refreshed whenever the organization, the stakeholders or the product\'s stage changes.',
   people: [
     { who: 'Product Manager', does: 'Maps, engages, communicates, and decides what is escalated versus absorbed.' },
-    { who: 'Sponsor', does: 'Provides air cover and arbitrates above your decision right.' },
+    { who: 'Sponsor', does: 'Provides air cover and settles above your decision right.' },
     { who: 'Blocking stakeholders', does: 'Legal, privacy, security, brand — can stop the product. Engage early, always.' },
     { who: 'Delivery stakeholders', does: 'Engineering, data, operations — deliver it.' },
     { who: 'Commercial stakeholders', does: 'Sales, pricing, partnerships — carry it to market.' }
   ],
-  inputs: ['Organisation and decision-rights map', 'Each stakeholder\'s goals and measures', 'History of past decisions and conflicts', 'Communication preferences'],
-  activities: ['Map by influence and interest', 'Learn what each is measured on', 'Agree a communication cadence per group', 'Engage blockers before commitment, not after', 'Log decisions so they are not re-litigated'],
+  inputs: ['Organization and decision-rights map', 'Each stakeholder\'s goals and measures', 'History of past decisions and conflicts', 'Communication preferences'],
+  activities: ['Map by influence and interest', 'Learn what each is measured on', 'Agree a communication rhythm for each group', 'Engage blockers before commitment, not after', 'Log decisions so they are not re-litigated'],
   outputs: ['Stakeholder map', 'Communication plan', 'Decision log', 'Escalation path'],
   outcomes: ['Fewer late surprises', 'Decisions that survive', 'A PM who is trusted with more decision right over time'],
   example: {
     title: 'Engage the blocker before the commitment',
-    body: 'A brand-side stakeholder can restrict how their vehicle data is presented in a partner\'s product. If you discover this at go-live, the launch slips and the relationship sours. If you discover it in definition, it is a requirement like any other, and often a smaller one than feared. The pattern generalises: the stakeholders who can stop you should hear about a product while it is still a question, not once it is a plan. It costs a half-hour meeting and it converts a veto into a constraint — which is the whole trick. The corollary is that you should know, before you start, which four or five people in the organisation can stop the thing.'
+    body: 'A brand-side stakeholder can restrict how their vehicle data is presented in a partner\'s product. If you discover this at go-live, the launch slips and the relationship sours. If you discover it in definition, it is a requirement like any other, and often a smaller one than feared. The pattern generalizes: the stakeholders who can stop you should hear about a product while it is still a question, not once it is a plan. It costs a half-hour meeting and it converts a veto into a constraint — which is the whole trick. The corollary is that you should know, before you start, which four or five people in the organization can stop the thing.'
   },
   mistakes: [
     { mistake: 'Treating stakeholder management as sending updates.', instead: 'It is understanding what each person is measured on. The update is downstream of that.' },
@@ -45,7 +45,7 @@ export default [
       'The launch timeline was too aggressive.'
     ],
     answer: 1,
-    why: 'Blocking stakeholders raising blocking concerns is them doing their job. The failure is in when they were consulted. The fix is a mapping and cadence change, not a complaint.'
+    why: 'Blocking stakeholders raising blocking concerns is them doing their job. The failure is in when they were consulted. The fix is a mapping and rhythm change, not a complaint.'
   },
   ownWords: 'Map five stakeholders on something you work on: what each is measured on, and which of them could stop it.',
   teachBack: {
@@ -61,9 +61,9 @@ export default [
 {
   id: 'crossfunctional', module: 'm6', order: 19, minutes: 10,
   title: 'Cross-functional collaboration',
-  oneLine: 'Getting people with different incentives, vocabularies and definitions of done to build one thing.',
+  oneLine: 'Getting people with different goals, different vocabulary and different ideas of finished to build one thing.',
   definition: 'Cross-functional collaboration is the day-to-day mechanics of working across functions: shared goals rather than handoffs, a common vocabulary, explicit interfaces between teams, and a way to resolve disagreement that does not depend on escalation every time. It differs from stakeholder management, which is about influence and information; this is about doing the work together.',
-  why: 'A data product touches engineering, data, legal, privacy, sales, support, finance and brand. Each function optimises for something real and different: engineering for maintainability, legal for defensibility, sales for the deal in front of them, support for resolvable tickets. Collaboration is not making them agree; it is making the trade-offs visible so the right person can choose.',
+  why: 'A data product touches engineering, data, legal, privacy, sales, support, finance and brand. Each function optimizes for something real and different: engineering for maintainability, legal for defensibility, sales for the deal in front of them, support for resolvable tickets. Collaboration is not making them agree; it is making the trade-offs visible so the right person can choose.',
   when: 'Continuously — most intensively at definition, at go-live, and whenever an incident crosses boundaries.',
   people: [
     { who: 'Product Manager', does: 'Holds the shared outcome and translates between vocabularies.' },
@@ -74,13 +74,13 @@ export default [
     { who: 'Support and operations', does: 'Own the product for most of its life.' },
     { who: 'Finance', does: 'Owns the business case and the cost of serving.' }
   ],
-  inputs: ['Shared outcome and success measures', 'Each function\'s constraints and incentives', 'Working agreements', 'Shared artefacts and single source of truth'],
+  inputs: ['Shared outcome and success measures', 'Each function\'s constraints and incentives', 'Working agreements', 'Shared artifacts and single source of truth'],
   activities: ['Agree one outcome everyone is serving', 'Establish shared vocabulary — write the definitions down', 'Make interfaces explicit: who needs what from whom, when', 'Resolve conflicts at the lowest level that can decide', 'Close the loop back to whoever raised the issue'],
   outputs: ['Working agreements', 'Shared definitions and glossary', 'Joint plans and interface commitments', 'Retrospectives that cross function boundaries'],
   outcomes: ['Fewer handoff failures', 'Decisions made lower down and faster', 'Trust that survives disagreement'],
   example: {
     title: '"Active vehicle" means four different things',
-    body: 'Sales counts a vehicle as active when it is on a signed contract. Engineering counts it when it has called the API in the last 30 days. Finance counts it when it has been invoiced. Support counts it when it has ever produced a ticket. Four dashboards, four numbers, and a monthly meeting spent reconciling them rather than deciding anything. The fix is unglamorous and enormously valuable: agree one definition, write it in a shared glossary, name which metric uses which, and let the others exist as clearly-named variants. A PM who does this in their first month buys back a meeting a month for a year.'
+    body: 'Sales counts a vehicle as active when it is on a signed contract. Engineering counts it when it has called the API in the last 30 days. Finance counts it when it has been invoiced. Support counts it when it has ever produced a ticket. Four dashboards, four numbers, and a monthly meeting spent reconciling them rather than deciding anything. The fix is unexciting and enormously valuable: agree one definition, write it in a shared glossary, name which metric uses which, and let the others exist as clearly-named variants. A PM who does this in their first month buys back a meeting a month for a year.'
   },
   mistakes: [
     { mistake: 'Assuming shared words mean shared definitions.', instead: 'Write the definitions down. "Active", "launched", "done" and "customer" are the usual offenders.' },
@@ -105,14 +105,14 @@ export default [
       'Ask engineering for an estimate to close the remaining work.'
     ],
     answer: 2,
-    why: 'A large share of cross-functional conflict is two correct people using one word differently. Checking the definition costs ten minutes and often dissolves the dispute; escalating first spends credibility on something that was never a real disagreement.'
+    why: 'Much of cross-functional conflict is two correct people using one word differently. Checking the definition costs ten minutes and often dissolves the dispute; escalating first spends credibility on something that was never a real disagreement.'
   },
-  ownWords: 'Name one term in your organisation that different functions define differently, and what it costs.',
+  ownWords: 'Name one term in your organization that different functions define differently, and what it costs.',
   teachBack: {
     prompt: 'Explain to a new PM why being the only communication channel between two teams is a problem, not a sign of importance.',
     mustMention: ['bottleneck', 'distortion', 'direct', 'trust']
   },
-  roleLink: { reqs: ['r4', 'r3', 'i2'], text: 'The role sits between two parent organisations with different tempos, and interfaces daily with Sales. Expect vocabulary and definition-of-done mismatches to be a real, recurring part of the job rather than an occasional annoyance.' },
+  roleLink: { reqs: ['r4', 'r3', 'i2'], text: 'The role sits between two parent organizations with different tempos, and interfaces daily with Sales. Expect vocabulary and definition-of-done mismatches to be a real, recurring part of the job rather than an occasional annoyance.' },
   youLink: { evidence: ['e-crossfunctional', 'e-app-learning', 'e-productdata'], text: 'You coordinate marketing, sales, supply chain, analytics and external suppliers today. And your pricing-app learning — that UX and system requirements were never in competition, the repeated manual reconciliation between them was the cost — is a cross-functional insight, not a technical one.' },
   depends: ['stakeholders'],
   glossary: ['working-agreement', 'definition-of-done', 'handoff', 'disagree-and-commit']
@@ -143,7 +143,7 @@ export default [
     { mistake: 'Deciding everything yourself.', instead: 'Push decisions down with clear boundaries. Your throughput is not the product\'s speed limit.' },
     { mistake: 'Treating every decision as high-stakes.', instead: 'Ask what it costs to reverse. Most cost very little.' },
     { mistake: 'Waiting for certainty.', instead: 'Decide at the point where more information costs more than the risk it removes.' },
-    { mistake: 'Deciding something that belongs to legal, privacy or security.', instead: 'Bring them the question. Accepting a legal risk is not within a PM\'s remit.' },
+    { mistake: 'Deciding something that belongs to legal, privacy or security.', instead: 'Bring them the question. Accepting a legal risk is not within a product manager\'s authority.' },
     { mistake: 'Defending a decision after the evidence turned.', instead: 'Change it and say why. Consistency is not a product value.' },
     { mistake: 'Taking credit and distributing blame.', instead: 'The reverse. It is the whole basis of influence without authority.' }
   ],
@@ -240,11 +240,11 @@ export default [
   title: 'Commercial models and pricing for B2B data',
   oneLine: 'Choosing what the customer pays for, and why that unit is the right one.',
   definition: 'A commercial model has three parts: the pricing metric (the unit you charge for), the packaging (what is bundled into which tier), and the terms (commitment, duration, scope of permitted use). For data products the metric is unusually consequential because marginal cost is near zero — so price expresses value and permission, not cost. The scope of permitted use is often the real product boundary: the same data at a different purpose is a different product.',
-  why: 'The pricing metric shapes customer behaviour, revenue predictability and your own roadmap. Charge per API call and customers optimise calls, which punishes them for using you well. Charge per vehicle and revenue tracks the customer\'s growth. Charge per use case and you must define use cases precisely — which is a product-definition task, not a commercial one.',
+  why: 'The pricing metric shapes customer behavior, revenue predictability and your own roadmap. Charge per API call and customers optimize calls, which punishes them for using you well. Charge per vehicle and revenue tracks the customer\'s growth. Charge per use case and you must define use cases precisely — which is a product-definition task, not a commercial one.',
   when: 'Decided during definition, tested in validation, and revisited rarely — because changing it means renegotiating.',
   people: [
     { who: 'Product Manager', does: 'Owns packaging and the definition of a use case; recommends the metric.' },
-    { who: 'Pricing / finance', does: 'Owns margin, approval and revenue modelling.' },
+    { who: 'Pricing / finance', does: 'Owns margin, approval and revenue modeling.' },
     { who: 'Sales', does: 'Tests willingness to pay in real negotiations and reports where the model breaks.' },
     { who: 'Legal', does: 'Turns permitted use into contractual language that is enforceable.' },
     { who: 'Leadership', does: 'Approves the model, because it is close to irreversible.' }
@@ -255,7 +255,7 @@ export default [
   outcomes: ['Revenue that grows with delivered value', 'Fewer bespoke deals', 'A sales team that can quote without escalating'],
   example: {
     title: 'One contract per use case',
-    body: 'GIS describes its Data Hub publicly as "one face, one contract per use case, one system". Read that as a product decision, not a sales convenience. It means a use case must be definable, boundable and enforceable: the same VIN and the same field, used for predictive maintenance versus insurance risk scoring, are two products with different permissions, different pricing and possibly different consent bases. The PM consequence is significant — when a customer asks to use existing data for a new purpose, that is not an upsell conversation, it is a new product definition with legal, privacy and brand requirements attached. Recognising that distinction quickly is a large part of the job.'
+    body: 'GIS describes its Data Hub publicly as "one face, one contract per use case, one system". Read that as a product decision, not a sales convenience. It means a use case must be definable, boundable and enforceable: the same VIN and the same field, used for predictive maintenance versus insurance risk scoring, are two products with different permissions, different pricing and possibly different consent bases. The PM consequence is significant — when a customer asks to use existing data for a new purpose, that is not an upsell conversation, it is a new product definition with legal, privacy and brand requirements attached. Recognizing that distinction quickly is a large part of the job.'
   },
   mistakes: [
     { mistake: 'Pricing from cost.', instead: 'Near-zero marginal cost makes cost-plus meaningless. Price on value delivered and permission granted.' },

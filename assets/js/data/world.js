@@ -19,7 +19,7 @@ export const PREMISE = {
 
 export const PRODUCT = {
   name: 'Fleet Pulse',
-  what: 'A vehicle-condition data product for commercial fleet operators. Mileage, service indicators, diagnostic trouble codes, and for electric vehicles state of charge and battery health — standardised across the six Group brands, delivered by API, sold under one contract per use case.',
+  what: 'A vehicle-condition data product for commercial fleet operators. Mileage, service indicators, diagnostic trouble codes, and for electric vehicles state of charge and battery health — standardized across the six Group brands, delivered by API, sold under one contract per use case.',
   why: 'Fleet operators run mixed fleets. Today they either fit third-party hardware to every vehicle or they find out a van is in trouble when a driver calls from the roadside.',
   stage: 'One signed pilot customer, one partner integration in progress, nothing yet in general availability.'
 };
@@ -45,13 +45,13 @@ export const CAST = [
 
 export const ACCOUNTS = [
   { id:'nordfleet', name:'NordFleet',        kind:'Partner — fleet-management platform',
-    note:'Hamburg. Eleven thousand vehicles under management across Europe. Wants to embed Fleet Pulse so their customers can connect Group vehicles without hardware. If they integrate, your API becomes load-bearing for their business.' },
+    note:'Hamburg. Eleven thousand vehicles under management across Europe. Wants to embed Fleet Pulse so their customers can connect Group vehicles without hardware. If they integrate, your API becomes essential to their business.' },
   { id:'meridian',  name:'Meridian Leasing', kind:'Pilot customer — leasing',
     note:'Barcelona and Lisbon. Four thousand vehicles. Prices remarketing at end of lease and currently guesses condition from mileage bands.' },
   { id:'valles',    name:'Vallès Motors',    kind:'Prospect — independent workshop chain',
     note:'Fourteen sites in Catalonia. Wants to know which customers are due for service before the customer does.' },
   { id:'aurora',    name:'Aurora Assurance', kind:'Prospect — insurer',
-    note:'The largest deal in the pipeline and the most dangerous one. Wants driving-behaviour data for risk pricing, which is a different consent world entirely.' }
+    note:'The largest deal in the pipeline and the most dangerous one. Wants driving-behavior data for risk pricing, which is a different consent world entirely.' }
 ];
 
 export const TIMELINE = [

@@ -23,7 +23,7 @@ gtm: {
       'And the direct motion does not disappear — Meridian is direct. You are now running two motions with different requirements, and saying that out loud is the point of the session.'
     ]
   },
-  outcome: 'A deprecation policy is published before NordFleet go live: ninety days notice, semantic versioning, a parallel-run window. It has never been used in anger. It is the single reason NordFleet\'s architect agreed to build on the API at all.',
+  outcome: 'A deprecation policy is published before NordFleet go live: ninety days notice, semantic versioning, a parallel-run window. It has never actually had to be used. It is the single reason NordFleet\'s architect agreed to build on the API at all.',
   principle: 'Go-to-market is not marketing\'s job and it is not a phase after the build. The motion determines the requirements — which is why it cannot be decided after the product exists.',
   wrong: 'Ship to a partner with no deprecation policy. The first breaking change is a commercial incident, and the trust you spend is not recoverable with a well-written apology.',
   carry: [
@@ -51,13 +51,13 @@ commercial: {
       'Start from the value: what does the customer stop doing. Meridian stops guessing condition from a mileage band. That value scales with vehicles, not with calls.',
       'Per vehicle scales with the customer\'s own growth, is predictable for procurement, and does not punish good integration.',
       'Per use case sits on top of it: the same VIN and the same field used for maintenance versus insurance risk scoring are two products with different permissions and possibly a different consent basis.',
-      'Which means: when a customer asks to reuse data for a new purpose, that is a new product definition, not an upsell. Recognising that quickly is a large part of this job.',
+      'Which means: when a customer asks to reuse data for a new purpose, that is a new product definition, not an upsell. Recognizing that quickly is a large part of this job.',
       'Commitments: you must now meter and expose vehicle-level activity, and you must be able to define a use case tightly enough for legal to enforce it.',
       'And say the honest thing out loud — building a price from cost through channel to a retail figure, which is how physical goods work, does not transfer here.'
     ]
   },
   outcome: 'Per contracted vehicle per month, packaged by use case, tiered on data breadth and freshness rather than on volume bands. Finance flags the metering work, which lands in the next quarter. Nobody has to renegotiate anything two years later.',
-  principle: 'The pricing metric is a product decision wearing commercial clothes. It shapes customer behaviour, your revenue predictability, and what you are obliged to build.',
+  principle: 'The pricing metric is a product decision wearing commercial clothes. It shapes customer behavior, your revenue predictability, and what you are obliged to build.',
   wrong: 'Per call. Customers ration the thing you want them to depend on, procurement cannot forecast, and you are financially rewarded for your own unreliability.',
   carry: [
     'Near-zero marginal cost makes cost-plus meaningless. Price on value and permission.',
@@ -90,7 +90,7 @@ partners: {
     ]
   },
   outcome: 'The migration completes in seventy-one days with no customer-visible incident. NordFleet\'s architect uses the phrase “this is why we chose you” in a review, which reaches Hanna, which does more for the portfolio than any feature shipped that quarter.',
-  principle: 'When a partner embeds your product, your interface becomes load-bearing for someone else\'s business. Everything you would want if the roles were reversed — notice, versioning, a parallel run — becomes a requirement rather than a courtesy.',
+  principle: 'When a partner embeds your product, your interface becomes essential to someone else\'s business. Everything you would want if the roles were reversed — notice, versioning, a parallel run — becomes a requirement rather than a courtesy.',
   wrong: 'Change it in two days. You save eighty-eight days and lose the channel, and every future partner will ask their reference customer about you before they integrate.',
   carry: [
     'Publish the deprecation policy before the first partner integrates.',
@@ -116,7 +116,7 @@ negotiation: {
     weak: 'Refuse on principle, and principle sounds like preference. Or agree, and then let it slip — the worst outcome available, because it costs the roadmap anyway and destroys the relationship you need every day.',
     strong: [
       '“Tell me what they are trying to do with it.” The request arrived as a solution. The need might have three cheaper answers, or it might be something you cannot legally sell.',
-      '“How many other customers have asked for something like this?” Reach turns a favour into a product decision. Three customers and it is a roadmap item; one and it is a variant that taxes every future change.',
+      '“How many other customers have asked for something like this?” Reach turns a favor into a product decision. Three customers and it is a roadmap item; one and it is a variant that taxes every future change.',
       '“If we do this in Q3, freshness moves to Q4. Is that the trade you want?” The trade-off is now visible and it is not personal.',
       '“Here is what I can do by then, and what I would need to do the rest.” Never refuse without leaving them something to take back to the customer.',
       'Then, if it still stands, escalate as a written choice with options, costs and a recommendation — not as a complaint, and not over her head before she has heard it from you.'
@@ -127,7 +127,7 @@ negotiation: {
   wrong: 'Agree and deprioritise. You lose the quarter and the trust, and the next time Marta wants something she will go around you rather than through you.',
   carry: [
     'Ask what they are trying to achieve before you cost anything.',
-    'Reach is what turns a favour into a product decision.',
+    'Reach is what turns a favor into a product decision.',
     'Escalate as a written choice, and only after the person in front of you has heard it.'
   ]
 }

@@ -3,7 +3,7 @@ export default [
 {
   id: 'market', module: 'm2', order: 7, minutes: 10,
   title: 'Market and competitor analysis',
-  oneLine: 'Understanding the field you compete in well enough to choose where to play — and where not to.',
+  oneLine: 'Understanding your market well enough to choose where to compete, and where not to.',
   definition: 'Market analysis sizes and segments the demand: who has the problem, how many, what they spend today, what forces are changing. Competitor analysis maps the alternatives a buyer can actually choose, including in-house builds and doing nothing. Together they answer whether an opportunity is worth pursuing and what a credible position inside it looks like.',
   why: 'It stops two failure modes. The first is entering a market that is real but unwinnable for you. The second is dismissing a competitor because they are technically inferior, when buyers are choosing them for distribution, contract simplicity or switching cost. In data businesses the decisive competitor is often the customer\'s own data team.',
   when: 'Before a strategic commitment, when entering a segment, at annual or quarterly portfolio review, and whenever win/loss reasons change shape.',
@@ -19,7 +19,7 @@ export default [
   outcomes: ['Investment aimed at winnable ground', 'Positioning that reflects real alternatives', 'Earlier warning of structural change'],
   example: {
     title: 'Regulation as a market force',
-    body: 'For a vehicle-data business the largest force is not a competitor but a regulation. The EU Data Act obliges data holders to make connected-product data available to users and, at the user\'s request, to third parties on fair, reasonable and non-discriminatory terms. That reshapes the market twice over: it lowers the barrier for competitors who could not previously get data, and it makes access itself less of a moat — so the defensible position moves towards standardisation, breadth across brands, contractual simplicity and reliability. A competitor analysis that only lists telematics vendors misses the thing that actually changes the game.'
+    body: 'For a vehicle-data business the largest force is not a competitor but a regulation. The EU Data Act obliges data holders to make connected-product data available to users and, at the user\'s request, to third parties on fair, reasonable and non-discriminatory terms. That reshapes the market twice over: it lowers the barrier for competitors who could not previously get data, and it makes access itself less of a moat — so the defensible position moves toward standardization, breadth across brands, contractual simplicity and reliability. A competitor analysis that only lists telematics vendors misses the thing that actually changes the game.'
   },
   mistakes: [
     { mistake: 'Sizing the total addressable market and stopping there.', instead: 'TAM is a slide. The number that matters is the segment you can reach with the channel you have.' },
@@ -58,7 +58,7 @@ export default [
 {
   id: 'experimentation', module: 'm2', order: 8, minutes: 10,
   title: 'Experimentation and validation',
-  oneLine: 'Designing a test whose result you have agreed, in advance, will change what you do.',
+  oneLine: 'Designing a test where you agree up front what result would change your decision.',
   definition: 'Validation is the deliberate reduction of uncertainty about a specific belief. An experiment states the belief, the measure, the threshold and the decision attached to each outcome, before it runs. Methods range from a conversation and a fake door to a bounded pilot or a controlled A/B test — the method follows the risk and the cost of being wrong, not fashion.',
   why: 'Untested beliefs become requirements, and requirements become commitments. Pre-committing to a decision rule is what stops a result being reinterpreted to justify what the team already wanted. In B2B, where sample sizes are small and A/B tests are often impossible, the discipline matters more, not less.',
   when: 'Whenever a belief is both uncertain and consequential. Before committing engineering capacity, before a launch, and after launch to check the outcome actually moved.',
@@ -85,7 +85,7 @@ export default [
   tools: [
     { name: 'Hypothesis statement', note: 'We believe [X]. We will know we are right when [measure] passes [threshold]. If it does not, we will [action].' },
     { name: 'Fake door / smoke test', note: 'Measures intent cheaply; be careful about doing it to enterprise buyers you need to trust you.' },
-    { name: 'Bounded pilot', note: 'The main B2B validation instrument. Bound scope, participants, duration and exit.' },
+    { name: 'Bounded pilot', note: 'The main B2B validation tool. Bound scope, participants, duration and exit.' },
     { name: 'A/B test', note: 'Powerful where traffic allows. Rarely available at enterprise-contract level.' },
     { name: 'Wizard of Oz', note: 'Deliver the outcome manually before building the automation.' }
   ],
@@ -112,21 +112,21 @@ export default [
 },
 
 {
-  id: 'prioritisation', module: 'm3', order: 9, minutes: 12,
-  title: 'Prioritisation frameworks',
-  oneLine: 'Making the trade-off explicit, so the decision is about criteria rather than about who asked.',
-  definition: 'Prioritisation is choosing sequence under constraint. Frameworks — RICE, WSJF, MoSCoW, Kano, cost of delay, opportunity scoring — are not calculators that produce the answer. They are instruments that force the inputs into the open and make a decision reviewable. The number a framework produces is far less valuable than the argument it provokes about the inputs.',
+  id: 'prioritization', module: 'm3', order: 9, minutes: 12,
+  title: 'Prioritization frameworks',
+  oneLine: 'Making the trade-off visible, so the decision comes down to criteria instead of who asked loudest.',
+  definition: 'Prioritization is choosing sequence under constraint. Frameworks — RICE, WSJF, MoSCoW, Kano, cost of delay, opportunity scoring — are not calculators that produce the answer. They are tools that force the inputs into the open and make a decision reviewable. The number a framework produces is far less valuable than the argument it provokes about the inputs.',
   why: 'Everything cannot be first. Without an explicit method, sequence is decided by proximity to power, recency, or whoever escalates. With one, you can defend a decision months later and change it when an input changes rather than when a mood changes.',
   when: 'Every planning cycle, at every intake of new requests, and whenever a large commercial request threatens the sequence.',
   people: [
     { who: 'Product Manager', does: 'Owns the method, the inputs and the resulting sequence.' },
     { who: 'Engineering', does: 'Supplies effort and reveals dependency and technical risk.' },
     { who: 'Sales and commercial', does: 'Supply reach, revenue exposure and deal timing.' },
-    { who: 'Leadership', does: 'Arbitrates when the trade-off is above the PM\'s decision right.' },
+    { who: 'Leadership', does: 'Settles when the trade-off is above the PM\'s decision right.' },
     { who: 'Legal and compliance', does: 'Impose non-negotiables that sit outside the scoring entirely.' }
   ],
   inputs: ['Candidate items with a stated problem each', 'Reach, impact, effort estimates', 'Strategic fit', 'Dependencies and deadlines', 'Regulatory obligations'],
-  activities: ['Normalise items to comparable size', 'Score against agreed criteria', 'Separate must-do compliance work from discretionary work', 'Sequence with dependencies applied', 'Publish the rationale, not only the order'],
+  activities: ['Normalize items to comparable size', 'Score against agreed criteria', 'Separate must-do compliance work from discretionary work', 'Sequence with dependencies applied', 'Publish the rationale, not only the order'],
   outputs: ['Ranked backlog or roadmap sequence', 'Decision log', 'Explicit "not now" list with reasons'],
   outcomes: ['Faster, calmer planning', 'Requests declined without damage to the relationship', 'A sequence that can be re-derived if inputs change'],
   example: {
@@ -134,11 +134,11 @@ export default [
     body: 'Four candidates: (1) a bespoke field for one large insurer, (2) a data-freshness improvement affecting all partners, (3) an EU Data Act access obligation, (4) a self-service status page. Item 3 is not scored at all — regulatory obligations are a constraint, not a candidate; scoring them invites the wrong conversation. Item 1 has high revenue but reach of one and creates a schema variant that raises the cost of every future change; RICE handles the reach but not the compounding maintenance cost, so you add it explicitly. Item 2 has low visibility and high reach. Item 4 reduces support load, which is real capacity. The framework will probably rank 2 above 1 — and the value of the exercise is that the insurer conversation now happens with a visible trade-off rather than as a refusal.'
   },
   mistakes: [
-    { mistake: 'Scoring compliance and legal obligations alongside features.', instead: 'Take them out of the scoring as constraints. They consume capacity before prioritisation starts.' },
-    { mistake: 'Hiding a judgement inside a number.', instead: 'The framework should expose the judgement, not disguise it. Publish the inputs.' },
-    { mistake: 'Comparing items of wildly different sizes.', instead: 'Normalise first, or you are comparing a quarter to an afternoon.' },
+    { mistake: 'Scoring compliance and legal obligations alongside features.', instead: 'Take them out of the scoring as constraints. They consume capacity before prioritization starts.' },
+    { mistake: 'Hiding a judgment inside a number.', instead: 'The framework should expose the judgment, not disguise it. Publish the inputs.' },
+    { mistake: 'Comparing items of wildly different sizes.', instead: 'Normalize first, or you are comparing a quarter to an afternoon.' },
     { mistake: 'Ignoring the compounding cost of bespoke work.', instead: 'A one-customer variant taxes every future change. Price that in explicitly.' },
-    { mistake: 'Changing the framework whenever the answer is unwelcome.', instead: 'Change the inputs if they are wrong. Changing the method to get a desired answer destroys the instrument.' }
+    { mistake: 'Changing the framework whenever the answer is unwelcome.', instead: 'Change the inputs if they are wrong. Changing the method to get a desired answer destroys the tool.' }
   ],
   tools: [
     { name: 'RICE', note: 'Reach × Impact × Confidence ÷ Effort. Best when reach is genuinely knowable.' },
@@ -149,15 +149,15 @@ export default [
     { name: 'Cost of delay', note: 'The most persuasive language for a commercial audience.' }
   ],
   check: {
-    q: 'An EU regulatory obligation with a fixed compliance date arrives in your intake. How should it enter prioritisation?',
+    q: 'An EU regulatory obligation with a fixed compliance date arrives in your intake. How should it enter prioritization?',
     options: [
       'Score it with RICE like everything else and let the number decide.',
-      'Treat it as a constraint that consumes capacity before discretionary items are scored, then prioritise what remains.',
+      'Treat it as a constraint that consumes capacity before discretionary items are scored, then prioritize what remains.',
       'Give it maximum impact and confidence so it ranks first.',
       'Handle it in a separate compliance workstream that does not affect the roadmap.'
     ],
     answer: 1,
-    why: 'Obligations are not options. Scoring them pretends there is a choice; inflating scores corrupts the instrument; a separate workstream that does not reduce roadmap capacity is a fiction, because the same people do the work.'
+    why: 'Obligations are not options. Scoring them pretends there is a choice; inflating scores corrupts the method; a separate workstream that does not reduce roadmap capacity is a fiction, because the same people do the work.'
   },
   ownWords: 'Describe how you actually sequence work today, and name the input you most often find people leave out of the conversation.',
   teachBack: {
@@ -165,7 +165,7 @@ export default [
     mustMention: ['reach', 'cost of delay', 'trade-off', 'criteria']
   },
   roleLink: { reqs: ['r5', 'r2'], text: '"Collaborate closely with Sales to align on market needs, feature prioritization" — the word "align" is doing heavy lifting there. Aligning means Sales understands and can defend the sequence, not that they approve each item.' },
-  youLink: { evidence: ['e-rolebeforethreshold', 'e-pricingpassthrough', 'e-evidence-inputs'], text: 'Both of your named portfolio rules are prioritisation discipline: judge by role rather than a uniform threshold, and differentiate a cost response by role rather than applying one percentage to everything. Both are arguments against the lazy uniform rule — which is exactly the instinct a prioritisation framework has to defeat.' },
+  youLink: { evidence: ['e-rolebeforethreshold', 'e-pricingpassthrough', 'e-evidence-inputs'], text: 'Both of your named portfolio rules are prioritization discipline: judge by role rather than a uniform threshold, and differentiate a cost response by role rather than applying one percentage to everything. Both are arguments against the lazy uniform rule — which is exactly the instinct in advancetization framework has to defeat.' },
   depends: ['strategy', 'problem'],
   glossary: ['rice', 'wsjf', 'moscow', 'kano', 'cost-of-delay', 'capacity']
 },
@@ -173,8 +173,8 @@ export default [
 {
   id: 'roadmap', module: 'm3', order: 10, minutes: 11,
   title: 'Product roadmaps',
-  oneLine: 'A communication instrument showing what you intend to achieve, in what order, and how sure you are.',
-  definition: 'A roadmap expresses intent over time. A good one is organised around outcomes or problems rather than features, carries explicit confidence that decreases with distance, and states its assumptions. Different audiences need different views of the same roadmap: an executive needs outcomes and bets, a delivery team needs the next increment, a customer needs directional themes without dates you cannot honour.',
+  oneLine: 'A communication tool showing what you intend to achieve, in what order, and how sure you are.',
+  definition: 'A roadmap expresses intent over time. A good one is organized around outcomes or problems rather than features, carries explicit confidence that decreases with distance, and states its assumptions. Different audiences need different views of the same roadmap: an executive needs outcomes and bets, a delivery team needs the next increment, a customer needs directional themes without dates you cannot honor.',
   why: 'The roadmap is where strategy becomes visible to everyone else. Its failure mode is being read as a commitment schedule. Managed well it aligns; managed badly it converts every change into a broken promise, which teaches teams to pad and hide.',
   when: 'Maintained continuously, reviewed at each planning cycle, re-cut per audience, and revised whenever a bet resolves.',
   people: [
@@ -184,7 +184,7 @@ export default [
     { who: 'Sales', does: 'Uses the customer-safe view; must not be handed the internal one.' },
     { who: 'Operations and support', does: 'Need lead time for what is coming into their world.' }
   ],
-  inputs: ['Strategy and portfolio goals', 'Prioritised opportunities', 'Capacity and dependency reality', 'Fixed external dates: regulatory, contractual, seasonal'],
+  inputs: ['Strategy and portfolio goals', 'Prioritized opportunities', 'Capacity and dependency reality', 'Fixed external dates: regulatory, contractual, seasonal'],
   activities: ['Group work by outcome or theme', 'Set horizons with declining precision', 'Attach confidence and assumptions', 'Cut audience-appropriate views', 'Review and re-communicate on change'],
   outputs: ['Now / next / later or three-horizon roadmap', 'Outcome statements per item', 'Confidence and assumption notes', 'Customer-safe external view'],
   outcomes: ['Aligned expectations across functions', 'Change absorbed as learning rather than failure', 'Sales able to set expectations without over-promising'],
@@ -220,17 +220,17 @@ export default [
     prompt: 'Explain the difference between a roadmap and a delivery plan to someone who wants dates for everything.',
     mustMention: ['confidence', 'outcome', 'commitment', 'horizon']
   },
-  roleLink: { reqs: ['r2', 'r5'], text: 'The ad pairs roadmaps with backlogs and visions in one sentence, then separately asks you to align with Sales on go-to-market readiness. Those two demands meet in the roadmap — and the customer-safe view is the artefact that keeps them from colliding.' },
-  youLink: { evidence: ['e-evidence-inputs', 'e-lifecycle'], text: 'Your CV describes producing evidence-based inputs for prioritisation and portfolio evolution, and your portfolio speaks of roadmap recommendations. Be precise in interview about the boundary: you produce and argue the sequence; name who signs it today, and say plainly that you are ready to own it.' },
-  depends: ['prioritisation', 'strategy'],
+  roleLink: { reqs: ['r2', 'r5'], text: 'The ad pairs roadmaps with backlogs and visions in one sentence, then separately asks you to align with Sales on go-to-market readiness. Those two demands meet in the roadmap — and the customer-safe view is the artifact that keeps them from colliding.' },
+  youLink: { evidence: ['e-evidence-inputs', 'e-lifecycle'], text: 'Your CV describes producing evidence-based inputs for prioritization and portfolio evolution, and your portfolio speaks of roadmap recommendations. Be precise in interview about the boundary: you produce and argue the sequence; name who signs it today, and say plainly that you are ready to own it.' },
+  depends: ['prioritization', 'strategy'],
   glossary: ['roadmap', 'now-next-later', 'horizon', 'confidence-band', 'outcome']
 },
 
 {
   id: 'backlog', module: 'm3', order: 11, minutes: 9,
   title: 'Backlog management',
-  oneLine: 'Keeping an ordered, understood, appropriately-detailed list of what the team will do next.',
-  definition: 'A product backlog is the single ordered source of work for a team. It is ordered, not categorised: exactly one item is next. Detail is graded — items near the top are refined enough to start, items far down are one line. Refinement is the continuous activity that moves items up that gradient. A backlog is a live artefact, and a healthy one shrinks as often as it grows.',
+  oneLine: 'Keeping one ordered list of what the team will do next, detailed at the top and rough further down.',
+  definition: 'A product backlog is the single ordered source of work for a team. It is ordered, not categorized: exactly one item is next. Detail is graded — items near the top are refined enough to start, items far down are one line. Refinement is the continuous activity that moves items up that gradient. A backlog is a live artifact, and a healthy one shrinks as often as it grows.',
   why: 'It is where strategy becomes executable. It is also where strategy quietly dies: a backlog that accumulates every request, never deletes, and orders by date received will produce a team that is busy and a product that goes nowhere.',
   when: 'Continuously. Formally at refinement sessions and sprint or iteration planning.',
   people: [
@@ -239,13 +239,13 @@ export default [
     { who: 'Stakeholders', does: 'Propose items and argue for them; they do not reorder the backlog.' },
     { who: 'Scrum Master / delivery lead', does: 'Protects the process and the refinement rhythm.' }
   ],
-  inputs: ['Prioritised opportunities and problems', 'Defects and technical debt', 'Compliance and operational obligations', 'Team capacity and velocity'],
+  inputs: ['Prioritized opportunities and problems', 'Defects and technical debt', 'Compliance and operational obligations', 'Team capacity and velocity'],
   activities: ['Refine top items to ready state', 'Split items too large to start', 'Order by value, risk, dependency and cost of delay', 'Delete items that will never be done', 'Keep acceptance criteria current'],
   outputs: ['Ordered backlog', 'Ready items for the next iteration', 'Definition of Ready and Definition of Done', 'A visible "won\'t do" record'],
   outcomes: ['Teams start work without ambiguity', 'Less rework from unclear items', 'Fewer stale commitments haunting planning'],
   example: {
     title: 'Deleting is backlog management',
-    body: 'A backlog with 340 items is not a plan; it is a filing cabinet of good intentions. Anything below roughly two or three iterations of capacity will not be worked in a recognisable form — by the time it surfaces, the context has changed and it needs rewriting anyway. Deleting the bottom 200, with a note of where the ideas came from, costs nothing real and removes the illusion of commitment. The valuable objection — "but we promised that customer" — is the point: if it was promised, it belongs near the top or it needs an honest conversation, and the backlog was hiding both options.'
+    body: 'A backlog with 340 items is not a plan; it is a filing cabinet of good intentions. Anything below roughly two or three iterations of capacity will not be worked in a recognizable form — by the time it surfaces, the context has changed and it needs rewriting anyway. Deleting the bottom 200, with a note of where the ideas came from, costs nothing real and removes the illusion of commitment. The valuable objection — "but we promised that customer" — is the point: if it was promised, it belongs near the top or it needs an honest conversation, and the backlog was hiding both options.'
   },
   mistakes: [
     { mistake: 'Using the backlog as an idea graveyard.', instead: 'Keep ideas somewhere else. A backlog is work you intend to do.' },
@@ -254,7 +254,7 @@ export default [
     { mistake: 'No Definition of Ready, so sprints start with unanswered questions.', instead: 'Agree what "startable" means and enforce it.' }
   ],
   tools: [
-    { name: 'DEEP', note: 'Detailed appropriately, Estimated, Emergent, Prioritised. A quick health check.' },
+    { name: 'DEEP', note: 'Detailed appropriately, Estimated, Emergent, Prioritized. A quick health check.' },
     { name: 'Definition of Ready / Done', note: 'Two short agreements that prevent most delivery arguments.' },
     { name: 'Story splitting patterns', note: 'By workflow step, by data variation, by rule, by interface, by effort.' },
     { name: 'Refinement session', note: 'A standing slot, not an emergency. Roughly 10% of team capacity.' }
@@ -276,15 +276,15 @@ export default [
     mustMention: ['order', 'single', 'capacity', 'trade-off']
   },
   roleLink: { reqs: ['r2', 'r10'], text: 'Backlogs are named directly in the ad, and "Agile and delivery competencies" is a listed requirement. Expect a question about how you run refinement and how you handle an item the team cannot estimate.' },
-  youLink: { evidence: ['e-agile', 'e-app-built'], text: 'Backlog prioritisation, user stories and acceptance criteria are named competencies on your CV. Your CV says "sprint support" — prepare for that being probed, and answer with what you concretely do in refinement rather than with the job title.' },
-  depends: ['prioritisation'],
+  youLink: { evidence: ['e-agile', 'e-app-built'], text: 'Backlog prioritization, user stories and acceptance criteria are named competencies on your CV. Your CV says "sprint support" — prepare for that being probed, and answer with what you concretely do in refinement rather than with the job title.' },
+  depends: ['prioritization'],
   glossary: ['backlog', 'refinement', 'definition-of-ready', 'definition-of-done', 'deep']
 },
 
 {
   id: 'requirements', module: 'm3', order: 12, minutes: 12,
   title: 'Requirements and user stories',
-  oneLine: 'Writing down what must be true for the product to be right — precisely enough to build, test and dispute.',
+  oneLine: 'Writing down what has to be true for the product to be right, clearly enough to build it, test it and argue about it.',
   definition: 'A requirement states a needed capability or constraint. A user story is one common format — as a [role], I want [capability], so that [outcome] — whose real content is its acceptance criteria: the conditions under which the story is done. Requirements come in families: functional, technical, legal, privacy, commercial, brand, operational. Non-functional requirements — latency, availability, freshness, security — are usually the ones that decide whether a B2B product succeeds.',
   why: 'Ambiguous requirements are paid for twice: once in building the wrong thing and once in rebuilding it. Written acceptance criteria also convert taste arguments into testable statements, which is how a PM ends a debate without pulling rank.',
   when: 'During definition, refined continuously through refinement, and revisited whenever a constraint changes.',
@@ -296,7 +296,7 @@ export default [
     { who: 'Brand and marketing', does: 'Constrain naming, presentation and permitted use of brand data.' },
     { who: 'Operations', does: 'Supply the supportability requirements everyone forgets.' }
   ],
-  inputs: ['Problem statement and desired outcome', 'Research findings', 'Technical and data constraints', 'Regulatory and contractual obligations', 'Existing system behaviour'],
+  inputs: ['Problem statement and desired outcome', 'Research findings', 'Technical and data constraints', 'Regulatory and contractual obligations', 'Existing system behavior'],
   activities: ['Gather across all requirement families deliberately', 'Write stories with testable acceptance criteria', 'Specify non-functional requirements explicitly', 'Resolve conflicts between families', 'Get sign-off from the owners of binding constraints'],
   outputs: ['User stories with acceptance criteria', 'Non-functional requirement set', 'Interface or data contract', 'Traceability from requirement to obligation'],
   outcomes: ['Less rework', 'Testable definitions of done', 'Compliance evidence that exists before it is demanded'],
@@ -306,10 +306,10 @@ export default [
   },
   mistakes: [
     { mistake: 'Acceptance criteria that restate the story.', instead: 'Write conditions a tester could pass or fail without asking you.' },
-    { mistake: 'Leaving non-functional requirements implicit.', instead: 'Latency, freshness, availability and error behaviour are the product in a data business. Write them down.' },
+    { mistake: 'Leaving non-functional requirements implicit.', instead: 'Latency, freshness, availability and error behavior are the product in a data business. Write them down.' },
     { mistake: 'Specifying the solution instead of the need.', instead: 'State the constraint and the outcome; let engineering choose the mechanism.' },
     { mistake: 'Gathering only from the loudest requirement family.', instead: 'Walk all five or six deliberately. The missing family is usually privacy or operations.' },
-    { mistake: '"The system should be fast."', instead: 'p95 latency under 400ms at 50 requests per second. Testable, or it is not a requirement.' }
+    { mistake: '"The system should be fast."', instead: 'p95 latency under 400ms at 50 requests in itselfcond. Testable, or it is not a requirement.' }
   ],
   tools: [
     { name: 'User story + acceptance criteria', note: 'The story is the placeholder; the criteria are the requirement.' },
@@ -322,7 +322,7 @@ export default [
     q: 'Which acceptance criterion is actually testable?',
     options: [
       'The endpoint should respond quickly under normal load.',
-      'Given a VIN within the contracted fleet, when the partner calls /battery with a valid token, then the response returns state of charge with a timestamp no older than 15 minutes, at p95 latency under 400ms at 50 requests per second.',
+      'Given a VIN within the contracted fleet, when the partner calls /battery with a valid token, then the response returns state of charge with a timestamp no older than 15 minutes, at p95 latency under 400ms at 50 requests in itselfcond.',
       'The API must be reliable and easy to integrate.',
       'Partners should be able to retrieve battery data without difficulty.'
     ],

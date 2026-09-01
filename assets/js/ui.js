@@ -1,4 +1,5 @@
 /* ui.js — DOM helpers */
+import { PLAIN, CASE_SENSITIVE } from './data/plain.js';
 
 export function el(tag, props = {}, ...kids) {
   const n = document.createElement(tag);
@@ -23,13 +24,92 @@ export const $  = (s, r = document) => r.querySelector(s);
 export const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 export function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); return n; }
 
-export function rich(s = '') {
-  return String(s)
+/* ---------- inline plain-English definitions ----------
+   The first time a technical term or acronym appears in a passage, it is
+   followed by a short explanation in a muted color. Matching runs longest
+   phrase first, skips anything already inside a tag, inside <code>, or
+   already followed by a parenthesis, and never runs on verbatim quotes —
+   those are rendered as plain text and never pass through here. */
+
+const ESC = t => t.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+
+const GLOSS_RULES = PLAIN.map(([term, def]) => {
+  const cased = CASE_SENSITIVE.has(term);
+  const alnum = /[A-Za-z0-9]/;
+  const left  = alnum.test(term[0])            ? '(^|[^A-Za-z0-9_-])' : '()';
+  const right = alnum.test(term[term.length-1]) ? '(?![A-Za-z0-9_-])'  : '';
+  return {
+    def,
+    re: new RegExp(left + '(' + ESC(term) + (term.endsWith('s') ? '' : 's?') + ')' + right,
+                   cased ? '' : 'i')
+  };
+});
+
+export function glossHTML(html) {
+  if (!html) return html;
+  /* Split on tags so only visible text is ever touched. A term is explained
+     once per paragraph — so a reader who lands anywhere in a long answer still
+     gets the explanation next to the term. */
+  const parts = html.split(/(<[^>]+>)/);
+  const BLOCK = /^<\/?(p|br|li|div|h[1-6]|tr|td|section|figure|dt|dd|ol|ul)[\s/>]/i;
+  let inCode = 0;
+  let used = new Set();
+  for (let i = 0; i < parts.length; i++) {
+    const seg = parts[i];
+    if (seg.startsWith('<')) {
+      if (/^<code[\s>]/i.test(seg)) inCode++;
+      else if (/^<\/code>/i.test(seg)) inCode = Math.max(0, inCode - 1);
+      else if (BLOCK.test(seg)) used = new Set();   // new paragraph, explain again
+      continue;
+    }
+    if (inCode || !seg.trim()) continue;
+
+    /* A blank line inside a text run is also a paragraph break. */
+    const chunks = seg.split(/(\n[ \t]*\n)/);
+    for (let c = 0; c < chunks.length; c++) {
+      const chunk = chunks[c];
+      if (/^\n[ \t]*\n$/.test(chunk)) { used = new Set(); continue; }
+      if (!chunk.trim()) continue;
+
+      /* Match against the pristine chunk, so a definition is never inserted
+         inside another definition and overlapping terms cannot double up. */
+      const hits = [];
+      for (let r = 0; r < GLOSS_RULES.length; r++) {
+        if (used.has(r)) continue;
+        const { re, def } = GLOSS_RULES[r];
+        const m = re.exec(chunk);
+        if (!m) continue;
+        const from = m.index + m[1].length;
+        const to = m.index + m[0].length;
+        if (hits.some(h => from < h.to && to > h.from)) continue;
+        if (/^\s*[([]/.test(chunk.slice(to))) { used.add(r); continue; }
+        used.add(r);
+        hits.push({ from, to, def });
+      }
+      if (!hits.length) continue;
+      hits.sort((a, b) => b.to - a.to);
+      let text = chunk;
+      for (const h of hits) {
+        text = text.slice(0, h.to) + ' <span class="gloss">(' + h.def + ')</span>' + text.slice(h.to);
+      }
+      chunks[c] = text;
+    }
+    parts[i] = chunks.join('');
+  }
+  return parts.join('');
+}
+
+export function rich(s = '', opts) {
+  const html = String(s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[\s(—])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+  return (opts && opts.plain) ? html : glossHTML(html);
 }
+
+/* For verbatim source quotes and monospace artifacts: format, never gloss. */
+export function verbatim(s = '') { return rich(s, { plain: true }); }
 export function rx(s = '') { const n = document.createElement('span'); n.innerHTML = rich(s); return n; }
 export function p(s, cls) { return el('p', { class: cls, html: rich(s) }); }
 export function ul(items, cls) { return el('ul', { class: cls }, items.map(i => el('li', { html: rich(i) }))); }

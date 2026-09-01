@@ -1,12 +1,12 @@
 /* Scenarios — Part III: Choice, Part IV: Delivery */
 export default {
 
-prioritisation: {
+prioritization: {
   title: 'Six things, one team, one quarter',
   slug: 'Planning · Monday 09:30 · Week 13',
   premise: 'Six candidates on the board and capacity for perhaps three. Marta is in the room, which is unusual, because one of the six is hers.',
   scene: [
-    { t:'action', x:'On the board: (1) Aurora\'s bespoke driving-behaviour field, worth €400k. (2) Freshness timestamp for all eleven partners. (3) EU Data Act access obligation with a fixed date. (4) Self-service partner status page. (5) Error semantics — “out of scope” vs “no data”. (6) Developer documentation rebuild.' },
+    { t:'action', x:'On the board: (1) Aurora\'s bespoke driving-behavior field, worth €400k. (2) Freshness timestamp for all eleven partners. (3) EU Data Act access obligation with a fixed date. (4) Self-service partner status page. (5) Error semantics — “out of scope” vs “no data”. (6) Developer documentation rebuild.' },
     { t:'line', who:'Marta', x:'One is four hundred thousand euros. I do not understand why we are discussing the others.' },
     { t:'action', x:'You take number three off the board entirely and put it on a separate line above everything else.' },
     { t:'line', who:'Marta', x:'You are just moving things around.' },
@@ -24,7 +24,7 @@ prioritisation: {
     ]
   },
   outcome: 'The sequence goes: Data Act obligation, freshness, error semantics, status page. Aurora becomes a written business case for Hanna rather than a line in your sprint. Marta is annoyed for a day and then uses the trade-off language herself in the next Aurora call, because it gives her something concrete to say.',
-  principle: 'A framework is not a calculator that produces the answer. It is an instrument that forces the inputs into the open so the argument is about evidence rather than about who asked most recently.',
+  principle: 'A framework is not a calculator that produces the answer. It is a tool that forces the inputs into the open so the argument is about evidence rather than about who asked most recently.',
   wrong: 'Score the compliance item alongside the features and you have told the room that the regulator is negotiable. Say yes to Aurora quietly and you will spend the quarter on one customer while eleven partners lose trust in the data.',
   carry: [
     'Obligations are constraints, not candidates. Take them out first.',
@@ -61,7 +61,7 @@ roadmap: {
   carry: [
     'Cut a view per audience. Same truth, different conclusions available.',
     'Precision should decay with distance. A confident twelve-month item is fiction.',
-    'Attend the meeting rather than sending the artefact.'
+    'Attend the meeting rather than sending the artifact.'
   ]
 },
 
@@ -72,7 +72,7 @@ backlog: {
   scene: [
     { t:'action', x:'You scroll. There are tickets from before the hub existed. There are three tickets that are the same idea written by three people. There is one from a customer who is no longer a customer.' },
     { t:'line', who:'Iker', x:'Should we book a second refinement session each week?' },
-    { t:'action', x:'Which would be more time spent on items that will never be built in a recognisable form.' },
+    { t:'action', x:'Which would be more time spent on items that will never be built in a recognizable form.' },
     { t:'line', who:'You', x:'No. We are going to delete about two hundred of these.' },
     { t:'line', who:'Marta', x:'Some of those were promised.' },
     { t:'line', who:'You', x:'Then they belong at the top, and we should talk about that now. That is exactly the point — right now the backlog is hiding both options.' }
@@ -81,7 +81,7 @@ backlog: {
     q: 'What is the rule, and what do you do with Marta\'s objection?',
     weak: 'Archive everything below the fold quietly, or split the backlog by stakeholder so everyone has their own list. The second one destroys the single order that makes a backlog useful.',
     strong: [
-      'Anything below roughly two or three iterations of capacity will not be worked in a recognisable form. By the time it surfaces the context has changed and it needs rewriting anyway.',
+      'Anything below roughly two or three iterations of capacity will not be worked in a recognizable form. By the time it surfaces the context has changed and it needs rewriting anyway.',
       'Delete it, with a one-line record of where each idea came from so nothing is lost that mattered.',
       'Take Marta\'s objection seriously and literally: go through the promised ones, one at a time. Either it moves to the top, or someone has an honest conversation with the customer. There is no third option, and the backlog was providing one.',
       'Then set a Definition of Ready so the next session does not become an audit: problem stated, acceptance criteria written, dependencies known, sized.'
@@ -134,7 +134,7 @@ requirements: {
 },
 
 agile: {
-  title: 'Two cadences in one room',
+  title: 'Two rhythms in one room',
   slug: 'Retro · Friday 16:00 · Week 14',
   premise: 'The team runs two-week sprints. It is not working, and everyone thinks the problem is the sprint.',
   scene: [
@@ -149,15 +149,15 @@ agile: {
     weak: 'Longer sprints, or a “buffer” of story points for interrupts. Both preserve the fiction that unplanned work can be planned.',
     strong: [
       'Left: product work. Battery health, error semantics, the status page. Batchable, has a goal, benefits from a review with a real partner in the room. Scrum shape.',
-      'Right: data operations. A brand feed goes quiet, a partner reports stale values, an onboarding request arrives. Arrives when it arrives, variable size, cannot be sprint-planned. Kanban shape — visualise it, limit work in progress, measure cycle time.',
-      'Decide who is on the right side each week, explicitly, and take that capacity out of the sprint before planning rather than apologising for it afterwards.',
+      'Right: data operations. A brand feed goes quiet, a partner reports stale values, an onboarding request arrives. Arrives when it arrives, variable size, cannot be sprint-planned. Kanban shape — visualize it, limit work in progress, measure cycle time.',
+      'Decide who is on the right side each week, explicitly, and take that capacity out of the sprint before planning rather than apologizing for it afterwards.',
       'The sprint goal becomes one sentence about an outcome, so the team can trade scope to reach it.',
-      'Choosing the cadence per stream is a product decision, not a process detail.'
+      'Choosing the rhythm per stream is a product decision, not a process detail.'
     ]
   },
   outcome: 'The next sprint finishes its goal. Not because the team got faster, but because the sprint stopped containing work that was never going to fit in it. Andrés starts attending the Kanban side, which turns out to matter more than the sprint.',
-  principle: 'The framework matters far less than the two behaviours it exists to produce: ship something real regularly, and change the plan when what shipped teaches you something.',
-  wrong: 'Add a buffer. You have now institutionalised the fiction, and the team learns that the sprint goal is decorative.',
+  principle: 'The framework matters far less than the two behaviors it exists to produce: ship something real regularly, and change the plan when what shipped teaches you something.',
+  wrong: 'Add a buffer. You have now institutionalized the fiction, and the team learns that the sprint goal is decorative.',
   carry: [
     'Interrupt-driven work is Kanban-shaped. Forcing it into a sprint strangles both.',
     'A sprint goal is an outcome, not a list of tickets.',
@@ -258,7 +258,7 @@ serviceops: {
       'Then the promise itself: SLOs stricter than the SLA, with headroom, set from what you have actually measured. And freshness as its own indicator, because a green availability number over a three-day-old value is the failure mode nobody catches.'
     ]
   },
-  outcome: 'The table takes an afternoon. Saturday calls stop within three weeks. Andrés resolves eighty per cent at first line because the first diagnostic step is written down. You get your product-manager job back, which is the actual return on the afternoon.',
+  outcome: 'The table takes an afternoon. Saturday calls stop within three weeks. Andrés resolves eighty percent at first line because the first diagnostic step is written down. You get your product-manager job back, which is the actual return on the afternoon.',
   principle: 'Once a product is live it becomes a service. Without a routing matrix, the product manager is the routing matrix — and the bottleneck is not a capacity problem, it is a design one.',
   wrong: 'Absorb it. You will be available, competent, and unable to do the job you were hired for. And the moment you take leave, the knowledge leaves with you.',
   carry: [

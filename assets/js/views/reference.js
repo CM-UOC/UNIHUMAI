@@ -1,5 +1,5 @@
 /* reference.js — the three orientation chapters */
-import { el, icon, rich, rx, ev } from '../ui.js';
+import { el, icon, rich, rx, ev, verbatim } from '../ui.js';
 import { ROLE, REQUIREMENTS, GAPS, STRENGTHS } from '../data/role.js';
 import { EVIDENCE, EVIDENCE_BY_ID, ROLE_LABEL, PROFILE, ROLES, EDUCATION } from '../data/profile.js';
 import { COMPANY_FACTS, PRODUCT_INFERENCES, SOURCES, ASK_THEM } from '../data/company.js';
@@ -29,13 +29,13 @@ function roleChapter(b) {
       el('div', { class: 'stack' }, STRENGTHS.map(s =>
         el('div', { class: 'panel reveal', style: { borderColor: 'color-mix(in srgb, var(--sage) 30%, transparent)' } },
           el('h3', { class: 'h-md', style: { marginBottom: '.5rem' } }, s.title),
-          el('p', { class: 'dim sm', style: { marginBottom: '.9rem' } }, s.line),
+          el('p', { class: 'dim sm', style: { marginBottom: '.9rem' }, html: rich(s.line) }),
           el('div', { class: 'stack', style: { '--gap': '.55rem' } },
             (s.evidence || []).map(id => EVIDENCE_BY_ID[id]).filter(Boolean).map(x =>
               el('div', { class: 'src' }, '“' + x.quote + '”',
                 el('span', { class: 'src__a' }, x.src === 'cv' ? 'Your CV' : 'cmmt.me')))))))),
 
-    section('Every requirement, mapped', 'The advertisement decomposed. Where your materials support a claim, the evidence is quoted. Where they do not, it says so.',
+    section('Every requirement, mapped', 'The job posting broken down. Where your materials support a claim, the evidence is quoted. Where they do not, it says so.',
       el('div', { class: 'stack', style: { '--gap': '.8rem' } },
         ['essential','implied'].map(kind => {
           const items = REQUIREMENTS.filter(r => r.kind === kind);
@@ -56,7 +56,7 @@ function roleChapter(b) {
             el('span', { class: 'mono dim2' }, '#' + (i + 1)),
             g.verify ? ev('check', 'Ask them, do not guess') : null),
           el('h3', { class: 'h-lg', style: { marginBottom: '.4rem' } }, g.title),
-          el('p', { class: 'dim sm', style: { marginBottom: '.9rem' } }, g.why),
+          el('p', { class: 'dim sm', style: { marginBottom: '.9rem' }, html: rich(g.why) }),
           el('div', { class: 'slug', style: { marginBottom: '.4rem' } }, 'How to close it'),
           el('ul', { class: 'sm dim' }, g.close.map(c => el('li', { html: rich(c) }))),
           workedBlock(g.id),
@@ -115,7 +115,7 @@ function sub(t, text, kind) {
 /* ---------------- 2. the business ---------------- */
 function businessChapter(b) {
   const groups = [
-    ['jd', 'From the advertisement', 'Quoted or closely paraphrased from the ad you supplied.'],
+    ['jd', 'From the job posting', 'Quoted or closely paraphrased from the ad you supplied.'],
     ['company', 'From public company material', 'Sourced below. Re-check any figure before quoting it in an interview.'],
     ['verify', 'Not publicly available', 'Do not guess at these. Ask.'],
     ['assume', 'Assumptions', 'Reasonable, unconfirmed. Verify with the recruiter.']
@@ -125,7 +125,7 @@ function businessChapter(b) {
   b.append(
     el('div', { class: 'panel panel--tall reveal', style: { marginBottom: '2.5rem', borderColor: 'color-mix(in srgb, var(--amber) 32%, transparent)' } },
       el('div', { class: 'slug', style: { marginBottom: '.6rem' } }, 'The role in one sentence'),
-      el('p', { class: 'lead', style: { color: 'var(--ink)' } }, ROLE.mission),
+      el('p', { class: 'lead', style: { color: 'var(--ink)' }, html: rich(ROLE.mission) }),
       el('div', { class: 'wrap', style: { marginTop: '1.2rem' } },
         el('span', { class: 'tag tag--line' }, ROLE.band),
         el('span', { class: 'tag tag--line' }, 'Ref: ' + ROLE.ref),
@@ -138,7 +138,7 @@ function businessChapter(b) {
         return el('div', { class: 'reveal' },
           el('div', { class: 'wrap', style: { marginBottom: '.3rem' } },
             el('h3', { class: 'h-md' }, title), ev(MAP[k])),
-          el('p', { class: 'sm dim2', style: { marginBottom: '.8rem' } }, blurb),
+          el('p', { class: 'sm dim2', style: { marginBottom: '.8rem' }, html: rich(blurb) }),
           el('div', { class: 'panel' }, el('div', { class: 'stack', style: { '--gap': '.8rem' } },
             items.map(f => el('p', { class: 'sm', html: rich(f.text) })))));
       }))),
@@ -158,7 +158,7 @@ function businessChapter(b) {
         el('div', { class: 'panel reveal', style: { marginBottom: '1.1rem' } },
           el('div', { class: 'slug', style: { marginBottom: '.4rem' } }, 'The product'),
           el('h3', { class: 'h-lg', style: { marginBottom: '.4rem' } }, PRODUCT.name),
-          el('p', { class: 'sm dim', style: { marginBottom: '.6rem' } }, PRODUCT.what),
+          el('p', { class: 'sm dim', style: { marginBottom: '.6rem' }, html: rich(PRODUCT.what) }),
           el('p', { class: 'sm dim2' }, PRODUCT.why)),
         el('div', { class: 'g2', style: { marginBottom: '1.1rem' } },
           el('div', { class: 'panel reveal' },
@@ -183,7 +183,7 @@ function businessChapter(b) {
             el('span', { class: 'mono', style: { color: 'var(--amber)', paddingTop: '.3rem', flex: 'none' } }, String(i + 1).padStart(2, '0')),
             el('div', {},
               el('p', { style: { fontWeight: 550, marginBottom: '.3rem' } }, '“' + a.q + '”'),
-              el('p', { class: 'sm dim' }, a.why))))))),
+              el('p', { class: 'sm dim', html: rich(a.why) }))))))),
 
     section('Sources', 'Where the public information came from.',
       el('div', { class: 'panel' }, el('div', { class: 'stack', style: { '--gap': '.7rem' } },
@@ -227,7 +227,7 @@ function evidenceChapter(b) {
                 el('div', { class: 'wrap', style: { marginBottom: '.3rem' } },
                   ev(e.src === 'cv' ? 'cv' : 'pf', e.src === 'cv' ? 'CV' : 'Portfolio'),
                   e.tags.slice(0, 5).map(t => el('span', { class: 'tag tag--line xs' }, t))),
-                el('p', { class: 'sm' }, e.claim),
+                el('p', { class: 'sm', html: rich(e.claim) }),
                 el('div', { class: 'src', style: { marginTop: '.5rem' } }, '“' + e.quote + '”')))));
         }))),
 
@@ -242,7 +242,7 @@ function evidenceChapter(b) {
 
 /* ---------------- worked examples ---------------- */
 /* Every piece of advice on this page is followed by two explicit examples:
-   the actual words, or the actual artefact. Never more advice. */
+   the actual words, or the actual artifact. Never more advice. */
 export function workedBlock(id, source, heading) {
   const items = (source || WORKED)[id];
   if (!items || !items.length) return null;
@@ -261,14 +261,14 @@ function workedCard(w, i) {
       el('span', { class: 'wex__i' }, String(i + 1)),
       el('span', { class: 'wex__kind' }, KIND_LABEL[w.kind] || 'Example'),
       el('span', { class: 'wex__label' }, w.label)),
-    el('div', { class: 'wex__body' }, w.body));
+    el('div', { class: 'wex__body', html: w.kind === 'artifact' ? verbatim(w.body) : rich(w.body) }));
 }
 
 /* ---------------- helpers ---------------- */
 function section(title, blurb, body) {
   return el('section', { class: 'sect', style: { marginTop: '3rem' } },
     el('div', { class: 'mark' }, el('span', { class: 'mark__n' }, title.toUpperCase()), el('span', { class: 'mark__r' })),
-    blurb ? el('p', { class: 'dim read', style: { marginBottom: '1.4rem' } }, blurb) : null,
+    blurb ? el('p', { class: 'dim read', style: { marginBottom: '1.4rem' }, html: rich(blurb) }) : null,
     body);
 }
 function stat(n, label, sub2, tone) {

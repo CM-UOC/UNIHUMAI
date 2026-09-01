@@ -7,6 +7,6 @@ export const WORKED = { ...w1, ...w2, ...w3 };
 
 export const KIND_LABEL = {
   say:      'Say it like this',
-  artefact: 'Bring this on paper',
+  artifact: 'Bring this on paper',
   do:       'Do it like this'
 };

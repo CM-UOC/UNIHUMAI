@@ -27,7 +27,7 @@ export const REQUIREMENTS = [
     reading: 'This is the spine of the role. It reads as end-to-end ownership of one or more data products, inside a named internal process with defined phases and, almost certainly, gates and approvers at each one.',
     evidence: ['e-lifecycle', 'e-fourgates', 'e-method-outcome'],
     strength: 'You already run a product across ideation → definition → launch → post-launch, and you already think in gates. The four gates on your portfolio (need validation, commercial viability, operational readiness, adoption preparedness) map almost one-for-one onto ideation/definition/validation/delivery.',
-    gap: 'DUP is a Volkswagen-internal process. Its exact phases, artefacts, approvers and exit criteria are not public. Do not pretend to know it.',
+    gap: 'DUP is a Volkswagen-internal process. Its exact phases, artifacts, approvers and exit criteria are not public. Do not pretend to know it.',
     action: 'Prepare one sentence that maps your gate model onto their phase names, and one good question asking how DUP phases are gated and who signs each one.',
     concepts: ['lifecycle', 'strategy', 'delivery'],
     weight: 5
@@ -41,10 +41,10 @@ export const REQUIREMENTS = [
     fit: 'partial',
     reading: 'Portfolio goals are set above you; you convert them into something a team can build against. "Portfolio" here means a set of data products, not a product family of physical goods — but the translation skill is the same.',
     evidence: ['e-evidence-inputs', 'e-rolebeforethreshold', 'e-agile'],
-    strength: 'Portfolio planning, roadmapping and backlog prioritisation are all named competencies, and "role before threshold" shows you can reason about a portfolio rather than a single line item.',
+    strength: 'Portfolio planning, roadmapping and backlog prioritization are all named competencies, and "role before threshold" shows you can reason about a portfolio rather than a single line item.',
     gap: 'Your CV wording is "evidence-based inputs for prioritization" and "roadmap recommendations" — supporting a roadmap, not owning one. An interviewer will probe that seam. You also have no evidenced example of writing a product vision statement.',
-    action: 'Write one vision statement for a plausible GIS data product and one three-horizon roadmap, so you have an artefact to talk from. Be precise about where your current decision rights end.',
-    concepts: ['strategy', 'roadmap', 'backlog', 'prioritisation'],
+    action: 'Write one vision statement for a plausible GIS data product and one three-horizon roadmap, so you have an artifact to talk from. Be precise about where your current decision rights end.',
+    concepts: ['strategy', 'roadmap', 'backlog', 'prioritization'],
     weight: 5
   },
   {
@@ -57,7 +57,7 @@ export const REQUIREMENTS = [
     reading: 'Five requirement families, listed deliberately. In a vehicle-data business, legal and privacy are not a rubber stamp at the end — they decide whether a product can exist at all. "Brand" means each of the six Group brands can restrict what its data is used for.',
     evidence: ['e-requirements', 'e-compliance', 'e-productdata'],
     strength: 'You already gather requirements across technical, commercial and regulatory families simultaneously. Coordinating Declarations of Performance, CE marking and EPDs is a genuine analogue: a product cannot ship until its documentation is right, and you own that.',
-    gap: 'Privacy and data-protection requirements (GDPR, EU Data Act, consent, purpose limitation) are not evidenced anywhere in your materials. This is one of your two biggest gaps.',
+    gap: 'Privacy and data-protection requirements (GDPR, EU Data Act, consent, purpose limitation) are not anywhere in your materials. This is one of your two biggest gaps.',
     action: 'Learn the GDPR/Data Act basics for connected-vehicle data well enough to ask a good question. Then explicitly bridge: "CE marking taught me that compliance evidence is a release blocker, not paperwork — I would expect purpose limitation to work the same way."',
     concepts: ['requirements', 'dataproduct', 'compliance', 'risk'],
     weight: 5
@@ -81,7 +81,7 @@ export const REQUIREMENTS = [
     id: 'r5',
     kind: 'essential',
     area: 'Sales interface',
-    title: 'Align with Sales on market needs, feature prioritisation and go-to-market readiness',
+    title: 'Align with Sales on market needs, feature prioritization and go-to-market readiness',
     jd: 'Collaborate closely with Sales to align on market needs, feature prioritization, and go-to-market readiness.',
     fit: 'strong',
     reading: 'The companion to R4. The hard part is not collaboration; it is saying no to the loudest deal while keeping the relationship, and keeping a roadmap from becoming a list of one-customer promises.',
@@ -89,7 +89,7 @@ export const REQUIREMENTS = [
     strength: 'You have run the feedback loop from both ends, and your adoption framework separates output from outcome — exactly the discipline needed when Sales asks for a feature that will not actually move adoption.',
     gap: 'No evidenced example of formally refusing a large commercial request. Prepare one honestly, or frame the nearest real one.',
     action: 'Prepare a "single-customer feature vs. platform" answer with an explicit decision rule (how many customers, what contract value, what reusability).',
-    concepts: ['prioritisation', 'stakeholders', 'gtm', 'roadmap'],
+    concepts: ['prioritization', 'stakeholders', 'gtm', 'roadmap'],
     weight: 4
   },
   {
@@ -99,10 +99,10 @@ export const REQUIREMENTS = [
     title: 'Coordinate go-live readiness — testing, risk handover, onboarding',
     jd: 'Coordinate and ensure product readiness for go-live, including testing, risk handover, and onboarding.',
     fit: 'partial',
-    reading: '"Risk handover" is the notable phrase: when a product goes live, its residual risks pass formally from the build team to whoever runs it. That is a governance artefact — a register with named owners — not a conversation.',
+    reading: '"Risk handover" is the notable phrase: when a product goes live, its residual risks pass formally from the build team to whoever runs it. That is a governance artifact — a register with named owners — not a conversation.',
     evidence: ['e-fourgates', 'e-launchcoord', 'e-app-decisions', 'e-compliance'],
     strength: 'Launch readiness and onboarding are both evidenced — you coordinated onboarding, adoption and retention for software-module launches at GVI. Treating accessibility as a release criterion on the pricing app shows you already use blocking acceptance criteria.',
-    gap: 'Formal risk handover and structured testing of a data product or API are not evidenced. Neither is a signed go/no-go.',
+    gap: 'Formal risk handover and structured testing of a data product or API do not appear. Neither is a signed go/no-go.',
     action: 'Learn what a go-live checklist for a data product contains: contract and consent in place, data quality thresholds, API rate limits, monitoring and alerting, support routing, rollback, named risk owners.',
     concepts: ['delivery', 'risk', 'gtm', 'serviceops'],
     weight: 4
@@ -116,8 +116,8 @@ export const REQUIREMENTS = [
     fit: 'partial',
     reading: 'This bullet is about life after launch. An SLA is a contractual promise about availability, latency or data freshness. A routing matrix says which team receives which kind of incident. Knowledge transfer is how support can answer without you. Together they are the operating model of a live data product.',
     evidence: ['e-kpis', 'e-dashboards', 'e-app-honesty'],
-    strength: 'KPI definition and monitoring are strongly evidenced, including service levels and availability. You build the dashboards yourself, and you are honest about what a metric can and cannot prove.',
-    gap: 'SLAs and routing matrices as artefacts are not evidenced. This is a concrete, learnable gap — and one you can close before the interview.',
+    strength: 'KPI definition and monitoring are clearly supported, including service levels and availability. You build the dashboards yourself, and you are honest about what a metric can and cannot prove.',
+    gap: 'SLAs and routing matrices as artifacts do not appear. This is a concrete, learnable gap — and one you can close before the interview.',
     action: 'Draft one KPI tree and one SLA/routing table for an imaginary vehicle-data product. Bring it. Almost no candidate will.',
     concepts: ['analytics', 'serviceops', 'risk'],
     weight: 4
@@ -131,7 +131,7 @@ export const REQUIREMENTS = [
     title: 'Project management and product management knowledge',
     jd: 'Project Management and Product Management knowledge',
     fit: 'partial',
-    reading: 'Both are named, in that order. In a corporate group hub you will be judged on plan, dependency and status discipline as much as on product judgement.',
+    reading: 'Both are named, in that order. In a corporate group hub you will be judged on plan, dependency and status discipline as much as on product judgment.',
     evidence: ['e-tools', 'e-crossfunctional', 'e-lifecycle'],
     strength: 'Jira, Confluence and Planner in daily use; cross-functional workstreams and dependency resolution are explicit in your CV.',
     gap: 'No formal certification is evidenced — no PMP, PRINCE2, CSPO, PSPO or SAFe. Nothing in your materials names a certification.',
@@ -163,8 +163,8 @@ export const REQUIREMENTS = [
     fit: 'partial',
     reading: 'The Digital:Hub half of the joint venture supplies the agile, hands-on culture. Expect Scrum or Kanban, real ceremonies, and a Product Owner-shaped expectation of backlog ownership.',
     evidence: ['e-agile', 'e-app-built', 'e-tools'],
-    strength: 'User stories, acceptance criteria, backlog prioritisation, release planning, Scrum and Kanban are all named. Building and shipping the pricing application is your strongest proof that you can carry something through delivery, not just define it.',
-    gap: 'Your CV says "sprint support", which suggests contributing to someone else\'s cadence rather than owning a backlog and running refinement. Be ready for "walk me through your refinement session."',
+    strength: 'User stories, acceptance criteria, backlog prioritization, release planning, Scrum and Kanban are all named. Building and shipping the pricing application is your strongest proof that you can carry something through delivery, not just define it.',
+    gap: 'Your CV says "sprint support", which suggests contributing to someone else\'s schedule rather than owning a backlog and running refinement. Be ready for "walk me through your refinement session."',
     action: 'Rehearse a concrete delivery week: what you do at refinement, how you write acceptance criteria, how you handle a story the team cannot estimate.',
     concepts: ['agile', 'backlog', 'requirements', 'delivery'],
     weight: 4
@@ -178,8 +178,8 @@ export const REQUIREMENTS = [
     fit: 'partial',
     reading: 'In this business, governance is the product constraint. Who may use which data, for what purpose, under which contract, with which consent — and who approves it.',
     evidence: ['e-compliance', 'e-productdata', 'e-supplierrisk', 'e-datapartofproduct'],
-    strength: 'Genuinely strong in the adjacent form: you coordinate regulatory documentation as a condition of market readiness, and you treat supplier and data quality as governed risks rather than admin.',
-    gap: 'Data-specific governance — GDPR lawful basis, purpose limitation, data minimisation, EU Data Act FRAND access, consent for location and driving-behaviour data — is not evidenced.',
+    strength: 'Genuinely strong in the closely related form: you coordinate regulatory documentation as a condition of market readiness, and you treat supplier and data quality as governed risks rather than admin.',
+    gap: 'Data-specific governance — GDPR lawful basis, purpose limitation, data minimization, EU Data Act FRAND access, consent for location and driving-behavior data — does not appear.',
     action: 'Learn enough to reason, not to advise. The credible position is: "I know where the questions are and who owns the answer", not "I am a privacy expert."',
     concepts: ['compliance', 'dataproduct', 'risk'],
     weight: 4
@@ -210,8 +210,8 @@ export const REQUIREMENTS = [
     fit: 'partial',
     reading: 'A new hub means no established playbook, unclear interfaces to Wolfsburg, and processes you will have to write yourself. Some people find that energising; others need structure. They are screening for which you are.',
     evidence: ['e-app-built', 'e-app-problem', 'e-mcy'],
-    strength: 'You built an internal application nobody asked you to build, and you design bounded proofs of concept before scaling. Both read as pioneer behaviour.',
-    gap: 'Your experience is inside established organisations with existing processes. You have not evidenced standing up a function from nothing.',
+    strength: 'You built an internal application nobody asked you to build, and you design bounded proofs of concept before scaling. Both read as pioneer behavior.',
+    gap: 'Your experience is inside established organizations with existing processes. You have not evidenced standing up a function from nothing.',
     action: 'Have an honest answer about what you would put in place first — and why "first" is a routing and decision-rights question, not a roadmap question.',
     concepts: ['leadership', 'serviceops'],
     weight: 3
@@ -223,10 +223,10 @@ export const REQUIREMENTS = [
     title: 'Operating in a matrix and a startup at the same time',
     jd: 'Deep automotive and data expertise from Volkswagen Group Info Services. An agile, digital, hands-on environment from the Volkswagen Digital: Hub.',
     fit: 'strong',
-    reading: 'Two parent organisations with different speeds and different decision cultures. The PM sits on the seam. Expect competing definitions of "done" and of "who decides".',
+    reading: 'Two parent organizations with different speeds and different decision cultures. The PM sits right between the two. Expect competing definitions of "done" and of "who decides".',
     evidence: ['e-crossfunctional', 'e-leadership', 'e-supplierrisk'],
     strength: 'Saint-Gobain is a large matrixed group; you already reconcile commercial, technical, supply and marketing priorities across two markets. That is the same muscle.',
-    gap: 'Nothing evidenced about navigating two parent organisations with different operating tempos.',
+    gap: 'Nothing evidenced about navigating two parent organizations with different operating tempos.',
     action: 'Prepare a stakeholder-conflict story where the conflict was structural, not personal.',
     concepts: ['stakeholders', 'crossfunctional', 'leadership'],
     weight: 3
@@ -238,9 +238,9 @@ export const REQUIREMENTS = [
     title: 'Commercial literacy for data licensing and use-case-based contracting',
     jd: 'Our focus is on developing data-driven B2B products that create real impact for customers, partners and the Volkswagen ecosystem.',
     fit: 'partial',
-    reading: 'GIS publicly describes a "one contract per use case" model. That makes the commercial construct — what a use case is, what it costs, what it permits — part of the product definition, not a separate sales artefact.',
+    reading: 'GIS publicly describes a "one contract per use case" model. That makes the commercial construct — what a use case is, what it costs, what it permits — part of the product definition, not a separate sales artifact.',
     evidence: ['e-suppliers', 'e-pricingpassthrough', 'e-zenhome', 'e-feedbackloop'],
-    strength: 'Pricing, margin and negotiation are strongly evidenced, and you already refuse uniform pricing where roles differ. Your export-pricing work shows you can build a price from cost through channel to end price.',
+    strength: 'Pricing, margin and negotiation are clearly supported, and you already refuse uniform pricing where roles differ. Your export-pricing work shows you can build a price from cost through channel to end price.',
     gap: 'Data-licensing specifics — per-call, per-vehicle, per-use-case, tiering, minimum commitments — are new. Physical-goods margin logic does not transfer cleanly to a near-zero-marginal-cost product.',
     action: 'Study pricing metrics for data products, and be ready to say why a data product prices on value and permission rather than on cost.',
     concepts: ['commercial', 'dataproduct', 'gtm'],
@@ -268,7 +268,7 @@ export const REQUIREMENTS = [
     title: 'Enough technical literacy to specify an API-delivered product',
     jd: 'Define, document, and align end-to-end product requirements (technical, …).',
     fit: 'partial',
-    reading: 'A data product is delivered through interfaces. You do not need to write the service, but you need to specify latency, freshness, schema, error behaviour, versioning and rate limits — and understand what breaks a partner integration.',
+    reading: 'A data product is delivered through interfaces. You do not need to write the service, but you need to specify latency, freshness, schema, error behavior, versioning and rate limits — and understand what breaks a partner integration.',
     evidence: ['e-app-built', 'e-tools', 'e-productdata'],
     strength: 'You built an application, you work with SQL, AWS and Azure are on your CV, and you have shipped something with a required downstream output structure — which is precisely a schema-contract problem.',
     gap: 'No evidenced work defining or versioning an API contract.',
@@ -303,10 +303,10 @@ export const GAPS = [
     reqs: ['r9', 'r3'],
     why: 'Named as a requirement, and nothing in your materials touches automotive or telematics. If you cannot hold a conversation about what a vehicle emits and who buys it, the rest of your profile will not be reached.',
     close: [
-      'Learn the Data Hub model: one face, one contract per use case, one system, six brands, standardised format.',
+      'Learn the Data Hub model: one face, one contract per use case, one system, six brands, standardized format.',
       'Learn the five published solution areas — repair & maintenance, retail & importer, insurance, maps & life services, fleet management — and one buyer question inside each.',
       'Be able to name plausible data points (mileage, fuel or state of charge, battery health, location, diagnostic trouble codes, service indicators) and say which are personal data.',
-      'Practise the bridge sentence out loud: product master data → vehicle data, same governance discipline, different data shape.'
+      'Practice the bridge sentence out loud: product master data → vehicle data, same governance discipline, different data shape.'
     ],
     concepts: ['dataproduct', 'compliance']
   },
@@ -317,9 +317,9 @@ export const GAPS = [
     reqs: ['r3', 'r11'],
     why: 'The ad lists privacy and legal as requirement families in their own right. In a vehicle-data business, these determine what a product may be, not just how it is documented.',
     close: [
-      'GDPR essentials as they apply here: personal data, lawful basis, consent, purpose limitation, data minimisation, retention.',
+      'GDPR essentials as they apply here: personal data, lawful basis, consent, purpose limitation, data minimization, retention.',
       'EU Data Act essentials: user right to access data their connected product generates, sharing with third parties on FRAND terms, and how it coexists with GDPR.',
-      'Understand why location and driving-behaviour data need explicit consent, and what that means for a product roadmap.',
+      'Understand why location and driving-behavior data need explicit consent, and what that means for a product roadmap.',
       'Rehearse the honest boundary: you reason about the constraint and know who owns the answer; you do not give legal advice.'
     ],
     concepts: ['compliance', 'dataproduct', 'risk']
@@ -329,7 +329,7 @@ export const GAPS = [
     title: 'SLAs, routing matrices and the operating model after go-live',
     severity: 'high',
     reqs: ['r7', 'r6'],
-    why: 'An entire responsibility bullet, and the artefacts named — SLAs, routing matrices, knowledge transfers — do not appear anywhere in your materials.',
+    why: 'An entire responsibility bullet, and the artifacts named — SLAs, routing matrices, knowledge transfers — do not appear anywhere in your materials.',
     close: [
       'Learn what belongs in an SLA for a data product: availability, latency, data freshness, support response time, credits or remedies.',
       'Learn what a routing matrix is: incident type → first responder → escalation → owner, with response times.',

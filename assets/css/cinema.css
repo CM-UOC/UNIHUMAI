@@ -561,3 +561,17 @@ strong { font-weight: 620; color: var(--ink); }
   .wex--art .wex__body { font-size: .71rem; }
   .wex--say .wex__body { margin-left: .5rem; padding-left: .7rem; font-size: .93rem; }
 }
+
+/* ---------- inline plain-English definitions ---------- */
+.gloss {
+  color: var(--ink-4);
+  font-size: .88em;
+  font-weight: 400;
+  font-style: normal;
+}
+.gloss::before { content: ''; }
+strong .gloss, h1 .gloss, h2 .gloss, h3 .gloss, .d-md .gloss, .d-lg .gloss, .beat__q .gloss {
+  font-weight: 400; color: var(--ink-3); font-size: .62em;
+}
+.answer .gloss { font-size: .86em; }
+@media print { .gloss { color: #666; } }

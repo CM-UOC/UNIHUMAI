@@ -4,9 +4,9 @@ export default [
   id: 'agile', module: 'm4', order: 13, minutes: 11,
   title: 'Agile and Scrum',
   oneLine: 'Working in short cycles so that reality can correct the plan before the plan becomes expensive.',
-  definition: 'Agile is a set of values: working software over documentation, responding to change over following a plan, customer collaboration over contract negotiation, individuals and interactions over process. Scrum is one framework implementing them — fixed-length sprints, three accountabilities (Product Owner, Scrum Master, Developers), and five events (sprint, planning, daily, review, retrospective). Kanban is another — continuous flow, work-in-progress limits, and optimisation for cycle time rather than for a cadence.',
-  why: 'Long plans in uncertain environments are expensive fiction. Short cycles convert uncertainty into learning at a survivable price. The framework matters far less than the two behaviours it is meant to produce: shipping something real regularly, and changing the plan when what shipped teaches you something.',
-  when: 'Scrum suits work that can be batched into a cadence with a review point. Kanban suits interrupt-driven work with variable item size — much support and data-operations work is Kanban-shaped. Many teams need both.',
+  definition: 'Agile is a set of values: working software over documentation, responding to change over following a plan, customer collaboration over contract negotiation, individuals and interactions over process. Scrum is one framework implementing them — fixed-length sprints, three accountabilities (Product Owner, Scrum Master, Developers), and five events (sprint, planning, daily, review, retrospective). Kanban is another — continuous flow, work-in-progress limits, and optimization for cycle time rather than for a rhythm.',
+  why: 'Long plans in uncertain environments are expensive fiction. Short cycles convert uncertainty into learning at a survivable price. The framework matters far less than the two behaviors it is meant to produce: shipping something real regularly, and changing the plan when what shipped teaches you something.',
+  when: 'Scrum suits work that can be batched into a rhythm with a review point. Kanban suits interrupt-driven work with variable item size — much support and data-operations work is Kanban-shaped. Many teams need both.',
   people: [
     { who: 'Product Owner', does: 'Owns and orders the backlog; the single voice on what is next.' },
     { who: 'Developers', does: 'Own how the work is done and the sprint plan.' },
@@ -18,8 +18,8 @@ export default [
   outputs: ['A working increment', 'Updated backlog and forecast', 'Retrospective actions with owners'],
   outcomes: ['Faster feedback', 'Lower cost of being wrong', 'Predictability that comes from evidence rather than promises'],
   example: {
-    title: 'Two cadences in one hub',
-    body: 'A new data-product team building an endpoint runs Scrum: two-week sprints, a sprint goal tied to an outcome, a review where a partner integration engineer actually attends. The same hub\'s data-operations work — a broken feed from one brand, a partner reporting stale timestamps, an onboarding request — cannot be sprint-planned, because it arrives when it arrives. That is Kanban: WIP limits, classes of service, and a cycle-time target. A PM who insists on one framework for both will either strangle the operations work in ceremony or destroy the product team\'s focus. Choosing the right cadence per stream is a product-management decision, not a process detail.'
+    title: 'Two rhythms in one hub',
+    body: 'A new data-product team building an endpoint runs Scrum: two-week sprints, a sprint goal tied to an outcome, a review where a partner integration engineer actually attends. The same hub\'s data-operations work — a broken feed from one brand, a partner reporting stale timestamps, an onboarding request — cannot be sprint-planned, because it arrives when it arrives. That is Kanban: WIP limits, classes of service, and a cycle-time target. A PM who insists on one framework for both will either strangle the operations work in ceremony or destroy the product team\'s focus. Choosing the right work rhythm for each kind of work is a product-management decision, not a process detail.'
   },
   mistakes: [
     { mistake: 'Doing the events without the values ("dark Scrum").', instead: 'Ask whether the plan actually changes as a result of what you learn. If not, the ceremonies are theatre.' },
@@ -29,8 +29,8 @@ export default [
     { mistake: 'The PM acting as a ticket-writing service.', instead: 'The Product Owner brings the problem and the outcome; the team brings solutions.' }
   ],
   tools: [
-    { name: 'Scrum', note: 'Sprints, three accountabilities, five events, three artefacts. Best with a stable team and batched work.' },
-    { name: 'Kanban', note: 'Visualise flow, limit WIP, manage cycle time. Best for interrupt-driven work.' },
+    { name: 'Scrum', note: 'Sprints, three accountabilities, five events, three artifacts. Best with a stable team and batched work.' },
+    { name: 'Kanban', note: 'Visualize flow, limit WIP, manage cycle time. Best for interrupt-driven work.' },
     { name: 'Definition of Done', note: 'The team\'s shared quality bar. Not negotiable per-story.' },
     { name: 'Story points / cycle time', note: 'Relative sizing or empirical flow measurement. Cycle time needs less trust and less arguing.' },
     { name: 'Sprint review vs demo', note: 'A review gathers feedback that changes the backlog. A demo is a presentation.' }
@@ -46,13 +46,13 @@ export default [
     answer: 1,
     why: 'Velocity reported upward as a target is Goodhart\'s law in action — it will rise without more value being delivered. Redirecting to the outcome keeps the conversation on what the sprint was for.'
   },
-  ownWords: 'Describe your actual delivery cadence in your own words: what happens in refinement, what you decide, and what the team decides.',
+  ownWords: 'Describe your actual delivery rhythm in your own words: what happens in refinement, what you decide, and what the team decides.',
   teachBack: {
     prompt: 'Explain the difference between a Product Owner and a Product Manager, and say honestly where the line sits in your own experience.',
     mustMention: ['backlog', 'outcome', 'decision', 'team']
   },
   roleLink: { reqs: ['r10', 'r2'], text: '"Agile and delivery competencies" is a named requirement, and the Digital:Hub half of this joint venture is described as the agile, hands-on environment. Expect a practical question, not a definitional one.' },
-  youLink: { evidence: ['e-agile', 'e-app-built', 'e-tools'], text: 'Scrum and Kanban, backlog prioritisation, user stories, acceptance criteria and release planning are on your CV, and you have shipped a real internal application. If asked about a formal certification, say what you actually hold — the shipped product is stronger evidence than a badge.' },
+  youLink: { evidence: ['e-agile', 'e-app-built', 'e-tools'], text: 'Scrum and Kanban, backlog prioritization, user stories, acceptance criteria and release planning are on your CV, and you have shipped a real internal application. If asked about a formal certification, say what you actually hold — the shipped product is stronger evidence than a badge.' },
   depends: ['backlog'],
   glossary: ['scrum', 'kanban', 'sprint', 'velocity', 'wip-limit', 'retrospective']
 },
@@ -60,9 +60,9 @@ export default [
 {
   id: 'delivery', module: 'm4', order: 14, minutes: 11,
   title: 'Product delivery and go-live readiness',
-  oneLine: 'Getting something built, proven, supportable and handed over — not just merged.',
+  oneLine: 'Getting something built, tested, supportable and formally handed over. Not just released.',
   definition: 'Delivery is everything between "we have decided" and "it is running reliably in someone else\'s hands". It includes build, testing, release mechanics, documentation, support enablement, monitoring, and the formal handover of residual risk to whoever will operate it. "Done" for a PM is not deployed; it is operable, supportable, measurable and contractually safe.',
-  why: 'Products fail after launch more often than during it. The activities that prevent that — a real go-live checklist, a support runbook, monitoring that alerts before a customer does, a named owner for each residual risk — are unglamorous, easy to defer, and are the difference between a launch and an incident.',
+  why: 'Products fail after launch more often than during it. The activities that prevent that — a real go-live checklist, a support runbook, monitoring that alerts before a customer does, a named owner for each residual risk — are unexciting, easy to defer, and are the difference between a launch and an incident.',
   when: 'From the moment build starts. Go-live readiness is assessed at a defined checkpoint, not discovered on launch day.',
   people: [
     { who: 'Product Manager', does: 'Owns readiness end to end and calls the go/no-go.' },
@@ -119,7 +119,7 @@ export default [
 {
   id: 'risk', module: 'm4', order: 15, minutes: 10,
   title: 'Risk, dependency and change management',
-  oneLine: 'Naming what could go wrong, what you are waiting on, and how a change gets agreed — before any of it bites.',
+  oneLine: 'Naming what could go wrong, what you are waiting on, and how changes get approved, before any of it hurts you.',
   definition: 'Risk management identifies what could prevent an outcome, estimates likelihood and impact, and assigns an owner and a response: avoid, reduce, transfer, or accept. Dependency management tracks what you need from others, when, and what happens if it slips. Change management is the agreed process for altering scope, and — separately — the human work of getting people to actually adopt a change.',
   why: 'Most product failures were foreseeable and unowned. The value of a risk register is not prediction; it is that someone specific is now responsible and a review date exists. Dependencies are where cross-functional products actually die, and in a group structure your critical dependency often sits in a different country and legal entity.',
   when: 'From definition onward. Reviewed at every planning cycle and at each gate. Change control tightens as commitment increases.',
@@ -147,7 +147,7 @@ export default [
   ],
   tools: [
     { name: 'Risk register', note: 'Description, likelihood, impact, response, owner, review date. Six columns, no more.' },
-    { name: 'RAID log', note: 'Risks, Assumptions, Issues, Dependencies. The standard project-management instrument.' },
+    { name: 'RAID log', note: 'Risks, Assumptions, Issues, Dependencies. The standard project-management tool.' },
     { name: 'Pre-mortem', note: 'Imagine it failed; work backwards. Surfaces risks people will not raise directly.' },
     { name: 'Dependency map / critical path', note: 'Shows which slip actually moves the date.' },
     { name: 'ADKAR', note: 'Awareness, Desire, Knowledge, Ability, Reinforcement — for the adoption half of change.' }
@@ -168,7 +168,7 @@ export default [
     prompt: 'Explain the difference between change control and change adoption, with an example where one succeeded and the other failed.',
     mustMention: ['owner', 'fallback', 'adoption', 'escalation']
   },
-  roleLink: { reqs: ['r6', 'r7', 'r8'], text: '"Risk handover" appears in the go-live bullet and "Project Management" is a named requirement. In a two-parent joint hub, dependency management across organisational boundaries will be a large part of the actual job.' },
+  roleLink: { reqs: ['r6', 'r7', 'r8'], text: '"Risk handover" appears in the go-live bullet and "Project Management" is a named requirement. In a two-parent joint hub, dependency management across organizational boundaries will be a large part of the actual job.' },
   youLink: { evidence: ['e-crossfunctional', 'e-supplierrisk', 'e-app-decisions'], text: 'You resolve cross-functional dependencies today, and you treat supplier performance as a portfolio and customer-value risk rather than a purchasing matter. That reframing — risk located where its consequence lands, not where its cause sits — is exactly the instinct a risk register needs.' },
   depends: ['delivery'],
   glossary: ['risk-register', 'raid', 'dependency', 'pre-mortem', 'escalation', 'change-control']
@@ -177,19 +177,19 @@ export default [
 {
   id: 'analytics', module: 'm5', order: 16, minutes: 13,
   title: 'Product analytics, KPIs and OKRs',
-  oneLine: 'Choosing the few measures that tell you whether the product is working — and knowing what each one cannot prove.',
+  oneLine: 'Picking the few numbers that tell you whether the product is working, and knowing what each one cannot prove.',
   definition: 'A metric is any measurement. A KPI is a metric a team has agreed to steer by. An OKR is a goal-setting structure: a qualitative Objective with three-ish measurable Key Results, usually quarterly, expressing intended change rather than business-as-usual health. Metrics divide into inputs (what you do), outputs (what gets produced) and outcomes (what changes for the customer or business). Most dashboards over-report outputs.',
   why: 'Metrics decide what a team pays attention to, so choosing them is a leadership act. Bad ones cause real damage: a target set on a proxy will be met without the underlying outcome improving. In a B2B data product, the useful measures are often adoption depth and reliability, not volume — a partner making a million calls that they cannot rely on is a churn risk, not a success.',
-  when: 'Defined at definition, instrumented before launch, reviewed continuously, and renegotiated when the product\'s stage changes.',
+  when: 'Defined at definition, measured from before launch, reviewed continuously, and renegotiated when the product\'s stage changes.',
   people: [
     { who: 'Product Manager', does: 'Chooses the KPI set, defends it, and states its limits.' },
     { who: 'Data analyst', does: 'Builds measurement and challenges what the data can support.' },
-    { who: 'Engineering', does: 'Instruments; without this nothing else is possible.' },
+    { who: 'Engineering', does: 'Adds the measurement code. Without it, nothing else on this list is possible.' },
     { who: 'Leadership', does: 'Sets portfolio-level objectives the product KPIs must ladder into.' },
     { who: 'Sales and operations', does: 'Live with the consequences of whatever gets measured.' }
   ],
-  inputs: ['Product outcome and value proposition', 'Instrumentation', 'Baselines', 'Contractual SLA commitments'],
-  activities: ['Build a KPI tree from outcome down to input', 'Choose a small primary set with a counter-metric each', 'Instrument before launch', 'Review with honest interpretation', 'Retire metrics that no longer drive decisions'],
+  inputs: ['Product outcome and value proposition', 'Toolation', 'Baselines', 'Contractual SLA commitments'],
+  activities: ['Build a KPI tree from outcome down to input', 'Choose a small primary set with a counter-metric each', 'Tool before launch', 'Review with honest interpretation', 'Retire metrics that no longer drive decisions'],
   outputs: ['KPI tree and definitions', 'Dashboards per audience', 'OKRs for the cycle', 'Stated measurement limitations'],
   outcomes: ['Decisions grounded in evidence', 'Early detection of degradation', 'Fewer arguments settled by seniority'],
   example: {
@@ -204,7 +204,7 @@ export default [
     { mistake: 'Claiming attribution the data cannot support.', instead: 'Say what the number shows and what it does not. This reads as senior, not as weak.' }
   ],
   tools: [
-    { name: 'KPI tree', note: 'North star at the root, decomposed into drivers you can actually influence.' },
+    { name: 'KPI tree', note: 'North star at the root, broken down into drivers you can actually influence.' },
     { name: 'OKR', note: 'Objective plus 3 Key Results. Quarterly, ambitious, few.' },
     { name: 'AARRR (pirate metrics)', note: 'Acquisition, Activation, Retention, Referral, Revenue. Adapt for B2B: activation is integration.' },
     { name: 'HEART', note: 'Happiness, Engagement, Adoption, Retention, Task success. Good for experience measurement.' },
@@ -236,19 +236,19 @@ export default [
 {
   id: 'serviceops', module: 'm5', order: 17, minutes: 12,
   title: 'Service operations: SLAs, routing and knowledge transfer',
-  oneLine: 'The operating model that keeps a live product reliable when the person who built it is busy building the next one.',
-  definition: 'Once a product is live it becomes a service. Its operating model has four parts: service levels (what you promise — availability, latency, data freshness, response times), routing (which team receives which type of issue and how it escalates), knowledge (what support needs in order to answer without escalating), and review (how performance against the promise is inspected and improved). An SLA is the contractual form of the promise; an SLO is the internal target you actually run to, usually stricter.',
+  oneLine: 'The setup that keeps a live product reliable once the person who built it has moved on to the next one.',
+  definition: 'Once a product is live it becomes a service. Its operating model has four parts: service levels (what you promise — availability, latency, data freshness, response times), routing (which team receives which type of issue and how it escalates), knowledge (what support needs to answer without escalating), and review (how performance against the promise is inspected and improved). An SLA is the contractual form of the promise; an SLO is the internal target you actually run to, usually stricter.',
   why: 'For a B2B data product the service is the product. A partner does not experience your roadmap; they experience whether the endpoint answered, whether the value was right, and how long it took to get an answer when it was not. Without a routing matrix, every issue arrives at the PM, and the PM becomes the bottleneck instead of the product owner.',
   when: 'Designed before go-live, agreed as part of the contract, reviewed in regular service reviews, and revisited whenever the promise and the reality diverge.',
   people: [
-    { who: 'Product Manager', does: 'Defines the service levels the product can actually honour and owns the operating model.' },
+    { who: 'Product Manager', does: 'Defines the service levels the product can actually honor and owns the operating model.' },
     { who: 'Operations / support', does: 'Runs the routing, holds the knowledge, escalates by the matrix.' },
     { who: 'Engineering / SRE', does: 'Owns monitoring, alerting and incident response.' },
     { who: 'Commercial and legal', does: 'Turn service levels into contractual commitments and remedies.' },
     { who: 'Customer / partner', does: 'The counterparty to the promise; part of the review.' }
   ],
   inputs: ['Product capability and real measured performance', 'Contractual commitments', 'Support volumes and issue types', 'Monitoring and alerting'],
-  activities: ['Set SLOs from measured reality, then agree SLAs with headroom', 'Build the routing matrix by issue type', 'Write the runbook and run knowledge transfer', 'Instrument alerting on the promise, not just the system', 'Hold service reviews and act on trends'],
+  activities: ['Set SLOs from measured reality, then agree SLAs with headroom', 'Build the routing matrix by issue type', 'Write the runbook and run knowledge transfer', 'Tool alerting on the promise, not just the system', 'Hold service reviews and act on trends'],
   outputs: ['SLA and internal SLOs', 'Routing and escalation matrix', 'Runbook and FAQ', 'Service review pack', 'Incident post-mortems'],
   outcomes: ['Predictable service the commercial team can sell honestly', 'Support resolving most issues at first line', 'Degradation caught before a customer reports it'],
   example: {
@@ -285,8 +285,8 @@ export default [
     prompt: 'Explain the difference between an SLA and an SLO, and why you would never set them equal.',
     mustMention: ['headroom', 'contract', 'internal target', 'measure']
   },
-  roleLink: { reqs: ['r7', 'r6'], text: 'This concept exists because the ad names SLAs, routing matrices and knowledge transfers explicitly — and none of those artefacts appear anywhere in your materials. It is the most concretely closable gap you have. Draft one of each and bring them.' },
-  youLink: { evidence: ['e-kpis', 'e-app-decisions'], text: 'The nearest evidence you have is monitoring service levels and availability, and analysing rotation and stock across a branch network — operational discipline applied to physical availability. Say that honestly: the discipline transfers, the artefacts are new to you.' },
+  roleLink: { reqs: ['r7', 'r6'], text: 'This concept exists because the ad names SLAs, routing matrices and knowledge transfers explicitly — and none of those artifacts appear anywhere in your materials. It is the most concretely closable gap you have. Draft one of each and bring them.' },
+  youLink: { evidence: ['e-kpis', 'e-app-decisions'], text: 'The nearest evidence you have is monitoring service levels and availability, and analyzing rotation and stock across a branch network — operational discipline applied to physical availability. Say that honestly: the discipline transfers, the artifacts are new to you.' },
   depends: ['analytics', 'delivery'],
   glossary: ['sla', 'slo', 'sli', 'routing-matrix', 'runbook', 'error-budget', 'post-mortem']
 }
